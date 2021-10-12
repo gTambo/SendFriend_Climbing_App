@@ -1,4 +1,5 @@
 import React from 'react';
+import GymForm from '../GymForm/GymForm';
 
 // This is one of our simplest components
 // It doesn't have local state
@@ -9,6 +10,7 @@ function InfoPage() {
   return (
     <div className="container">
       <p>Info Page</p>
+      <GymForm />
     </div>
   );
 }

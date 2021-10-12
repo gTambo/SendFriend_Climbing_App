@@ -2,18 +2,19 @@
 
 ## Tuesday
 
-- [ ] Review starter code, review user authentication lecture notes.
-    - [ ] user.router post('/register') to include additional profile information
-- [ ] rootsaga and combineReducers from template, if not yet built
-- [ ] Login and register Page setup
-- [ ] Login component
-- [ ] register component, 
-    - [ ] profile info form (in the register)
+- [x] Review starter code, review user authentication lecture notes.
+    - [x] user.router post('/register') to include additional profile information
+- [x] rootsaga and combineReducers from template, if not yet built
+- [x] Login and register Page setup
+- [x] Login component
+- [x] register component, 
+    - [x] profile info form (in the register)
 - [ ] Client side App, 
     - [ ] Header, 
     - [ ] Footer (minimal styling), 
     - [ ] client Routes boilerplate
 - [ ] Database tables initial setup (seed tables with example data)
+- [ ] minor css changes
 
 Milestone: login functionality display on DOM
 
