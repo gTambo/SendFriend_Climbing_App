@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [hometown, setHometown] = useState('');
+  const [climbingExp, setClimbingExp] = useState(2021-10-12)
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -15,6 +17,8 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
+        hometown: hometown,
+        climbing_start_date: climbingExp,
       },
     });
   }; // end registerUser
@@ -48,6 +52,31 @@ function RegisterForm() {
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="hometown">
+          Hometown:
+          <input
+            type="text"
+            name="hometown"
+            value={hometown}
+            required
+            onChange={(event) => setHometown(event.target.value)}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="climbing-experience">
+          When did you start climbing?
+          <input
+            type="date"
+            min="1921-01-01"
+            name="climbing-experience"
+            value={climbingExp}
+            required
+            onChange={(event) => setClimbingExp(event.target.value)}
           />
         </label>
       </div>

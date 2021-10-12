@@ -10,6 +10,7 @@ function AboutPage() {
     <div className="container">
       <div>
         <p>This about page is for anyone to read!</p>
+      <p>Tag-Tender is a Climbing app for logging specific routes in climbing gyms and viewing that information as provided by other users - like you!</p>
       </div>
     </div>
   );
