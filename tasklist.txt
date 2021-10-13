@@ -35,9 +35,9 @@ Milestone: login functionality display on DOM
     - [x] useParams to navigate to climb list with gym info?
 - [ ] Display Selected routes for Selected Gym
     - [x] server route and query for correct climbs
-    - [ ] saga for climbs
-    - [ ] reducer for climbs
-    - [ ] add sample climbs to database
+    - [x] saga for climbs
+    - [x] reducer for climbs
+    - [x] add sample climbs to database
     - [ ] client display climbs on dom
     - [ ] buttons and clickability
     - [ ] functions to details page, 

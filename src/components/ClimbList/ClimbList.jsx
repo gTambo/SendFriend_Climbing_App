@@ -7,6 +7,9 @@ import ClimbTag from './ClimbTag';
 function ClimbList() {
 
     const dispatch = useDispatch();
+    // useSelector to get climbs for render
+    const reduxStore = useSelector(store => store);
+    const { climbList } = reduxStore;
     // uses params to get gym id and style id selected on GymSelect page
     const { gymId, styleId } = useParams();
 
@@ -18,6 +21,7 @@ function ClimbList() {
             <p>list of climbs here</p>
             {JSON.stringify(gymId)}
             {JSON.stringify(styleId)}
+            {JSON.stringify(climbList)}
             <ul>
                 <ClimbTag />
             </ul>

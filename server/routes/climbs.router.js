@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * GET route template
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
   console.log("req.user: ", req.user);
   console.log('Params: ', req.params);

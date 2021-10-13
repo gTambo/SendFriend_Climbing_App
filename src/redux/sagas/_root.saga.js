@@ -20,5 +20,6 @@ export default function* rootSaga() {
     userSaga(),
     gymSaga(),
     styleSaga(),
+    climblistSaga(),
   ]);
 }
