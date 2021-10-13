@@ -22,7 +22,7 @@ function GymForm () {
             <p>route style selector here</p>
             <select defaultValue="type of climbing">
                 <option>type of climbing</option>
-                <option>Baouldering</option>
+                <option value="boulder">Baouldering</option>
             </select>
         </form>
     )

@@ -6,13 +6,13 @@ import GymForm from '../GymForm/GymForm';
 // It doesn't dispatch any redux actions or display any part of redux state
 // or even care what the redux state is
 
-function InfoPage() {
+function GymSelect() {
   return (
     <div className="container">
-      <p>Info Page</p>
+      <p>Select a Gym</p>
       <GymForm />
     </div>
   );
 }
 
-export default InfoPage;
+export default GymSelect;

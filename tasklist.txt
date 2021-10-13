@@ -13,7 +13,7 @@
     - [ ] Header, 
     - [ ] Footer (minimal styling), 
     - [ ] client Routes boilerplate
-- [ ] Database tables initial setup (seed tables with example data)
+- [x] Database tables initial setup (seed tables with example data)
 - [ ] minor css changes
 
 Milestone: login functionality display on DOM

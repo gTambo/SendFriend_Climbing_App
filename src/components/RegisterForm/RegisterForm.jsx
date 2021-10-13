@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// Moment.js
+const moment = require('moment');
+
 
 function RegisterForm() {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [hometown, setHometown] = useState('');
