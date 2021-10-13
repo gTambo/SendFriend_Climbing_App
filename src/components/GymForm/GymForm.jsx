@@ -22,6 +22,7 @@ function GymForm () {
 
     const handleSubmit = () => {
         console.log('Clicked Submit');
+
     }
 
     return(
@@ -38,7 +39,7 @@ function GymForm () {
                 {gyms.gymList.map(gym => {
                     return(
                         <option key={gym.id}
-                                value={gym.id}
+                                value={gym.name}
                         >
                             {gym.name}
                         </option>
@@ -53,7 +54,7 @@ function GymForm () {
                 {climbStyles.map(style => {
                     return(
                         <option key={style.id}
-                                value={style.id}
+                                value={style.style}
                         >
                             {style.style}
                         </option>
@@ -63,6 +64,10 @@ function GymForm () {
             <br/>
             <input type="submit" value="Submit" />
         </form>
+        <ul>
+            <li>Chosen Gym: {chosenGym}</li>
+            <li>Chosen Style: {chosenStyle}</li>
+        </ul>
         </div>
     )
 }
