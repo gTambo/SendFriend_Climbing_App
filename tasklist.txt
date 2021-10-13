@@ -10,11 +10,12 @@
 - [x] register component, 
     - [x] profile info form (in the register)
 - [ ] Client side App, 
-    - [ ] Header, 
+    - [ ] Header (tweak styling)
     - [ ] Footer (minimal styling), 
-    - [ ] client Routes boilerplate
+    - [x] client Routes boilerplate
 - [x] Database tables initial setup (seed tables with example data)
 - [ ] minor css changes
+- [ ] 
 
 Milestone: login functionality display on DOM
 
@@ -24,3 +25,11 @@ Milestone: login functionality display on DOM
 - [ ] work on resume/linkedin stuff
 
 ## Wednesday 
+- [ ] gym select Page
+    - [ ] server get route
+    - [ ] gym saga
+    - [ ] gym reducer
+    - [ ] climb style server route
+    - [ ] climb style saga
+    - [ ] climb style reducer
+    - [ ] useParams to navigate to climb list with gym info?
