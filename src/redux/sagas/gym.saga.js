@@ -8,7 +8,7 @@ function* fetchGyms() {
             withCredentials: true,
         }
         // setting what we get back to a variable
-        const response = yield axios.get('/api/gyms', config);
+        const response = yield axios.get('/api/gym', config);
         console.log("show me the gyms: ", response.data);
         // send dispatch and payload to reducer
         yield put({ type: 'SET_GYMS', payload: response.data});
