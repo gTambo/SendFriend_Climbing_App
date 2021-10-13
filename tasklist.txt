@@ -25,11 +25,27 @@ Milestone: login functionality display on DOM
 - [ ] work on resume/linkedin stuff
 
 ## Wednesday 
-- [ ] gym select Page
+- [x] gym select Page
     - [x] server get route
     - [x] gym saga
     - [x] gym reducer
     - [x] climb style server route
     - [x] climb style saga
     - [x] climb style reducer
-    - [ ] useParams to navigate to climb list with gym info?
+    - [x] useParams to navigate to climb list with gym info?
+- [ ] Display Selected routes for Selected Gym
+    - [x] server route and query for correct climbs
+    - [ ] saga for climbs
+    - [ ] reducer for climbs
+    - [ ] add sample climbs to database
+    - [ ] client display climbs on dom
+    - [ ] buttons and clickability
+    - [ ] functions to details page, 
+- [ ] Climb Detail page
+    - [ ] server 
+    - [ ] 
+    - [ ] 
+    - [ ] 
+    - [ ] 
+- [ ] update navigate
+- [ ] base components for Add new climb.

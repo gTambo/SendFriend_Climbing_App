@@ -10,9 +10,9 @@ function ClimbList() {
     // uses params to get gym id and style id selected on GymSelect page
     const { gymId, styleId } = useParams();
 
-    useEffect({
+    useEffect( () => {
         dispatch({ type: 'FETCH_ALL_CLIMBS', payload: {gymId: gymId, styleId: styleId }})
-    }, [])
+    }, [dispatch])
     return(
         <div>
             <p>list of climbs here</p>
