@@ -19,6 +19,8 @@ import GymSelect from '../GymSelect/GymSelect';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ClimbList from '../ClimbList/ClimbList';
+import ClimbDetail from '../ClimbDetail/ClimbDetail';
 
 import './App.css';
 
@@ -61,11 +63,27 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows GymSelect else shows LoginPage
             exact
             path="/gym"
           >
             <GymSelect />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/climbs/:gymId/:styleId"
+          >
+            <ClimbList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/climbdetail/:id"
+          >
+            <ClimbDetail />
           </ProtectedRoute>
 
           <Route
@@ -75,7 +93,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/gym" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -89,7 +107,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/gym" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -103,7 +121,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/gym" />
               :
               // Otherwise, show the Landing page
               <LandingPage />

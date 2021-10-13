@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 // To Do: import MUI Select components for dropdown
 
 function GymForm () {
@@ -11,6 +12,7 @@ function GymForm () {
     const reduxStore = useSelector(store => store);
     const { gyms, climbStyles } = reduxStore;
     const dispatch = useDispatch();
+    const history = useHistory();
     
     // STRETCH TO DO: Use selector to pull gym-specific information to populate select dropdowns
     // **STRETCH TODO: Add a gym
@@ -20,16 +22,17 @@ function GymForm () {
         dispatch({ type: 'FETCH_CLIMB_STYLES'})
     }, [dispatch]);
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         console.log('Clicked Submit');
-
+        history.push(`/climbs/${chosenGym}/${chosenStyle}`);
     }
 
     return(
         <div>
             <p>{JSON.stringify(gyms)}</p>
             <p>{JSON.stringify(climbStyles)}</p>
-        <form className="entry-form" >
+        <form className="entry-form" onSubmit={ handleSubmit }>
             <h2>Gym Selection</h2>
             <p>**gym selector here**</p>
             <select defaultValue="select a gym" 
@@ -39,7 +42,7 @@ function GymForm () {
                 {gyms.gymList.map(gym => {
                     return(
                         <option key={gym.id}
-                                value={gym.name}
+                                value={gym.id}
                         >
                             {gym.name}
                         </option>
@@ -54,7 +57,7 @@ function GymForm () {
                 {climbStyles.map(style => {
                     return(
                         <option key={style.id}
-                                value={style.style}
+                                value={style.id}
                         >
                             {style.style}
                         </option>

@@ -9,7 +9,7 @@
 - [x] Login component
 - [x] register component, 
     - [x] profile info form (in the register)
-- [ ] Client side App, 
+- [x] Client side App, 
     - [ ] Header (tweak styling)
     - [ ] Footer (minimal styling), 
     - [x] client Routes boilerplate
@@ -26,10 +26,10 @@ Milestone: login functionality display on DOM
 
 ## Wednesday 
 - [ ] gym select Page
-    - [ ] server get route
-    - [ ] gym saga
-    - [ ] gym reducer
-    - [ ] climb style server route
-    - [ ] climb style saga
-    - [ ] climb style reducer
+    - [x] server get route
+    - [x] gym saga
+    - [x] gym reducer
+    - [x] climb style server route
+    - [x] climb style saga
+    - [x] climb style reducer
     - [ ] useParams to navigate to climb list with gym info?
