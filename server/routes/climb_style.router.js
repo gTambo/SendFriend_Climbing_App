@@ -1,15 +1,15 @@
 const express = require('express');
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
+ router.get('/', rejectUnauthenticated, (req, res) => {
   // GET route code here
   console.log('req.user: ', req.user);
-  const query = `SELECT * FROM "gym";`;
+  const query = `SELECT * FROM "climb_style";`;
   pool.query(query).then( (result) => {
       console.log("send back: ", result.rows);
       res.send(result.rows);
@@ -18,7 +18,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
      res.sendStatus(500); 
   });
 });
-  
 
 /**
  * POST route template
@@ -28,3 +27,6 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+
+
+

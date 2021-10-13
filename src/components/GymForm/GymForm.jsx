@@ -8,14 +8,16 @@ function GymForm () {
     const [chosenStyle, setChosenStyle] = useState('');
 
     // TO DO: use (redux?) state to hold gym and climb style 
-    const gyms = useSelector(store => store.gyms);
+    const reduxStore = useSelector(store => store);
+    const { gyms, climbStyles } = reduxStore;
     const dispatch = useDispatch();
-    // const { gyms } = reduxStore;
+    
     // STRETCH TO DO: Use selector to pull gym-specific information to populate select dropdowns
     // **STRETCH TODO: Add a gym
 
     useEffect( () => {
         dispatch({ type: 'FETCH_GYMS' })
+        dispatch({ type: 'FETCH_CLIMB_STYLES'})
     }, [dispatch]);
 
     const handleSubmit = () => {
@@ -25,6 +27,7 @@ function GymForm () {
     return(
         <div>
             <p>{JSON.stringify(gyms)}</p>
+            <p>{JSON.stringify(climbStyles)}</p>
         <form className="entry-form" >
             <h2>Gym Selection</h2>
             <p>**gym selector here**</p>
@@ -47,8 +50,18 @@ function GymForm () {
                     onChange={ (event) => setChosenStyle(event.target.value) }
             >
                 <option>type of climbing</option>
-                <option value="boulder">Baouldering</option>
+                {climbStyles.map(style => {
+                    return(
+                        <option key={style.id}
+                                value={style.id}
+                        >
+                            {style.style}
+                        </option>
+                    )
+                })}
             </select>
+            <br/>
+            <input type="submit" value="Submit" />
         </form>
         </div>
     )
