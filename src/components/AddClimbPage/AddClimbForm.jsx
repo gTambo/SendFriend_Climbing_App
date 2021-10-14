@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function AddClimbForm({gymId, styleId}) {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
+    // Use Redux to store grades
+    const grades = useSelector(store => store.grades);
     // use local state to assemble new climb details as an object
     let defaultClimb = {
         grade_id: '',
@@ -14,11 +19,23 @@ function AddClimbForm({gymId, styleId}) {
     };
 
     const [newClimb, setNewClimb] = useState(defaultClimb);
-    //  Use Redux to store grades
+    
     // To Do: get Grades 
+    useEffect( () => {
+        dispatch({ type: 'FETCH_ALL_GRADES' })
+    }, [dispatch]);
+
+    const saveNewClimb = (event) => {
+        event.preventDefault();
+        console.log('climb to add: ', newClimb);
+        // dispatch({ type: 'ADD_CLIMB', payload: newClimb});
+        // history.push(`/climbs/${gymId}/${styleId}`);
+    }
 
     return(
-        <form>
+        <>
+        {/* {JSON.stringify(grades)} */}
+        <form onSubmit={ saveNewClimb }>
             <label htmlFor="grade">Grade</label> 
             <select name="grade" 
                     required 
@@ -27,6 +44,13 @@ function AddClimbForm({gymId, styleId}) {
                     value={newClimb.grade_id} 
                     onChange={ (event) => setNewClimb({...newClimb, grade_id: event.target.value})}>
                         {/* get grades from redux and map to selector */}
+                        <option>Select the grade</option>
+                        {grades.map((grade) => {
+                            return(
+                                <option key={grade.id} value={grade.id}>{grade.difficulty}</option>
+                            )
+
+                        })}
             </select>
             <label htmlFor="color">Color</label>
             <select required
@@ -52,14 +76,19 @@ function AddClimbForm({gymId, styleId}) {
             <label htmlFor="photo">Photo</label>
             <input required
                    id="photo" 
-                   type="text" 
+                   type="text"
+                   value={newClimb.photo}
+                   onChange={ (event) => setNewClimb({...newClimb, photo: event.target.value})} 
             />
             <label htmlFor="movement">Movement Style</label>
             <input id="movement" 
                    type="text" 
+                   value={newClimb.movement_style}
+                   onChange={ (event) => setNewClimb({...newClimb, movement_style: event.target.value})}
             />
             <input type="submit" value="Save Climb" />
         </form>
+        </>
     )
 }
 

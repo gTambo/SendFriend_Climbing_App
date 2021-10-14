@@ -31,9 +31,10 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
 /**
  * GET all the climb styles
  */
-router.get('/styles', rejectUnauthenticated, (req, res) => {
+router.get('/grades', rejectUnauthenticated, (req, res) => {
     // We'll just take all the grades
     //  TO DO: limit grades by boulder or rope, once client can send specifics
+    console.log('Getting grades', req.params);
     const query = `SELECT * FROM "grade";`;
     pool.query(query).then( (result) => {
         console.log('Sending grades from DB: ', result.rows); // let's see 'em

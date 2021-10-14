@@ -5,6 +5,7 @@ import gyms from './gym.reducer';
 import climbStyles from './climb_style.reducer'
 import climbList from './climblist.reducer';
 import climbDetails from './climb_details.reducer';
+import grades from './grades.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   climbStyles,
   climbList,
   climbDetails,
+  grades,
 });
 
 export default rootReducer;

@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
 
-function* fetchGrades(action) {
+function* fetchGrades() {
     try {
         // verify login
         const config = {
             headers: { 'Content-Type': 'application/json'},
             withCredentials: true,
         }
-        const response = yield axios.get('/api/climbs/slyes', config);
+        const response = yield axios.get('/api/climbs/grades', config);
         console.log('Got the grades:', response.data);
         yield put({ type: 'SET_GRADES', payload: response.data });
     } catch (error) {
@@ -17,7 +17,7 @@ function* fetchGrades(action) {
 }
 
 function* gradesSaga() {
-    takeLatest('FETCH_ALL_GRADES', fetchGrades);
+    yield takeEvery('FETCH_ALL_GRADES', fetchGrades);
 }
 
 export default gradesSaga;
