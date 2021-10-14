@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link, NavLink } from 'react-router-dom';
 
 import ClimbTag from './ClimbTag';
 
@@ -16,8 +16,12 @@ function ClimbList() {
     useEffect( () => {
         dispatch({ type: 'FETCH_ALL_CLIMBS', payload: {gymId: gymId, styleId: styleId }})
     }, [dispatch])
+
     return(
         <div>
+            <NavLink to="/addclimb">
+                <h2 className="navlink">Don't see a climb? Add It!</h2>
+            </NavLink>
             <p>list of climbs here</p>
             {/* {JSON.stringify(gymId)}
             {JSON.stringify(styleId)}

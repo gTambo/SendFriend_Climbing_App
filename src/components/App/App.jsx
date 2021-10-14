@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ClimbList from '../ClimbList/ClimbList';
 import ClimbDetail from '../ClimbDetail/ClimbDetail';
+import AddNewClimb from '../AddClimbPage/AddClimbPage';
 
 import './App.css';
 
@@ -63,6 +64,14 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            // logged in shows AddNewClimb else shows LoginPage
+            exact
+            path="/addclimb"
+          >
+            <AddNewClimb />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows GymSelect else shows LoginPage
             exact
             path="/gym"
@@ -79,9 +88,9 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows ClimbDetail else shows LoginPage
             exact
-            path="/climbdetail/:id"
+            path="/climbdetail/:climbId"
           >
             <ClimbDetail />
           </ProtectedRoute>

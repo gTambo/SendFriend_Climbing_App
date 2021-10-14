@@ -39,8 +39,8 @@ Milestone: login functionality display on DOM
     - [x] reducer for climbs
     - [x] add sample climbs to database
     - [x] client display climbs on dom
-    - [ ] buttons and clickability
-    - [ ] functions to details page, 
+    - [x] buttons and clickability
+    - [x] functions to details page, 
 - [ ] Climb Detail page
     - [ ] server 
     - [ ] 
