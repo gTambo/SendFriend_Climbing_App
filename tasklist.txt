@@ -42,9 +42,9 @@ Milestone: login functionality display on DOM
     - [x] buttons and clickability
     - [x] functions to details page, 
 - [ ] Climb Detail page
-    - [ ] server 
-    - [ ] saga
-    - [ ] reducer
+    - [x] server 
+    - [x] saga
+    - [x] reducer
     - [ ] get 
     - [ ] 
 - [ ] update navigate
