@@ -11,7 +11,7 @@ function ClimbDetail() {
         //  use Selector to get details from redux
         const climbDetails = useSelector(store => store.climbDetails);
     // use params to get climb ID
-    const { climbId } = useParams();
+    const { gymId, climbId, styleId } = useParams();
     const addDate = moment(climbDetails.date_added).format("dddd, MMMM, do YYYY");
     // On page load, get climb details, using id from params
     useEffect( () => {
@@ -28,14 +28,18 @@ function ClimbDetail() {
         <div>
             <p>Details here</p>
             {JSON.stringify(climbDetails)}
+            Gym Id:{JSON.stringify(gymId)}
+            Style Id:{JSON.stringify(styleId)}
             <img className="big-photo" src={climbDetails.photo} />
             <p>Grade: {climbDetails.difficulty}</p>
             <p>Color: {climbDetails.color}</p>
             <p>Date added {addDate}</p>
             <p>Movement style: {climbDetails.movement_style}</p>
-            
+
             <button onClick={ logRoute }>Log Your Send</button>
-            <button onClick={ () => history.goBack() }>Cancel</button>
+            <button>Delete Climb</button>
+            <button>Edit Climb</button>
+            <button onClick={ () => history.goBack() }>All Climbs</button>
         </div>
     )
 

@@ -7,15 +7,17 @@ function AddNewClimb() {
     const reduxStore = useSelector(store => store);
     const { climbList } = reduxStore;
     const allParams = useParams();
+    const { gymId, styleId } = allParams;
 
 
     return(
         <div>
+
             Climblist:{JSON.stringify(climbList)}
             Params: {JSON.stringify(allParams)}
             <p>add new climb here!</p>
-            <AddClimbForm />
-            <button onClick={ () => history.goBack() }>Back</button>
+            <AddClimbForm gymId={gymId} styleId={styleId} />
+            <button onClick={ () => history.goBack() }>Cancel</button>
         </div>
     )
 }

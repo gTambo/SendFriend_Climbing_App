@@ -45,7 +45,11 @@ Milestone: login functionality display on DOM
     - [x] server 
     - [x] saga
     - [x] reducer
-    - [ ] get 
-    - [ ] 
+    - [ ] get comments
+    - [ ] get ratings
+    - [ ] comments and ratings on dom
 - [ ] update navigate
 - [x] base components for Add new climb.
+- [ ] 
+- [ ] 
+- [ ] 

@@ -2,13 +2,13 @@
 // import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function ClimbTag({climb}) {
+function ClimbTag({gymId, styleId, climb}) {
     //  use history to view details page
     const history = useHistory();
 
 
     const viewClimbDetails = () => {
-        history.push(`/climbdetail/${climb.id}`)
+        history.push(`/climbs/${gymId}/${styleId}/climbdetail/${climb.id}`)
     }
 
     return(

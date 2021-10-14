@@ -4,7 +4,7 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
- * GET route template
+ * GET climbs from specified gym with specified style
  */
 router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
@@ -20,7 +20,7 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
 
   pool.query((query), [req.params.gymId, req.params.styleId])
   .then( (result) => {
-    console.log('Sending back: ', result.rows);
+    console.log('Sending back: ', result.rows); // Show me what I got
     res.send(result.rows)
   }).catch(error => {
       console.log('Error getting climbs: ', error);
@@ -28,6 +28,21 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   });
 });
 
+/**
+ * GET all the climb styles
+ */
+router.get('/styles', rejectUnauthenticated, (req, res) => {
+    // We'll just take all the grades
+    //  TO DO: limit grades by boulder or rope, once client can send specifics
+    const query = `SELECT * FROM "grade";`;
+    pool.query(query).then( (result) => {
+        console.log('Sending grades from DB: ', result.rows); // let's see 'em
+        res.send(result.rows);
+    }).catch((err) => { // uh-oh
+        console.log('There was an error getting grades: ', err);
+        res.sendStatus(500);
+    });
+});
 
 /**
  * POST route template
@@ -35,5 +50,21 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
 router.post('/', (req, res) => {
   // POST route code here
 });
+
+/**
+ * PUT route template
+ * 
+ */
+router.put('/', (req, res) => {
+    // PUT route code here
+});
+
+/**
+ * DELETE route template
+ */
+ router.delete('/:id', (req, res) => {
+    //  DELETE route code here
+ })
+
 
 module.exports = router;

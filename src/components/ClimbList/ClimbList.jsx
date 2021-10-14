@@ -5,7 +5,7 @@ import { useHistory, useParams, Link, NavLink } from 'react-router-dom';
 import ClimbTag from './ClimbTag';
 
 function ClimbList() {
-
+    const history = useHistory();
     const dispatch = useDispatch();
     // useSelector to get climbs for render
     const reduxStore = useSelector(store => store);
@@ -17,11 +17,12 @@ function ClimbList() {
         dispatch({ type: 'FETCH_ALL_CLIMBS', payload: {gymId: gymId, styleId: styleId }})
     }, [dispatch])
 
+    const addNewClimb = () => {
+        history.push(`/climbs/${gymId}/${styleId}/addclimb`)
+    }
     return(
         <div>
-            <NavLink to="/addclimb">
-                <h2 className="navlink">Don't see a climb? Add It!</h2>
-            </NavLink>
+            <button onClick={ addNewClimb }>ADD A NEW CLIMB!</button>
             <p>list of climbs here</p>
             {/* {JSON.stringify(gymId)}
             {JSON.stringify(styleId)}
@@ -29,7 +30,7 @@ function ClimbList() {
             <ul>
                 {climbList.map(climb => {
                     return(
-                        <ClimbTag key={climb.id} climb={climb}/>
+                        <ClimbTag key={climb.id} gymId={gymId} styleId={styleId} climb={climb}/>
                     )
                 })}
             </ul>

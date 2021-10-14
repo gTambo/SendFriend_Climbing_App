@@ -66,7 +66,7 @@ function App() {
           <ProtectedRoute
             // logged in shows AddNewClimb else shows LoginPage
             exact
-            path="/addclimb"
+            path="/climbs/:gymId/:styleId/addclimb"
           >
             <AddNewClimb />
           </ProtectedRoute>
@@ -90,7 +90,7 @@ function App() {
           <ProtectedRoute
             // logged in shows ClimbDetail else shows LoginPage
             exact
-            path="/climbdetail/:climbId"
+            path="/climbs/:gymId/:styleId/climbdetail/:climbId"
           >
             <ClimbDetail />
           </ProtectedRoute>
