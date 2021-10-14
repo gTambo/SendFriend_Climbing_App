@@ -28,8 +28,10 @@ function AddClimbForm({gymId, styleId}) {
     const saveNewClimb = (event) => {
         event.preventDefault();
         console.log('climb to add: ', newClimb);
-        // dispatch({ type: 'ADD_CLIMB', payload: newClimb});
-        // history.push(`/climbs/${gymId}/${styleId}`);
+        dispatch({ type: 'ADD_CLIMB', payload: newClimb});
+        setNewClimb(defaultClimb);
+        alert("Climb added!");
+        history.push(`/climbs/${gymId}/${styleId}`);
     }
 
     return(

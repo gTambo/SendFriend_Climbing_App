@@ -27,9 +27,10 @@ function ClimbDetail() {
     return(
         <div>
             <p>Details here</p>
-            {JSON.stringify(climbDetails)}
+            <button onClick={ () => history.goBack() }>Back to Climbs</button>
+            {/* {JSON.stringify(climbDetails)}
             Gym Id:{JSON.stringify(gymId)}
-            Style Id:{JSON.stringify(styleId)}
+            Style Id:{JSON.stringify(styleId)} */}
             <img className="big-photo" src={climbDetails.photo} />
             <p>Grade: {climbDetails.difficulty}</p>
             <p>Color: {climbDetails.color}</p>
@@ -39,7 +40,7 @@ function ClimbDetail() {
             <button onClick={ logRoute }>Log Your Send</button>
             <button>Delete Climb</button>
             <button>Edit Climb</button>
-            <button onClick={ () => history.goBack() }>All Climbs</button>
+            
         </div>
     )
 

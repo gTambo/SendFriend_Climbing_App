@@ -46,10 +46,32 @@ router.get('/grades', rejectUnauthenticated, (req, res) => {
 });
 
 /**
- * POST route template
+ * POST new climb
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
+    console.log('Posting new climb: ', req.body);
+    console.log('User: ', req.user);
+    const query = `INSERT INTO "climbs" 
+	("grade_id", "color", "gym_id", "climb_style_id", "photo", "movement_style", "user_id")
+VALUES
+	($1, $2, $3, $4, $5, $6, $7);
+`;
+pool.query((query), [
+        req.body.grade_id, // $1
+        req.body.color, // $2
+        req.body.gym_id, // $3
+        req.body.climb_style_id, // $4
+        req.body.photo, // $5
+        req.body.movement_style, // $6
+        req.user.id // $7
+    ]).then((result) => {
+        console.log("result: ", result);
+        // res.send(result)
+    }).catch((err) => {
+        console.log('Error in post: ', err);
+        res.sendStatus(500);
+    })
 });
 
 /**

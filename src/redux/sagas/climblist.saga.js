@@ -27,8 +27,26 @@ function* fetchClimbs(action) {
     }
 }
 
+function* addClimb(action) {
+    try {
+        // const config = {
+        //     headers: { 'Content-Type': 'application/json'},
+        //     withCredentials: true,
+        // }
+
+        const newClimb = action.payload;
+        console.log('Add Climb Saga: ', newClimb);
+        yield axios.post('/api/climbs', newClimb);
+        yield put({ type: 'FETCH_ALL_CLIMBS' });
+    } catch (err) {
+        console.log('Error adding new Climb ', err);
+        alert("Unable to add Climb.");
+    }
+}
+
 function* climblistSaga() {
     yield takeLatest('FETCH_ALL_CLIMBS', fetchClimbs);
+    yield takeLatest('ADD_CLIMB', addClimb);
 }
 
 export default climblistSaga;
