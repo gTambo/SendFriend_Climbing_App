@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import gymSaga from './gym.saga';
 import styleSaga from './climb_style.saga';
 import climblistSaga from './climblist.saga';
+import climbDetailSaga from './climb_details.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     gymSaga(),
     styleSaga(),
     climblistSaga(),
+    climbDetailSaga(),
   ]);
 }

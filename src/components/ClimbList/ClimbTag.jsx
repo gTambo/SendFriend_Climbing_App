@@ -15,7 +15,7 @@ function ClimbTag({climb}) {
         <li>
             <p>{climb.difficulty}</p>
             <p>{climb.color}</p>
-            <img src={climb.photo} />
+            <img className="small-photo" src={climb.photo} />
             <button onClick={ viewClimbDetails }>View Details</button>
         </li>
     )

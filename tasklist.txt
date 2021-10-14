@@ -43,9 +43,9 @@ Milestone: login functionality display on DOM
     - [x] functions to details page, 
 - [ ] Climb Detail page
     - [ ] server 
-    - [ ] 
-    - [ ] 
-    - [ ] 
+    - [ ] saga
+    - [ ] reducer
+    - [ ] get 
     - [ ] 
 - [ ] update navigate
-- [ ] base components for Add new climb.
+- [x] base components for Add new climb.

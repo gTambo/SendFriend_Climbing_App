@@ -111,3 +111,13 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+.big-photo {
+  height: 26rem;
+  width: fit-content;
+}
+
+.small-photo {
+  height: 20rem;
+  width: fit-content;
+}
