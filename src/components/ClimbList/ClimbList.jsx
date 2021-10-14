@@ -19,11 +19,15 @@ function ClimbList() {
     return(
         <div>
             <p>list of climbs here</p>
-            {JSON.stringify(gymId)}
+            {/* {JSON.stringify(gymId)}
             {JSON.stringify(styleId)}
-            {JSON.stringify(climbList)}
+            {JSON.stringify(climbList)} */}
             <ul>
-                <ClimbTag />
+                {climbList.map(climb => {
+                    return(
+                        <ClimbTag key={climb.id} climb={climb}/>
+                    )
+                })}
             </ul>
         </div>
     )

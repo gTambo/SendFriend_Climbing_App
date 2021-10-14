@@ -10,7 +10,13 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
   console.log("req.user: ", req.user);
   console.log('Params: ', req.params);
-  const query = `SELECT * FROM "climbs" WHERE "gym_id" = $1 AND "climb_style_id" = $2;`;
+  const query = `
+        SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "movement_style" FROM "climbs" 
+        JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
+        WHERE "gym_id" = $1 AND "climb_style_id" = $2
+        GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo"
+        ORDER BY "grade"."difficulty" ASC;
+    `;
 
   pool.query((query), [req.params.gymId, req.params.styleId])
   .then( (result) => {

@@ -30,8 +30,8 @@ function GymForm () {
 
     return(
         <div>
-            <p>{JSON.stringify(gyms)}</p>
-            <p>{JSON.stringify(climbStyles)}</p>
+            {/* <p>{JSON.stringify(gyms)}</p>
+            <p>{JSON.stringify(climbStyles)}</p> */}
         <form className="entry-form" onSubmit={ handleSubmit }>
             <h2>Gym Selection</h2>
             <p>**gym selector here**</p>

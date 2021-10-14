@@ -38,7 +38,7 @@ Milestone: login functionality display on DOM
     - [x] saga for climbs
     - [x] reducer for climbs
     - [x] add sample climbs to database
-    - [ ] client display climbs on dom
+    - [x] client display climbs on dom
     - [ ] buttons and clickability
     - [ ] functions to details page, 
 - [ ] Climb Detail page
