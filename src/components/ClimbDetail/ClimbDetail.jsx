@@ -16,7 +16,7 @@ function ClimbDetail() {
     // On page load, get climb details, using id from params
     useEffect( () => {
         dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}})
-    }, [])
+    }, [climbId])
 
     const logRoute = () => {
         // STRETCH TO DO: Navigate to log route page

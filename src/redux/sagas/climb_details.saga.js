@@ -35,11 +35,15 @@ function* deleteClimbTag(action) {
 
 function* editClimbTag(action) {
     try {
+        const config = {
+            headers: { 'Content-Type': 'application/json'},
+            withCredentials: true,
+        }
         // set the Id to a variable
         const idToEdit = action.payload.id;
         console.log('Edit Saga: ', idToEdit, action.payload);
         // send to server 
-        yield axios.put(`/api/climbs/edit/${idToEdit}`, action.payload);
+        yield axios.put(`/api/climbs/edit/${idToEdit}`, action.payload, config);
         // update climbs list
         yield put({ type: 'FETCH_ALL_CLIMBS' });
     } catch (err) {

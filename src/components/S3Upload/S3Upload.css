@@ -1,0 +1,9 @@
+.inner-drop {
+    text-align: center;
+    color: white;
+}
+
+.inner-drop:hover {
+    background-color: #00d3d6;
+    color: #555555;
+}

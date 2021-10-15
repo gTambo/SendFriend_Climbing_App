@@ -15,7 +15,7 @@ function ClimbList() {
 
     useEffect( () => {
         dispatch({ type: 'FETCH_ALL_CLIMBS', payload: {gymId: gymId, styleId: styleId }})
-    }, [dispatch])
+    }, [gymId, styleId])
 
     const addNewClimb = () => {
         history.push(`/climbs/${gymId}/${styleId}/addclimb`)

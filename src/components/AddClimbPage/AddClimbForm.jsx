@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import UploadDisplay from '../S3Upload/S3Upload';
 
 function AddClimbForm({gymId, styleId}) {
 
@@ -76,12 +77,13 @@ function AddClimbForm({gymId, styleId}) {
                 <option value="Other">Other</option>
             </select>
             <label htmlFor="photo">Photo</label>
-            <input required
+            {/* <input required
                    id="photo" 
                    type="text"
                    value={newClimb.photo}
                    onChange={ (event) => setNewClimb({...newClimb, photo: event.target.value})} 
-            />
+            /> */}
+            <UploadDisplay id="photo" setNewClimb={setNewClimb} newClimb={newClimb} />
             <label htmlFor="movement">Movement Style</label>
             <input id="movement" 
                    type="text" 
@@ -90,6 +92,7 @@ function AddClimbForm({gymId, styleId}) {
             />
             <input type="submit" value="Save Climb" />
         </form>
+        
         </>
     )
 }
