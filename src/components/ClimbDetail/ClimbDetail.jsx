@@ -41,6 +41,7 @@ function ClimbDetail() {
         event.preventDefault();
         console.log('rating to add: ', rating);
         dispatch({ type: 'ADD_RATING', payload: {climb_id: climbId, rating: rating }});
+        dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}})
     }
 
     return(

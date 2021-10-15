@@ -10,7 +10,7 @@ function* addRating(action) {
         // const idToRate = action.payload.id;
         console.log('request to rate: ', action.payload);
         yield axios.post(`/api/details/rating`, action.payload, config);
-        yield put({ type: 'FETCH_ALL_CLIMBS' });
+        yield put({ type: 'FETCH_CLIMB_DETAILS' });
     } catch (err) {
         console.log('Error in rating saga: ', err);
     }
