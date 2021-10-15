@@ -78,8 +78,29 @@ pool.query((query), [
  * PUT route template
  * 
  */
-router.put('/', (req, res) => {
+router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
     // PUT route code here
+    console.log('Params: ', req.params.id);
+    console.log('Body: ', req.body);
+    const climbToEdit = req.params.id;
+    const query = `
+            UPDATE "climbs" SET 
+            ("grade_id", "color", "gym_id", "climb_style_id", "photo", "movement_style")
+            =
+	        ($1, $2, $3, $4, $5, $6)
+            WHERE "id" = $7;
+        `;
+    pool.query((query), [
+        req.body.grade_id, // $1
+        req.body.color, // $2
+        req.body.gym_id, // $3
+        req.body.climb_style_id, // $4
+        req.body.photo, // $5
+        req.body.movement_style, // $6
+        climbToEdit // $7
+    ]).then( results => {
+
+    })
 });
 
 /**
@@ -91,6 +112,13 @@ router.put('/', (req, res) => {
     const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1 AND "user_id" = $2;`;
     pool.query((deleteQuery), [req.params.id, req.user.id]).then( (result) => {
         console.log('Delete result: ',result);
+        if (result.rowCount > 0) {
+            // we deleted something
+            res.send({message: 'You deleted the climb!'})
+          } else {
+            // we did not delete anything
+            res.send({ message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
+          }
     }).catch(error => {
         res.sendStatus(500);
     });

@@ -33,10 +33,25 @@ function* deleteClimbTag(action) {
     }
 }
 
+function* editClimbTag(action) {
+    try {
+        // set the Id to a variable
+        const idToEdit = action.payload.id;
+        console.log('Edit Saga: ', idToEdit, action.payload);
+        // send to server 
+        yield axios.put(`/api/climbs/edit/${idToEdit}`, action.payload);
+        // update climbs list
+        yield put({ type: 'FETCH_ALL_CLIMBS' });
+    } catch (err) {
+        console.log('Error in edit saga: ', err);
+    }
+}
+
 
 function* climbDetailSaga() {
     yield takeLatest('FETCH_CLIMB_DETAILS', fetchClimbDetails);
     yield takeLatest('DELETE_CLIMB_TAG', deleteClimbTag);
+    yield takeLatest('EDIT_CLIMB_TAG', editClimbTag);
 }
 
 export default climbDetailSaga;

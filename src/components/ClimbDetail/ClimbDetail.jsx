@@ -31,6 +31,10 @@ function ClimbDetail() {
         history.push(`/climbs/${gymId}/${styleId}`);
     }
 
+    const toEditPage = () => {
+        history.push(`/climbs/${gymId}/${styleId}/edit/${climbId}`);
+    }
+
     return(
         <div>
             <p>Details here</p>
@@ -46,7 +50,7 @@ function ClimbDetail() {
 
             <button onClick={ logRoute }>Log Your Send</button>
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
-            <button>Edit Climb</button>
+            <button onClick={ toEditPage } >Edit Climb</button>
             <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb(climbId) } }>
               Delete
             </button>
