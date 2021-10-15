@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 const moment = require('moment');
 
+// MaterialUI styling here
+
 
 function ClimbDetail() {
     // use dispatch to get details

@@ -73,8 +73,9 @@ Milestone: login functionality display on DOM
 
 
 - [ ] S3 BUCKET!!
-    - [ ] get the dropZone
-    - [ ] add fliename to database
+    - [x] get the dropZone
+    - [x] add fliename to database
+    - [ ] look into Chris' code, and implement
 
 Styling TO DO's:
 - [ ] star rating component 
