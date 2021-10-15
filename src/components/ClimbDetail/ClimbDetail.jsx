@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 const moment = require('moment');
@@ -40,7 +40,7 @@ function ClimbDetail() {
     const rateClimb = (event) => {
         event.preventDefault();
         console.log('rating to add: ', rating);
-        // dispatch({ type: 'ADD_RATING', payload: {climb_id: climbId, rating: rating }});
+        dispatch({ type: 'ADD_RATING', payload: {climb_id: climbId, rating: rating }});
     }
 
     return(
@@ -55,8 +55,8 @@ function ClimbDetail() {
             <p>Color: {climbDetails.color}</p>
             <p>Date added {addDate}</p>
             <p>Movement style: {climbDetails.movement_style}</p>
+            <p>rating: {climbDetails.coalesce}</p>
             <label htmlFor="rating">Rate This Climb</label>
-                <option value="1">1 star</option>
             <select name="rate-climb" 
                     id="rating" 
                     value={rating}
