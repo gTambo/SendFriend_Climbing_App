@@ -59,5 +59,14 @@ Milestone: login functionality display on DOM
     - [x] post /climbs route
     - [x] results into reducer
     - [x] new climb on DOM
-- [ ] 
-- [ ] 
+- [ ] DELETE climb
+    - [x] Confirmation alert
+    - [ ] climbs router
+    - [x] saga
+    - [x] client form
+    - [x] test it
+- [ ] Edit/PUT climb
+    - [ ] client form
+    - [ ] saga
+    - [ ] router
+    - [ ] test it

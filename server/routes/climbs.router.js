@@ -14,8 +14,8 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
         SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "movement_style" FROM "climbs" 
         JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
         WHERE "gym_id" = $1 AND "climb_style_id" = $2
-        GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo"
-        ORDER BY "grade"."difficulty" ASC;
+        GROUP BY "climbs"."id", "grade"."id", "grade"."difficulty", "color", "photo"
+        ORDER BY "grade"."id", "climbs"."id" ASC;
     `;
 
   pool.query((query), [req.params.gymId, req.params.styleId])
@@ -85,9 +85,16 @@ router.put('/', (req, res) => {
 /**
  * DELETE route template
  */
- router.delete('/:id', (req, res) => {
+ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     //  DELETE route code here
- })
+    console.log('Params(climb Id) and user id: ', req.params, req.user.id);
+    const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1 AND "user_id" = $2;`;
+    pool.query((deleteQuery), [req.params.id, req.user.id]).then( (result) => {
+        console.log('Delete result: ',result);
+    }).catch(error => {
+        res.sendStatus(500);
+    });
+ });
 
 
 module.exports = router;

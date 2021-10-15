@@ -24,6 +24,13 @@ function ClimbDetail() {
         alert("Okay, log the route!");
     }
 
+    const deleteClimb = (id) => {
+        console.log('confirmed delete climb: ', id);
+        dispatch({ type: 'DELETE_CLIMB_TAG', payload: id });
+        alert(`Deleted Climb: #${id}`);
+        history.push(`/climbs/${gymId}/${styleId}`);
+    }
+
     return(
         <div>
             <p>Details here</p>
@@ -38,9 +45,11 @@ function ClimbDetail() {
             <p>Movement style: {climbDetails.movement_style}</p>
 
             <button onClick={ logRoute }>Log Your Send</button>
-            <button>Delete Climb</button>
+            {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
             <button>Edit Climb</button>
-            
+            <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb(climbId) } }>
+              Delete
+            </button>
         </div>
     )
 

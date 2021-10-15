@@ -18,8 +18,25 @@ function* fetchClimbDetails(action) {
     }
 }
 
+function* deleteClimbTag(action) {
+    try {
+        const config = {
+            headers: { 'Content-Type': 'application/json'},
+            withCredentials: true,
+        }
+        const idToDelete = action.payload;
+        console.log('request to delete: ', idToDelete);
+        yield axios.delete(`/api/climbs/${idToDelete}`, config);
+        yield put({ type: 'FETCH_ALL_CLIMBS' })
+    } catch (err) {
+        console.log('Error in delete saga: ', err);
+    }
+}
+
+
 function* climbDetailSaga() {
     yield takeLatest('FETCH_CLIMB_DETAILS', fetchClimbDetails);
+    yield takeLatest('DELETE_CLIMB_TAG', deleteClimbTag);
 }
 
 export default climbDetailSaga;
