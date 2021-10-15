@@ -6,10 +6,12 @@ const moment = require('moment');
 
 function ClimbDetail() {
     // use dispatch to get details
-        const dispatch = useDispatch();
-        const history = useHistory();
-        //  use Selector to get details from redux
-        const climbDetails = useSelector(store => store.climbDetails);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    // use local state to store rating
+    const [rating, setRating] = useState(0);
+    //  use Selector to get details from redux
+    const climbDetails = useSelector(store => store.climbDetails);
     // use params to get climb ID
     const { gymId, climbId, styleId } = useParams();
     const addDate = moment(climbDetails.date_added).format("dddd, MMMM, do YYYY");
@@ -35,6 +37,12 @@ function ClimbDetail() {
         history.push(`/climbs/${gymId}/${styleId}/edit/${climbId}`);
     }
 
+    const rateClimb = (event) => {
+        event.preventDefault();
+        console.log('rating to add: ', rating);
+        // dispatch({ type: 'ADD_RATING', payload: {climb_id: climbId, rating: rating }});
+    }
+
     return(
         <div>
             <p>Details here</p>
@@ -47,7 +55,20 @@ function ClimbDetail() {
             <p>Color: {climbDetails.color}</p>
             <p>Date added {addDate}</p>
             <p>Movement style: {climbDetails.movement_style}</p>
-
+            <label htmlFor="rating">Rate This Climb</label>
+                <option value="1">1 star</option>
+            <select name="rate-climb" 
+                    id="rating" 
+                    value={rating}
+                    onChange={(event) => setRating(event.target.value)}
+                >
+                <option value="">select rating</option>
+                <option value="1">1 star</option>
+                <option value="2">2 stars</option>
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+            </select>
+            <button onClick={ rateClimb }>Rate This Climb</button>
             <button onClick={ logRoute }>Log Your Send</button>
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
             <button onClick={ toEditPage } >Edit Climb</button>
