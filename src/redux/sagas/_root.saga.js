@@ -8,6 +8,7 @@ import climblistSaga from './climblist.saga';
 import climbDetailSaga from './climb_details.saga';
 import gradesSaga from './grades.saga';
 import ratingSaga from './rating.saga';
+import commentSaga from './comment.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     climbDetailSaga(),
     gradesSaga(),
     ratingSaga(),
+    commentSaga(),
   ]);
 }

@@ -64,7 +64,7 @@ function ClimbDetail() {
     const addNewComment = (event) => {
         event.preventDefault();
         console.log('new comment: ', newComment);
-        // dispatch({ type: 'ADD_COMMENT', payload: {id: climbId, comment: newComment }});
+        dispatch({ type: 'ADD_COMMENT', payload: {climb_id: climbId, comment: newComment }});
         setNewComment('');
         // dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
     }
