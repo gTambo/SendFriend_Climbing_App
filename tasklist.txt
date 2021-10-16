@@ -70,6 +70,40 @@ Milestone: login functionality display on DOM
     - [x] saga
     - [x] router
     - [x] test it
+
+
 - [ ] S3 BUCKET!!
-    - [ ] get the 
-    - [ ] 
+    - [x] get the dropZone
+    - [x] add fliename to database
+    - [ ] look into Chris' code, and implement
+
+Styling TO DO's:
+- [ ] star rating component 
+- [ ] replace boilerplate navbar
+- [ ] replace dropdown select with MUI
+    - [ ] gym form
+    - [ ] add climb form
+    - [ ] edit climb form
+- [ ] use Grid
+- [ ] MUI cards on climbList
+- [ ] replace all input fields
+- [ ] replace all buttons
+- [ ] import fonts
+- [ ] Typography
+- [ ] ???
+
+    Friday to-dos:
+- [ ] look deeper into s3 BUCKET
+- [ ] update resume
+- [ ] ratings on climb details
+- [ ] comments on climb-details
+- [ ] update README!
+- [ ] some Styling
+- [ ] attempt test on phone browser
+
+General To-Do's:
+- [ ] find way to open camera from within app
+- [ ] review and test async await lecture/notes
+- [ ] Update linkedin/cover letter and apply for a job
+- [ ] post a question to stackoverflow
+- [ ] review recursion
