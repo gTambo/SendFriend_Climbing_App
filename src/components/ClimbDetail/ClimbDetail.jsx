@@ -4,14 +4,17 @@ import { useHistory, useParams } from 'react-router-dom';
 const moment = require('moment');
 
 // MaterialUI styling here
+
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
 function ClimbDetail() {
+    const [value, setValue] = useState(4);
     // use dispatch to get details
     const dispatch = useDispatch();
     const history = useHistory();
+
     // use local state to store rating
     const [rating, setRating] = useState(0);
     //  use Selector to get details from redux
@@ -82,6 +85,7 @@ function ClimbDetail() {
                     '& > legend': { mt: 2 },
                 }}
                 >
+
                 <Typography component="legend">Rate this climb!</Typography>
                 <Rating
                     name="simple-controlled"
