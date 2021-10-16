@@ -4,7 +4,9 @@ import { useHistory, useParams } from 'react-router-dom';
 const moment = require('moment');
 
 // MaterialUI styling here
-
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
 function ClimbDetail() {
     // use dispatch to get details
@@ -21,6 +23,9 @@ function ClimbDetail() {
     useEffect( () => {
         dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}})
     }, [climbId])
+
+    let avgRating = parseInt(climbDetails.coalesce);
+    console.log("coalesce: ", avgRating);
 
     const logRoute = () => {
         // STRETCH TO DO: Navigate to log route page
@@ -56,10 +61,11 @@ function ClimbDetail() {
             <img className="big-photo" src={climbDetails.photo} />
             <p>Grade: {climbDetails.difficulty}</p>
             <p>Color: {climbDetails.color}</p>
+            <Typography component="legend">Current Rating</Typography>
+            <Rating name="read-only" max={4} value={avgRating} readOnly />
             <p>Date added {addDate}</p>
             <p>Movement style: {climbDetails.movement_style}</p>
-            <p>rating: {climbDetails.coalesce}</p>
-            <label htmlFor="rating">Rate This Climb</label>
+            {/* <label htmlFor="rating">Rate This Climb</label>
             <select name="rate-climb" 
                     id="rating" 
                     value={rating}
@@ -70,8 +76,21 @@ function ClimbDetail() {
                 <option value="2">2 stars</option>
                 <option value="3">3 stars</option>
                 <option value="4">4 stars</option>
-            </select>
-            <button onClick={ rateClimb }>Rate This Climb</button>
+            </select> */}
+            <Box
+                sx={{
+                    '& > legend': { mt: 2 },
+                }}
+                >
+                <Typography component="legend">Rate this climb!</Typography>
+                <Rating
+                    name="simple-controlled"
+                    max={4}
+                    value={rating}
+                    onChange={(event) => setRating(event.target.value)}
+                />
+            </Box>
+            <button onClick={ rateClimb }>Save Rating</button>
             <button onClick={ logRoute }>Log Your Send</button>
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
             <button onClick={ toEditPage } >Edit Climb</button>

@@ -11,7 +11,7 @@ function* fetchClimbDetails(action) {
         const climbId = action.payload.id;
 
         const response = yield axios.get(`/api/details/${climbId}`, config);
-        console.log('Got the deets: ', response);
+        console.log('Got the deets: ', response.data);
         yield put({ type: 'SET_CLIMB_DETAILS', payload: response.data[0]});
     } catch (error) {
         console.log('Error fetching details', error);
