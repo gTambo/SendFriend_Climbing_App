@@ -27,7 +27,10 @@ function ClimbDetail() {
         dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}})
     }, [climbId])
 
+    // useState returns a number
     let avgRating = parseInt(climbDetails.coalesce);
+    let ratingToAdd = parseInt(rating);
+    console.log("rating: ", rating);
     console.log("coalesce: ", avgRating);
 
     const logRoute = () => {
@@ -90,7 +93,7 @@ function ClimbDetail() {
                 <Rating
                     name="simple-controlled"
                     max={4}
-                    value={rating}
+                    value={ratingToAdd}
                     onChange={(event) => setRating(event.target.value)}
                 />
             </Box>
