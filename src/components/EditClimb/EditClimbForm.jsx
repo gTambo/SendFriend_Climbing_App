@@ -34,8 +34,8 @@ function EditClimbForm({ gymId, styleId, climbId }) {
     return(
         <form onSubmit={ updateClimb }>
             <label htmlFor="grade">Grade</label> 
-            <select name="grade" 
-                    required 
+            <select 
+                    name="grade" 
                     id="grade" 
                     type="text" 
                     value={editedClimb.grade_id} 
@@ -50,7 +50,7 @@ function EditClimbForm({ gymId, styleId, climbId }) {
                         })}
             </select>
             <label htmlFor="color">Color</label>
-            <select required
+            <select
                     name="color" 
                     id="color"
                     value={editedClimb.color}
@@ -71,14 +71,15 @@ function EditClimbForm({ gymId, styleId, climbId }) {
                 <option value="Other">Other</option>
             </select>
             <label htmlFor="photo">Photo</label>
-            <input required
+            <input 
                    id="photo" 
                    type="text"
                    value={editedClimb.photo}
                    onChange={ (event) => setEditedClimb({...editedClimb, photo: event.target.value})} 
             />
             <label htmlFor="movement">Movement Style</label>
-            <input id="movement" 
+            <input 
+                   id="movement" 
                    type="text" 
                    value={editedClimb.movement_style}
                    onChange={ (event) => setEditedClimb({...editedClimb, movement_style: event.target.value})}

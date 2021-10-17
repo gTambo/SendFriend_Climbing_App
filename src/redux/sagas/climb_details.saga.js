@@ -9,10 +9,11 @@ function* fetchClimbDetails(action) {
         }
         // set id from payload to var
         const climbId = action.payload.id;
-
+        console.log('in details saga', climbId);
         const response = yield axios.get(`/api/details/${climbId}`, config);
         console.log('Got the deets: ', response.data);
         yield put({ type: 'SET_CLIMB_DETAILS', payload: response.data[0]});
+        yield put({ type: 'FETCH_COMMENTS', payload: climbId });
     } catch (error) {
         console.log('Error fetching details', error);
     }

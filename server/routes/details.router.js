@@ -10,6 +10,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     // GET route code here
     console.log("req.user: ", req.user);
     console.log('Params: ', req.params);
+    const climbId = req.params.climbId;
     const query = `
     SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "movement_style", "date_added", "user"."username", 
     COALESCE((AVG("rating"."rating")::NUMERIC(10)),0) 
@@ -22,10 +23,10 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "user"."username";
             `;
   
-    pool.query((query), [req.params.climbId])
+    pool.query((query), [climbId])
     .then( (result) => {
-      console.log('Sending back: ', result.rows);
-      res.send(result.rows)
+        console.log('Sending back details: ', result.rows);
+        res.send(result.rows);
     }).catch(error => {
         console.log('Error getting climbs: ', error);
         res.sendStatus(500);
@@ -35,7 +36,29 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
   /**
    * GET route for Comments
    */
-
+router.get('/comment/:climbId', rejectUnauthenticated, (req, res) => {
+    console.log('Getting Comments', req.params.climbId);
+    const climbId = req.params.climbId;
+    const commentQuery = `SELECT "comment"."id", "comment"."comment", "created_at", "user"."username" 
+        FROM "comment"
+        JOIN "user" ON "comment"."user_id" = "user"."id"
+        WHERE "comment"."climb_id" = $1
+        GROUP BY "comment"."id", "user"."username"
+        ORDER BY "comment"."created_at";
+    `;
+    pool.query((commentQuery), [climbId])
+    .then(response => {
+    console.log("Comments for the climb: ", response.rows);
+    if (response.rowCount > 0) {
+    res.send(response.rows);
+    } else {
+    res.send([{ id: climbId, comment: 'No comments yet', username: 'n/a', created_at: 'n/a' }])
+    }
+    }).catch( error => {
+    console.log('ERROR FETCHING COMMENTS', error);
+    res.sendStatus(500);
+    });
+});
 
   /**
    * GET route for Ratings
@@ -45,6 +68,24 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * POST route for Comments
  */
+ router.post('/comment', rejectUnauthenticated, (req, res) => {
+    console.log('comment router: ', req.body);
+    console.log('comment router, user: ', req.user);
+    // rating to add is rating property
+    const addComment = req.body.comment;
+    const climb_id = req.body.climb_id;
+    const queryText = `INSERT INTO "comment" 
+                            ("comment", "climb_id", "user_id") 
+                        VALUES 
+                            ($1, $2, $3);`;
+    pool.query((queryText), [addComment, climb_id, req.user.id])
+    .then((result) => {
+        console.log('After comment post: ', result);
+    }).catch(error => {
+        console.log('ERROR posting comment', error);
+        res.sendStatus(500);
+    });
+});
 
 /**
  * POST route for rating
@@ -62,8 +103,10 @@ router.post('/rating', rejectUnauthenticated, (req, res) => {
     pool.query((queryText), [addRating, climb_id, req.user.id])
     .then((result) => {
         console.log('After rating post: ', result);
-
-    })
+    }).catch(error => {
+        console.log("ERROR posting rating", error);
+        res.sendStatus(500);
+    });
 });
 
   /**

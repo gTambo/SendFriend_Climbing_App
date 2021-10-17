@@ -14,7 +14,8 @@ function ClimbList() {
     const { gymId, styleId } = useParams();
 
     useEffect( () => {
-        dispatch({ type: 'FETCH_ALL_CLIMBS', payload: {gymId: gymId, styleId: styleId }})
+        dispatch({ type: 'FETCH_ALL_CLIMBS', payload: {gymId: gymId, styleId: styleId }});
+        dispatch({ type: 'UNSET_COMMENTS'})
     }, [gymId, styleId])
 
     const addNewClimb = () => {
@@ -25,8 +26,8 @@ function ClimbList() {
             <button onClick={ addNewClimb }>ADD A NEW CLIMB!</button>
             <p>list of climbs here</p>
             {/* {JSON.stringify(gymId)}
-            {JSON.stringify(styleId)}
-            {JSON.stringify(climbList)} */}
+            {JSON.stringify(styleId)} */}
+            {JSON.stringify(climbList)}
             <ul>
                 {climbList.map(climb => {
                     return(
