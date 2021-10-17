@@ -76,7 +76,7 @@ function RegisterForm() {
           When did you start climbing?
           <input
             type="month"
-            min="1921-01-01"
+            min="1921-01"
             name="climbing-experience"
             value={climbingExp}
             required
