@@ -22,17 +22,26 @@ function ClimbDetail() {
     // use local state to store rating, comments
     const [rating, setRating] = useState(0);
     const [newComment, setNewComment] = useState('');
+    // const [comments, setComments] = useState([]);
     //  use Selector to get details from redux
-    const climbDetails = useSelector(store => store.climbDetails);
+    const reduxStore = useSelector(store => store);
+    const { climbDetails, comments } = reduxStore;
     // use params to get climb ID
     const { gymId, climbId, styleId } = useParams();
-    const addDate = moment(climbDetails.date_added).format("dddd, MMMM, do YYYY");
+    // use moment.js to make the date look nice
+    const addDate = moment(climbDetails.date_added).format("MMMM, do YYYY");
     // On page load, get climb details, using id from params
     useEffect( () => {
-        dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}})
+        dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
+        dispatch({ type: 'FETCH_COMMENTS', payload: climbId });
+        // setComments(climbDetails.comment);
+        // commentsRefresh
     }, [climbId])
 
     // useState returns a number
+    // const commentsRefresh = () => {
+    //     setComments(climbDetails.comment);
+    // }
     let avgRating = parseInt(climbDetails.coalesce);
     let ratingToAdd = parseInt(rating);
 
@@ -66,7 +75,7 @@ function ClimbDetail() {
         console.log('new comment: ', newComment);
         dispatch({ type: 'ADD_COMMENT', payload: {climb_id: climbId, comment: newComment }});
         setNewComment('');
-        // dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
+        dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
     }
 
     return(
@@ -83,6 +92,16 @@ function ClimbDetail() {
             <Rating name="read-only" max={4} value={avgRating} readOnly />
             <p>Date added {addDate}</p>
             <p>Movement style: {climbDetails.movement_style}</p>
+            <ul>
+                {comments.map(aComment => {
+                    return(
+                        <li key={aComment.id}>
+                            "{aComment.comment}" - {aComment.username}, {moment(aComment.created_at).format("MMMM do YYYY")}
+                        </li>
+                    )
+                })}
+            </ul>
+            {/* <p>{JSON.stringify(comments)}</p> */}
             <Box
                 component="form"
                 sx={{

@@ -102,6 +102,7 @@ Styling TO DO's:
 - [ ] attempt test on phone browser
 
 General To-Do's:
+reroute login page to gym select 
 - [ ] find way to open camera from within app
 - [ ] review and test async await lecture/notes
 - [ ] Update linkedin/cover letter and apply for a job

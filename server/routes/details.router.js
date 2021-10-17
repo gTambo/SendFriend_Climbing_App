@@ -27,25 +27,6 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     .then( (result) => {
         console.log('Sending back details: ', result.rows);
         res.send(result.rows);
-        const commentQuery = `SELECT "comment"."comment", "created_at", "user"."username" 
-                        FROM "comment"
-                        JOIN "user" ON "comment"."user_id" = "user"."id"
-                        WHERE "comment"."climb_id" = $1
-                        GROUP BY "comment"."id", "user"."username"
-                        ORDER BY "comment"."created_at";
-        `;
-        pool.query((commentQuery), [climbId])
-        .then(response => {
-            console.log("Comments for the climb: ", response.rows);
-            if (response.rowCount > 0) {
-                res.send(response.rows);
-            } else {
-                res.send({ id: climbId, comment: 'No comments yet' })
-            }
-        }).catch( error => {
-            console.log('ERROR FETCHING COMMENTS', error);
-            res.sendStatus(500);
-        });
     }).catch(error => {
         console.log('Error getting climbs: ', error);
         res.sendStatus(500);
@@ -55,7 +36,29 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
   /**
    * GET route for Comments
    */
-
+router.get('/comment/:climbId', rejectUnauthenticated, (req, res) => {
+    console.log('Getting Comments', req.params.climbId);
+    const climbId = req.params.climbId;
+    const commentQuery = `SELECT "comment"."comment", "created_at", "user"."username" 
+        FROM "comment"
+        JOIN "user" ON "comment"."user_id" = "user"."id"
+        WHERE "comment"."climb_id" = $1
+        GROUP BY "comment"."id", "user"."username"
+        ORDER BY "comment"."created_at";
+    `;
+    pool.query((commentQuery), [climbId])
+    .then(response => {
+    console.log("Comments for the climb: ", response.rows);
+    if (response.rowCount > 0) {
+    res.send(response.rows);
+    } else {
+    res.send([{ id: climbId, comment: 'No comments yet', username: 'n/a', created_at: 'n/a' }])
+    }
+    }).catch( error => {
+    console.log('ERROR FETCHING COMMENTS', error);
+    res.sendStatus(500);
+    });
+});
 
   /**
    * GET route for Ratings
