@@ -25,9 +25,7 @@ function ClimbList() {
         <div>
             <button onClick={ addNewClimb }>ADD A NEW CLIMB!</button>
             <p>list of climbs here</p>
-            {/* {JSON.stringify(gymId)}
-            {JSON.stringify(styleId)} */}
-            {JSON.stringify(climbList)}
+            {/* {JSON.stringify(climbList)} */}
             <ul>
                 {climbList.map(climb => {
                     return(
