@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import './ClimbDetail.css';
 const moment = require('moment');
 
 // MaterialUI styling here
@@ -92,8 +93,9 @@ function ClimbDetail() {
             <Rating name="read-only" max={4} value={avgRating} readOnly />
             <p>Date added {addDate}</p>
             <p>Movement style: {climbDetails.movement_style}</p>
-            <ul>
-                {comments.map(aComment => {
+            <label htmlFor="comments-field">Comments:</label>
+            <ul className="comments" id="comments-field">
+                {comments.map((aComment, i) => {
                     return(
                         <li key={aComment.id}>
                             "{aComment.comment}" - {aComment.username}, {moment(aComment.created_at).format("MMMM do YYYY")}

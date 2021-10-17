@@ -39,7 +39,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/comment/:climbId', rejectUnauthenticated, (req, res) => {
     console.log('Getting Comments', req.params.climbId);
     const climbId = req.params.climbId;
-    const commentQuery = `SELECT "comment"."comment", "created_at", "user"."username" 
+    const commentQuery = `SELECT "comment"."id", "comment"."comment", "created_at", "user"."username" 
         FROM "comment"
         JOIN "user" ON "comment"."user_id" = "user"."id"
         WHERE "comment"."climb_id" = $1
