@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import UploadDisplay from '../S3Upload/S3Upload';
 
-function EditClimbForm({ gymId, styleId, climbId }) {
+
+function EditClimbForm({ gymId, styleId, climbId, climb }) {
     const dispatch = useDispatch();
     const history = useHistory();
     // Use Redux to store grades
     const grades = useSelector(store => store.grades);
     let defaultClimb = {
         id: climbId,
-        grade_id: '',
-        color: '',
-        photo: '',
-        movement_style: '',
+        grade_id: climb.grade_id,
+        color: climb.color,
+        photo: climb.photo,
+        movement_style: climb.movement_style,
         gym_id: gymId,
         climb_style_id: styleId,
     };
@@ -71,12 +73,13 @@ function EditClimbForm({ gymId, styleId, climbId }) {
                 <option value="Other">Other</option>
             </select>
             <label htmlFor="photo">Photo</label>
-            <input 
+            {/* <input 
                    id="photo" 
                    type="text"
                    value={editedClimb.photo}
                    onChange={ (event) => setEditedClimb({...editedClimb, photo: event.target.value})} 
-            />
+            /> */}
+            <UploadDisplay id="photo" setNewClimb={setEditedClimb} newClimb={editedClimb} />
             <label htmlFor="movement">Movement Style</label>
             <input 
                    id="movement" 
