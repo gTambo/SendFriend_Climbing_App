@@ -2,6 +2,8 @@ import React from 'react';
 import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 import './S3Upload.css';
 
+// TO DO: REPLACE WITH MORE CURRENT VERSION OF S3BUCKET
+
 function UploadDisplay ({setNewClimb, newClimb }) {
 
     const dropStyles ={

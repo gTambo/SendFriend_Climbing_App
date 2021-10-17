@@ -78,7 +78,7 @@ Milestone: login functionality display on DOM
     - [ ] look into Chris' code, and implement
 
 Styling TO DO's:
-- [ ] star rating component 
+- [x] star rating component 
 - [ ] replace boilerplate navbar
 - [ ] replace dropdown select with MUI
     - [ ] gym form
@@ -95,15 +95,17 @@ Styling TO DO's:
     Friday to-dos:
 - [ ] look deeper into s3 BUCKET
 - [ ] update resume
-- [ ] ratings on climb details
-- [ ] comments on climb-details
+- [x] ratings on climb details
+- [x] comments on climb-details
 - [ ] update README!
 - [ ] some Styling
 - [ ] attempt test on phone browser
 
 General To-Do's:
+reroute login page to gym select 
 - [ ] find way to open camera from within app
 - [ ] review and test async await lecture/notes
 - [ ] Update linkedin/cover letter and apply for a job
 - [ ] post a question to stackoverflow
 - [ ] review recursion
+
