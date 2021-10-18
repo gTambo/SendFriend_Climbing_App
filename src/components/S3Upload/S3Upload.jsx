@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 // import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 
 import './S3Upload.css';
@@ -10,17 +10,21 @@ import { readAndCompressImage } from 'browser-image-resizer';
 
 
 function UploadPhoto () {
-
+    // usingParams
+    const allParams = useParams();
+    const { gymId, styleId } = allParams;
     const dispatch = useDispatch();
     const history = useHistory();
     // get the New Climb ID
-    const { newClimb } = useSelector(store => store.newClimb);
+    const newClimb = useSelector(store => store.newClimb);
     // code for aws-sdk /s3Bucket
     const imageConfig = {
         quality: 1.0,
         maxHeight: 300,
         autoRotate: false,
     };
+    const newClimbId = newClimb.id;
+    console.log('Id for new climb: ', newClimbId);
     const [preview, setPreview] = useState('');
     const [selectedFile, setSelectedFile] = useState('');
     const [resizedFile, setResizedFile] = useState({});
@@ -42,7 +46,7 @@ function UploadPhoto () {
     }
 
     const sendFormDataToServer = () => {
-        let photoInfo = { climbId: newClimb.id, selectedFile: selectedFile, resizedFile: resizedFile };
+        let photoInfo = { climbId: newClimbId, selectedFile: selectedFile, resizedFile: resizedFile };
         console.log('sending to saga: ', photoInfo);
         dispatch({ type: 'UPLOAD_PHOTO', payload: photoInfo});
         setPreview('');
@@ -57,8 +61,9 @@ function UploadPhoto () {
                     alt="Photo preview"
                 />)
             }
-            <input id="photoInput" type="file" accept="image/*" onChange={onFileChange} />
+            <input id="photoInput" type="file" accept="image/*" encType="multipart/form-data" onChange={onFileChange} />
             <button onClick={() => sendFormDataToServer()}>Save Photo</button>
+            <button onClick={ () => history.push(`/climbs/${gymId}/${styleId}`)}>Skip Photo</button>
         </div>
     )
 }

@@ -60,7 +60,7 @@ function* addClimb(action) {
         console.log('Add Climb Saga: ', newClimb);
         const postRes = yield axios.post('/api/climbs', newClimb, config);
         console.log('Response from server, expecting id: ', postRes.data.id);
-        yield put({ type: 'NEW_CLIMB', payload: {newId: postRes.data.id, gymId: action.payload.gymId, styleId: action.payload.styleId}});
+        yield put({ type: 'NEW_CLIMB', payload: postRes.data});
         // yield put({ type: 'FETCH_ALL_CLIMBS', payload: action.payload});
     } catch (err) {
         console.log('Error adding new Climb ', err);

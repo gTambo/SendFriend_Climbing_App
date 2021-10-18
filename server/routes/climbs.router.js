@@ -118,10 +118,10 @@ pool.query((query), [
      try {
         //  console.log("request", req);
         //  console.log('req Query: ', req.query);
-
+        console.log('req.BODY ', req.body);
         const imageProps = req.query;
         const imageData = req.files.image.data;
-        const climbId = req.files.climbId;
+        const climbId = req.files.climbId.data;
         console.log('imageData', imageData);
         console.log('climb Id: ', climbId);
         const mediumKey = `photos/medium/${imageProps.name}`;

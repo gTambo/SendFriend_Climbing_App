@@ -17,7 +17,7 @@ function* uploadPhoto(action) {
         formData.append('climbId', climbId);
         console.log(resizedFile);
         console.log('Saga posting to the server: ', formData);
-        const resp = yield axios.put(`/api/climbs/s3?name=${fileName}&type=${fileType}&size=${fileSize}`,  formData );
+        const resp = yield axios.put(`/api/climbs/s3?name=${fileName}&type=${fileType}&size=${fileSize}`, formData, climbId );
         console.log(resp);
     } catch (error) {
         alert('Something went wrong when uploading a photo');

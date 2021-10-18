@@ -59,15 +59,16 @@ function AddClimbForm({gymId, styleId}) {
         event.preventDefault();
         console.log('climb to add: ', newClimb);
         // including gymId and styleId for dispatch to FETCH_ALL_CLIMBS
-        // including files for adding photos to s3Bucket
-        dispatch({ type: 'ADD_CLIMB', payload: {newClimb: newClimb, selectedFile: selectedFile, resizedFile: resizedFile, gymId: gymId, styleId: styleId} });
+        // If including files for adding photos to s3Bucket
+        // use: selectedFile: selectedFile, resizedFile: resizedFile,
+        dispatch({ type: 'ADD_CLIMB', payload: {newClimb: newClimb,  gymId: gymId, styleId: styleId} });
         // sendFormDataToServer();
         // setNewClimb(defaultClimb);
         // alert("Climb added!");
         // setPreview('');
         // setSelectedFile('');
         // setResizedFile('');
-        // history.push(`/climbs/${gymId}/${styleId}/addPhoto`);
+        history.push(`/climbs/${gymId}/${styleId}/addPhoto`);
     }
 
     const sendFormDataToServer = () => {
@@ -118,14 +119,14 @@ function AddClimbForm({gymId, styleId}) {
                 <option value="Other">Other</option>
             </select>
             
-            { preview && (
+            {/* { preview && (
                 <img
                     className="placeholder-photo-preview"
                     src={preview}
                     alt="Photo preview"
                 />)
             }
-            <input id="photoInput" type="file" accept="image/*" encType="multipart/form-data" onChange={onFileChange} />
+            <input id="photoInput" type="file" accept="image/*" encType="multipart/form-data" onChange={onFileChange} /> */}
             {/* <button onClick={() => sendFormDataToServer()}>Save Photo</button> */}
 
             <label htmlFor="movement">Movement Style</label>
@@ -134,7 +135,7 @@ function AddClimbForm({gymId, styleId}) {
                    value={newClimb.movement_style}
                    onChange={ (event) => setNewClimb({...newClimb, movement_style: event.target.value})}
             />
-            <input type="submit" value="Save Climb" />
+            <input type="submit" value="Add Photo" />
         </form>
         {/* <label htmlFor="photo">Photo</label> */}
             {/* <input required
