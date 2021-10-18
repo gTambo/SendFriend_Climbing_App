@@ -133,7 +133,7 @@ function AddClimbForm({gymId, styleId}) {
                     alt="Photo preview"
                 />)
             }
-            <input id="photoInput" type="file" accept="image/*" enctype="multipart/form-data" onChange={onFileChange} />
+            <input id="photoInput" type="file" accept="image/*" encType="multipart/form-data" onChange={onFileChange} />
             {/* <button onClick={() => sendFormDataToServer()}>Save Photo</button> */}
 
             <label htmlFor="movement">Movement Style</label>

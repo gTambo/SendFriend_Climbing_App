@@ -87,7 +87,6 @@ pool.query((query), [
     accessKeyId: AWS_ACCESS_KEY_ID,
     secretAccessKey: AWS_SECRET_ACCESS_KEY
 });
-
  /**
   * @api {post} /s3 Upload Photo
   * @apiPermission user
@@ -112,10 +111,12 @@ pool.query((query), [
          console.log('request route: ', req.route);
          console.log('req.body: ', req.body);
          console.log('req Query: ', req.query);
+         console.log('request headers: ', req.headers);
          const imageProps = req.query;
-        //  const imageData = req.files.image.data;
+         const imageData = req.files.image.data;
          const header = req.get('formData');
-         console.log("imageData", header);
+         console.log('Header', header);
+         console.log('imageData', imageData);
          const mediumKey = `photos/medium/${imageProps.name}`;
          // Optionally, resize the image
          const mediumFileContent = await sharp(req.body).resize(300, 300).toBuffer();
