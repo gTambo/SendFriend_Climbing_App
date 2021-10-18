@@ -57,8 +57,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('User: ', req.user);
     const query = `INSERT INTO "climbs" 
 	("grade_id", "color", "gym_id", "climb_style_id", "photo", "movement_style", "user_id")
-VALUES
-	($1, $2, $3, $4, $5, $6, $7);
+    VALUES
+	($1, $2, $3, $4, $5, $6, $7) 
+    RETURNING "id";
 `;
 pool.query((query), [
         req.body.grade_id, // $1
@@ -70,7 +71,7 @@ pool.query((query), [
         req.user.id // $7
     ]).then((result) => {
         console.log("result: ", result);
-        // res.send(result)
+        res.send(result);
     }).catch((err) => {
         console.log('Error in post: ', err);
         res.sendStatus(500);
@@ -109,61 +110,57 @@ pool.query((query), [
          return;
      }
      try {
-         console.log("request", req);
-         console.log('request files: ', req.files);
-         console.log('req.body: ', req.body);
-         console.log('req Query: ', req.query);
-         console.log('request headers: ', req.headers);
-         const imageProps = req.query;
-         const imageData = req.files.image.data;
-         const header = req.get('formData');
-         console.log('Header', header);
-         console.log('imageData', imageData);
-         const mediumKey = `photos/medium/${imageProps.name}`;
-         // Optionally, resize the image
-         const mediumFileContent = await sharp(imageData).resize(300, 300).toBuffer();
+        //  console.log("request", req);
+        //  console.log('req Query: ', req.query);
+        const imageProps = req.query;
+        const imageData = req.files.image.data;
+        console.log('imageData', imageData);
+        const mediumKey = `photos/medium/${imageProps.name}`;
+        // Optionally, resize the image
+        const mediumFileContent = await sharp(imageData).resize(300, 300).toBuffer();
  
-         // Setting up S3 upload parameters
-         const params = {
-             Bucket: S3_BUCKET,
-             Key: mediumKey,
-             Body: mediumFileContent,
-             ACL: 'public-read',
-         };
-         const s3 = new aws.S3();
-         // Uploading files to the bucket
-         const data = await s3.upload(params).promise();
+        // Setting up S3 upload parameters
+        const params = {
+            Bucket: S3_BUCKET,
+            Key: mediumKey,
+            Body: mediumFileContent,
+            ACL: 'public-read',
+        };
+        const s3 = new aws.S3();
+        // Uploading files to the bucket
+        const data = await s3.upload(params).promise();
  
-         // Optionally, create a thumbnail
-         const thumbFileConent = await sharp(imageData).resize(100, 100).toBuffer();
-         const thumbKey = `photos/thumb/${req.user.id}/${imageProps.name}`;
-         params.Key = thumbKey;
-         params.Body = thumbFileConent;
-         await s3.upload(params).promise();
+        // Optionally, create a thumbnail
+        const thumbFileConent = await sharp(imageData).resize(100, 100).toBuffer();
+        const thumbKey = `photos/thumb/${req.user.id}/${imageProps.name}`;
+        params.Key = thumbKey;
+        params.Body = thumbFileConent;
+        await s3.upload(params).promise();
  
-         // INSERT photo path into the database
-         await pool.query((`INSERT INTO "climbs" ("photo") VALUES ($1);`), [
-             `https://climbtags1.s3.amazonaws.com/${thumbKey}`
-            ])
+        // INSERT photo path into the database
+        await pool.query((`INSERT INTO "climbs" ("thumb_url", "photo") VALUES ($1, $2) WHERE ;`), [
+            `https://climbtags1.s3.amazonaws.com/${thumbKey}`,
+            `https://climbtags1.s3.amazonaws.com/${mediumKey}`
+        ]);
         
-         console.log('sending data somewhere:', data);
-         // Send back medium image data.
-         res.send(data);
-     } catch (error) {
-         console.log(error);
-         res.sendStatus(500);
-     }
- });
+        console.log('sending data somewhere:', data);
+        // Send back medium image data.
+        res.send(data);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
  
- router.post('/photourl', (req, res) => {
-      const query = `INSERT INTO "climbs" ("photo") VALUES ($1);`
-      pool.query(query, [req.body.selectedFile])
-      .then(results => {
-          console.log('Photo url from s3bucket: ', results);
-          res.sendStatus(200);
-      });
-      // to do; write catch
- });
+router.post('/photourl', (req, res) => {
+    const query = `INSERT INTO "climbs" ("photo") VALUES ($1);`
+    pool.query(query, [req.body.selectedFile])
+    .then(results => {
+        console.log('Photo url from s3bucket: ', results);
+        res.sendStatus(200);
+    });
+    // to do; write catch
+});
 
 /**
  * PUT route template

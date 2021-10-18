@@ -18,7 +18,6 @@ function* uploadPhoto(action) {
         console.log('Saga posting to the server: ', formData);
         const resp = yield axios.post(`/api/climbs/s3?name=${fileName}&type=${fileType}&size=${fileSize}`,  formData );
         console.log(resp);
-        yield put({ type: 'POST_PHOTO', payload: fileName});
     } catch (error) {
         alert('Something went wrong when uploading a photo');
         console.log('Photo Upload - post request failed', error);

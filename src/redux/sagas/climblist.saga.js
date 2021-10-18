@@ -34,10 +34,10 @@ function* addClimb(action) {
             withCredentials: true,
         }
 
-        const newClimb = action.payload;
+        const newClimb = action.payload.newClimb;
         console.log('Add Climb Saga: ', newClimb);
-        yield axios.post('/api/climbs', newClimb, config);
-        yield put({ type: 'FETCH_ALL_CLIMBS' });
+        const postRes = yield axios.post('/api/climbs', newClimb, config);
+        yield put({ type: 'FETCH_ALL_CLIMBS', payload: action.payload});
     } catch (err) {
         console.log('Error adding new Climb ', err);
         alert("Unable to add Climb.");
