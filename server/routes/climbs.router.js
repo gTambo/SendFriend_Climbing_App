@@ -109,12 +109,13 @@ pool.query((query), [
          res.status(500).send('Missing environment variables for AWS bucket.');
      }
      try {
-        //  console.log('request: ', req);
+         console.log('request route: ', req.route);
          console.log('req.body: ', req.body);
          console.log('req Query: ', req.query);
          const imageProps = req.query;
-         const imageData = req.files.image.data;
-         console.log("imageData", imageData);
+        //  const imageData = req.files.image.data;
+         const header = req.get('formData');
+         console.log("imageData", header);
          const mediumKey = `photos/medium/${imageProps.name}`;
          // Optionally, resize the image
          const mediumFileContent = await sharp(req.body).resize(300, 300).toBuffer();
