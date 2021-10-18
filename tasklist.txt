@@ -109,3 +109,24 @@ reroute login page to gym select
 - [ ] post a question to stackoverflow
 - [ ] review recursion
 
+
+
+function* uploadPhoto(action) {
+    try {
+        const { selectedFile, resizedFile } = action.payload;
+        // The name seems to be dropped on resize, send the name from the
+        // original selected file instead.
+        const fileName = encodeURIComponent(selectedFile.name);
+        const fileType = encodeURIComponent(resizedFile.type);
+        const fileSize = encodeURIComponent(resizedFile.size);
+        console.log('fileName', fileName);
+        const formData = new FormData();
+        formData.append('image', resizedFile);
+        yield axios.post(`api/profile/s3?name=${fileName}&type=${fileType}&size=${fileSize}`, formData);
+        yield put({type: 'POST_PHOTO', payload: fileName})
+        // yield put({type:'FETCH_PROFILE_INFO'})
+    } catch (error) {
+        alert('Something went wrong when uploading a photo');
+        console.log('Photo Upload - post request failed', error);
+    }
+}
