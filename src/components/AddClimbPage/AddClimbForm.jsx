@@ -39,10 +39,9 @@ function AddClimbForm({gymId, styleId}) {
 
     // code for aws-sdk /s3Bucket
     const imageConfig = {
-        quality: 0.5,
+        quality: 1.0,
         maxHeight: 300,
         autoRotate: false,
-        debug: true
     };
     const [preview, setPreview] = useState('');
     const [selectedFile, setSelectedFile] = useState('');
@@ -52,12 +51,12 @@ function AddClimbForm({gymId, styleId}) {
         const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
         if (acceptedImageTypes.includes(selectedFile.type)) {
             const copyFile = new Blob([selectedFile], { type: selectedFile.type });
-            const resizedFile = await readAndCompressImage(copyFile, imageConfig);
+            const saveFile = await readAndCompressImage(copyFile, imageConfig);
             setSelectedFile(selectedFile);
-            setResizedFile(resizedFile);
-            setPreview(URL.createObjectURL(resizedFile));
+            setResizedFile(saveFile);
+            setPreview(URL.createObjectURL(saveFile));
             console.log('preview: ', preview);
-            console.log('resized file: ', resizedFile);
+            console.log('save file: ', saveFile);
             console.log('selected file: ', selectedFile);
         } else {
             alert('Invalid image file type. Must be gif, jpeg or png.');

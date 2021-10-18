@@ -16,13 +16,13 @@ const detailsRouter = require('./routes/details.router');
 
 // const UploaderS3router = require('react-dropzone-s3-uploader/s3router');
 const fileUpload = require('express-fileupload');
-
+app.use(fileUpload());
 
 // Body parser middleware
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileUpload());
+
 
 // Passport Session Configuration //
 app.use(sessionMiddleware);

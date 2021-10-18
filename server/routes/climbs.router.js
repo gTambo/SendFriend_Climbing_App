@@ -106,9 +106,11 @@ pool.query((query), [
      console.log("in s3 router");
      if (!S3_BUCKET || !AWS_REGION || !AWS_ACCESS_KEY_ID || !AWS_SECRET_ACCESS_KEY) {
          res.status(500).send('Missing environment variables for AWS bucket.');
+         return;
      }
      try {
-         console.log('request route: ', req.route);
+         console.log("request", req);
+         console.log('request files: ', req.files);
          console.log('req.body: ', req.body);
          console.log('req Query: ', req.query);
          console.log('request headers: ', req.headers);
@@ -119,7 +121,7 @@ pool.query((query), [
          console.log('imageData', imageData);
          const mediumKey = `photos/medium/${imageProps.name}`;
          // Optionally, resize the image
-         const mediumFileContent = await sharp(req.body).resize(300, 300).toBuffer();
+         const mediumFileContent = await sharp(imageData).resize(300, 300).toBuffer();
  
          // Setting up S3 upload parameters
          const params = {
@@ -134,12 +136,15 @@ pool.query((query), [
  
          // Optionally, create a thumbnail
          const thumbFileConent = await sharp(imageData).resize(100, 100).toBuffer();
-         const thumbKey = `photos/thumb/${imageProps.name}`;
+         const thumbKey = `photos/thumb/${req.user.id}/${imageProps.name}`;
          params.Key = thumbKey;
          params.Body = thumbFileConent;
          await s3.upload(params).promise();
  
          // INSERT photo path into the database
+         await pool.query((`INSERT INTO "climbs" ("photo") VALUES ($1);`), [
+             `https://climbtags1.s3.amazonaws.com/${thumbKey}`
+            ])
         
          console.log('sending data somewhere:', data);
          // Send back medium image data.
