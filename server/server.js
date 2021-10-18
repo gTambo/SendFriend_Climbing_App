@@ -22,6 +22,7 @@ const fileUpload = require('express-fileupload');
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 // Passport Session Configuration //
 app.use(sessionMiddleware);
@@ -43,7 +44,6 @@ app.use('/api/details', detailsRouter);
 //   headers: {'Access-Control-Allow-Origin': '*'},  // optional
 //   ACL: 'public-read',                                 // this is the default - set to `public-read` to let anyone view uploads
 // }));
-app.use(fileUpload());
 
 // Serve static files
 app.use(express.static('build'));
