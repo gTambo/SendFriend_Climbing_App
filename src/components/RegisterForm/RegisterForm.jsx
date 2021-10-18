@@ -75,8 +75,8 @@ function RegisterForm() {
         <label htmlFor="climbing-experience">
           When did you start climbing?
           <input
-            type="month"
-            min="1921-01"
+            type="date"
+            min="1921-01-01"
             name="climbing-experience"
             value={climbingExp}
             required

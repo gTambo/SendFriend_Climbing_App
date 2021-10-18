@@ -79,10 +79,15 @@ function ClimbDetail() {
         dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
     }
 
+    const handleGoBack = () => {
+        history.goBack();
+        dispatch({ type: 'UNSET_DETAILS' });
+    } 
+
     return(
         <div>
             <p>Details here</p>
-            <button onClick={ () => history.goBack() }>Back to Climbs</button>
+            <button onClick={ handleGoBack }>Back to Climbs</button>
             {/* {JSON.stringify(climbDetails)}
             Gym Id:{JSON.stringify(gymId)}
             Style Id:{JSON.stringify(styleId)} */}
