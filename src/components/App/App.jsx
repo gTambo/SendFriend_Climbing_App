@@ -23,6 +23,7 @@ import ClimbList from '../ClimbList/ClimbList';
 import ClimbDetail from '../ClimbDetail/ClimbDetail';
 import AddNewClimb from '../AddClimbPage/AddClimbPage';
 import EditClimb from '../EditClimb/EditClimb';
+import UploadPhoto from '../S3Upload/S3Upload';
 
 import './App.css';
 
@@ -70,6 +71,14 @@ function App() {
             path="/climbs/:gymId/:styleId/addclimb"
           >
             <AddNewClimb />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AddNewClimb else shows LoginPage
+            exact
+            path="/climbs/:gymId/:styleId/addPhoto"
+          >
+            <UploadPhoto />
           </ProtectedRoute>
 
           <ProtectedRoute

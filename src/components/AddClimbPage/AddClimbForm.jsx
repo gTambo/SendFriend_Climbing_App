@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-// import UploadDisplay from '../S3Upload/S3Upload';
+// import UploadPhoto from '../S3Upload/S3Upload';
 import { readAndCompressImage } from 'browser-image-resizer';
 
 function AddClimbForm({gymId, styleId}) {
@@ -27,15 +27,7 @@ function AddClimbForm({gymId, styleId}) {
         dispatch({ type: 'FETCH_ALL_GRADES' })
     }, [dispatch]);
 
-    const saveNewClimb = (event) => {
-        event.preventDefault();
-        console.log('climb to add: ', newClimb);
-        dispatch({ type: 'ADD_CLIMB', payload: {newClimb: newClimb, gymId: gymId, styleId: styleId} });
-        // sendFormDataToServer();
-        setNewClimb(defaultClimb);
-        alert("Climb added!");
-        // history.push(`/climbs/${gymId}/${styleId}`);
-    }
+    
 
     // code for aws-sdk /s3Bucket
     const imageConfig = {
@@ -63,23 +55,24 @@ function AddClimbForm({gymId, styleId}) {
         }
     }
 
+    const saveNewClimb = (event) => {
+        event.preventDefault();
+        console.log('climb to add: ', newClimb);
+        // including gymId and styleId for dispatch to FETCH_ALL_CLIMBS
+        // including files for adding photos to s3Bucket
+        dispatch({ type: 'ADD_CLIMB', payload: {newClimb: newClimb, selectedFile: selectedFile, resizedFile: resizedFile, gymId: gymId, styleId: styleId} });
+        // sendFormDataToServer();
+        // setNewClimb(defaultClimb);
+        // alert("Climb added!");
+        // setPreview('');
+        // setSelectedFile('');
+        // setResizedFile('');
+        // history.push(`/climbs/${gymId}/${styleId}/addPhoto`);
+    }
+
     const sendFormDataToServer = () => {
-        // const formData = new FormData();
-        // formData.append('image', resizedFile, {fileName: selectedFile.name});
         // console.log('sending to saga: ', formData.has('image'));
         dispatch({ type: 'UPLOAD_PHOTO', payload: {selectedFile, resizedFile}});
-        // let action;
-        // // The file name seems to be dropped on resize, send both the
-        // // original and resized files.
-        // action = {
-        //     type: 'UPLOAD_PHOTO',
-        //     payload: {
-        //         // any other form data...
-        //         selectedFile,
-        //         resizedFile,
-        //     },
-        // };
-        // dispatch(action);
         setPreview('');
     }
 

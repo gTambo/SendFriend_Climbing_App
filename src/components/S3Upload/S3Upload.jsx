@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 // import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 
 import './S3Upload.css';
@@ -8,14 +9,18 @@ import { readAndCompressImage } from 'browser-image-resizer';
 
 
 
-function UploadDisplay ({setNewClimb, newClimb }) {
+function UploadPhoto () {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+    // get the New Climb ID
+    const { newClimb } = useSelector(store => store.newClimb);
+    // code for aws-sdk /s3Bucket
     const imageConfig = {
-        quality: 0.5,
+        quality: 1.0,
         maxHeight: 300,
         autoRotate: false,
-        debug: true
     };
-    const dispatch = useDispatch();
     const [preview, setPreview] = useState('');
     const [selectedFile, setSelectedFile] = useState('');
     const [resizedFile, setResizedFile] = useState({});
@@ -24,12 +29,12 @@ function UploadDisplay ({setNewClimb, newClimb }) {
         const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
         if (acceptedImageTypes.includes(selectedFile.type)) {
             const copyFile = new Blob([selectedFile], { type: selectedFile.type });
-            const resizedFile = await readAndCompressImage(copyFile, imageConfig);
+            const saveFile = await readAndCompressImage(copyFile, imageConfig);
             setSelectedFile(selectedFile);
-            setResizedFile(resizedFile);
-            setPreview(URL.createObjectURL(resizedFile));
+            setResizedFile(saveFile);
+            setPreview(URL.createObjectURL(saveFile));
             console.log('preview: ', preview);
-            console.log('resized file: ', resizedFile);
+            console.log('save file: ', saveFile);
             console.log('selected file: ', selectedFile);
         } else {
             alert('Invalid image file type. Must be gif, jpeg or png.');
@@ -37,22 +42,9 @@ function UploadDisplay ({setNewClimb, newClimb }) {
     }
 
     const sendFormDataToServer = () => {
-        const formData = new FormData();
-        formData.append('image', resizedFile, {fileName: selectedFile.name});
-        console.log('sending to saga: ', formData.has('image'));
-        dispatch({ type: 'UPLOAD_PHOTO', payload: {selectedFile, resizedFile, formData}});
-        // let action;
-        // // The file name seems to be dropped on resize, send both the
-        // // original and resized files.
-        // action = {
-        //     type: 'UPLOAD_PHOTO',
-        //     payload: {
-        //         // any other form data...
-        //         selectedFile,
-        //         resizedFile,
-        //     },
-        // };
-        // dispatch(action);
+        let photoInfo = { climbId: newClimb.id, selectedFile: selectedFile, resizedFile: resizedFile };
+        console.log('sending to saga: ', photoInfo);
+        dispatch({ type: 'UPLOAD_PHOTO', payload: photoInfo});
         setPreview('');
     }
 
@@ -71,10 +63,11 @@ function UploadDisplay ({setNewClimb, newClimb }) {
     )
 }
 
+export default UploadPhoto;
 
 // BELOW: using react-dropzone-s3-uploader
 
-// function UploadDisplay ({setNewClimb, newClimb }) {
+// function UploadPhoto ({setNewClimb, newClimb }) {
 
 //     const dropStyles ={
 //         width: '220px',
@@ -116,4 +109,3 @@ function UploadDisplay ({setNewClimb, newClimb }) {
 //     )
 // }
 
-export default UploadDisplay;

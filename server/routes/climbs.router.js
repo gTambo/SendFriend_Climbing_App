@@ -48,11 +48,22 @@ router.get('/grades', rejectUnauthenticated, (req, res) => {
     });
 });
 
+
+const { S3_BUCKET, AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
+aws.config.region = AWS_REGION;
+aws.config.update({
+   accessKeyId: AWS_ACCESS_KEY_ID,
+   secretAccessKey: AWS_SECRET_ACCESS_KEY
+});
 /**
  * POST new climb
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
+  if (!S3_BUCKET || !AWS_REGION || !AWS_ACCESS_KEY_ID || !AWS_SECRET_ACCESS_KEY) {
+        res.status(500).send('Missing environment variables for AWS bucket.');
+        return;
+    }
     console.log('Posting new climb: ', req.body);
     console.log('User: ', req.user);
     const query = `INSERT INTO "climbs" 
@@ -71,7 +82,7 @@ pool.query((query), [
         req.user.id // $7
     ]).then((result) => {
         console.log("result: ", result);
-        res.send(result);
+        res.send(result.rows[0]);
     }).catch((err) => {
         console.log('Error in post: ', err);
         res.sendStatus(500);
@@ -82,12 +93,7 @@ pool.query((query), [
  * S3 BUCKET HERE
  */
 
- const { S3_BUCKET, AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
- aws.config.region = AWS_REGION;
- aws.config.update({
-    accessKeyId: AWS_ACCESS_KEY_ID,
-    secretAccessKey: AWS_SECRET_ACCESS_KEY
-});
+
  /**
   * @api {post} /s3 Upload Photo
   * @apiPermission user
@@ -103,7 +109,7 @@ pool.query((query), [
   * @apiSuccessExample {json} Success-Response:
   *      HTTP/1.1 201 OK
   */
- router.post('/s3', rejectUnauthenticated, async (req, res) => {
+ router.put('/s3', rejectUnauthenticated, async (req, res) => {
      console.log("in s3 router");
      if (!S3_BUCKET || !AWS_REGION || !AWS_ACCESS_KEY_ID || !AWS_SECRET_ACCESS_KEY) {
          res.status(500).send('Missing environment variables for AWS bucket.');
@@ -112,9 +118,12 @@ pool.query((query), [
      try {
         //  console.log("request", req);
         //  console.log('req Query: ', req.query);
+
         const imageProps = req.query;
         const imageData = req.files.image.data;
+        const climbId = req.files.climbId;
         console.log('imageData', imageData);
+        console.log('climb Id: ', climbId);
         const mediumKey = `photos/medium/${imageProps.name}`;
         // Optionally, resize the image
         const mediumFileContent = await sharp(imageData).resize(300, 300).toBuffer();
@@ -138,9 +147,10 @@ pool.query((query), [
         await s3.upload(params).promise();
  
         // INSERT photo path into the database
-        await pool.query((`INSERT INTO "climbs" ("thumb_url", "photo") VALUES ($1, $2) WHERE ;`), [
+        await pool.query((`INSERT INTO "climbs" ("thumb_url", "photo") VALUES ($1, $2) WHERE "id" = $3;`), [
             `https://climbtags1.s3.amazonaws.com/${thumbKey}`,
-            `https://climbtags1.s3.amazonaws.com/${mediumKey}`
+            `https://climbtags1.s3.amazonaws.com/${mediumKey}`,
+            climbId
         ]);
         
         console.log('sending data somewhere:', data);

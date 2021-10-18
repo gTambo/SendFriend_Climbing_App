@@ -4,7 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* uploadPhoto(action) {
     try {
-        const { selectedFile, resizedFile } = action.payload;
+        const { selectedFile, resizedFile, climbId } = action.payload;
         // The name seems to be dropped on resize, send the name from the
         // original selected file instead.
         const fileName = encodeURIComponent(selectedFile.name);
@@ -13,10 +13,11 @@ function* uploadPhoto(action) {
         // const fileData = encodeURIComponent(resizedFile);
         console.log('File name/type: ', fileName, fileType,);
         const formData = new FormData();
-        formData.append('image', resizedFile );
+        formData.append('image', resizedFile);
+        formData.append('climbId', climbId);
         console.log(resizedFile);
         console.log('Saga posting to the server: ', formData);
-        const resp = yield axios.post(`/api/climbs/s3?name=${fileName}&type=${fileType}&size=${fileSize}`,  formData );
+        const resp = yield axios.put(`/api/climbs/s3?name=${fileName}&type=${fileType}&size=${fileSize}`,  formData );
         console.log(resp);
     } catch (error) {
         alert('Something went wrong when uploading a photo');
