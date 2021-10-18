@@ -7,7 +7,8 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background-color: #faf5e3;
+  background-color: #141310;
+  color: aliceblue;
 }
 
 img {
@@ -33,7 +34,7 @@ Button
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #0872af;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;

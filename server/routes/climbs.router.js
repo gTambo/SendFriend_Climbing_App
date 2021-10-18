@@ -108,21 +108,34 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
  */
  router.delete('/:id', rejectUnauthenticated, (req, res) => {
     //  DELETE route code here
-    console.log('Params(climb Id) and user id: ', req.params, req.user.id);
-    const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1 AND "user_id" = $2;`;
-    pool.query((deleteQuery), [req.params.id, req.user.id]).then( (result) => {
-        console.log('Delete result: ',result);
-        if (result.rowCount > 0) {
-            // we deleted something
-            res.send({message: 'You deleted the climb!'})
-          } else {
-            // we did not delete anything
-            res.send({ message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
-          }
+    console.log('DELETE Params(climb Id) and user id: ', req.params, req.user.id);
+    const idToDelete = req.params.id;
+    const deleteComments = `DELETE FROM "comments" WHERE "id" = $1;`;
+    pool.query((deleteComments), [idToDelete]).then(dCResult => { 
+        const deleteRating = `DELETE FROM "rating" WHERE "climb_id" = $1;`;
+        pool.query((deleteRating), [idToDelete]).then(dRResult=> {
+            const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1;`;
+            pool.query((deleteQuery), [req.params.id]).then( (result) => {
+                console.log('DELETE result: ',result);
+                if (result.rowCount > 0) {
+                    // we deleted something
+                    res.send({message: 'You deleted the climb!'})
+                } else {
+                    // we did not delete anything
+                    res.send({ message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
+                }
+            
+            }).catch(error => {
+                res.sendStatus(500);
+        })
     }).catch(error => {
-        res.sendStatus(500);
-    });
- });
+            res.sendStatus(500);
+    })
+}).catch(error => {
+    res.sendStatus(500);
+});
+});
+
 
 
 module.exports = router;

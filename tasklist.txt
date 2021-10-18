@@ -15,12 +15,11 @@
     - [x] client Routes boilerplate
 - [x] Database tables initial setup (seed tables with example data)
 - [ ] minor css changes
-- [ ] 
 
 Milestone: login functionality display on DOM
 
 ## Tuesday Stretch 
-- [ ] start on Wednesday
+- [x] start on Wednesday
 - [ ] Schedule 1-on-1 weith Christy
 - [ ] work on resume/linkedin stuff
 

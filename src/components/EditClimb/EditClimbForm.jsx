@@ -87,7 +87,7 @@ function EditClimbForm({ gymId, styleId, climbId, climb }) {
                    value={editedClimb.movement_style}
                    onChange={ (event) => setEditedClimb({...editedClimb, movement_style: event.target.value})}
             />
-            <input type="submit" value="Save Climb" />
+            <input type="submit" value="Save Changes" />
         </form>
     )
 }

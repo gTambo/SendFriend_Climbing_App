@@ -52,10 +52,10 @@ function ClimbDetail() {
         alert("Okay, log the route!");
     }
 
-    const deleteClimb = (id) => {
-        console.log('confirmed delete climb: ', id);
-        dispatch({ type: 'DELETE_CLIMB_TAG', payload: id });
-        alert(`Deleted Climb: #${id}`);
+    const deleteClimb = () => {
+        console.log('clicked delete climb: ', climbId);
+        dispatch({ type: 'DELETE_CLIMB_TAG', payload: {idToDelete: climbId, gymId: gymId, styleId: styleId}});
+        // alert(`Deleted Climb: #${id}`);
         history.push(`/climbs/${gymId}/${styleId}`);
     }
 
@@ -139,11 +139,12 @@ function ClimbDetail() {
                     onChange={(event) => setRating(event.target.value)}
                 />
             </Box>
+            <p>Contribued by: {climbDetails.username}</p>
             <button onClick={ rateClimb }>Save Rating</button>
             <button onClick={ logRoute }>Log Your Send</button>
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
             <button onClick={ toEditPage } >Edit Climb</button>
-            <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb(climbId) } }>
+            <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
               Delete
             </button>
         </div>
