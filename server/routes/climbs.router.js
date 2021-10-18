@@ -121,7 +121,7 @@ pool.query((query), [
         console.log('req.BODY ', req.body);
         const imageProps = req.query;
         const imageData = req.files.image.data;
-        const climbId = req.files.climbId.data;
+        const climbId = req.body.climbId;
         console.log('imageData', imageData);
         console.log('climb Id: ', climbId);
         const mediumKey = `photos/medium/${imageProps.name}`;
@@ -147,7 +147,7 @@ pool.query((query), [
         await s3.upload(params).promise();
  
         // INSERT photo path into the database
-        await pool.query((`INSERT INTO "climbs" ("thumb_url", "photo") VALUES ($1, $2) WHERE "id" = $3;`), [
+        await pool.query((`UPDATE "climbs" SET ("thumb_url", "photo") = ($1, $2) WHERE "id" = $3;`), [
             `https://climbtags1.s3.amazonaws.com/${thumbKey}`,
             `https://climbtags1.s3.amazonaws.com/${mediumKey}`,
             climbId

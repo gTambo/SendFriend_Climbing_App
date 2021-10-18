@@ -46,10 +46,11 @@ function UploadPhoto () {
     }
 
     const sendFormDataToServer = () => {
-        let photoInfo = { climbId: newClimbId, selectedFile: selectedFile, resizedFile: resizedFile };
+        let photoInfo = { climbId: newClimbId, selectedFile: selectedFile, resizedFile: resizedFile, gymId, styleId};
         console.log('sending to saga: ', photoInfo);
         dispatch({ type: 'UPLOAD_PHOTO', payload: photoInfo});
         setPreview('');
+        history.push(`/climbs/${gymId}/${styleId}`);
     }
 
     return(
