@@ -54,8 +54,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('User: ', req.user);
     const query = `INSERT INTO "climbs" 
 	("grade_id", "color", "gym_id", "climb_style_id", "photo", "movement_style", "user_id")
-VALUES
-	($1, $2, $3, $4, $5, $6, $7);
+    VALUES
+	($1, $2, $3, $4, $5, $6, $7)
+    RETURNING "id";
 `;
 pool.query((query), [
         req.body.grade_id, // $1
@@ -67,7 +68,7 @@ pool.query((query), [
         req.user.id // $7
     ]).then((result) => {
         console.log("result: ", result);
-        // res.send(result)
+        res.send(result.rows);
     }).catch((err) => {
         console.log('Error in post: ', err);
         res.sendStatus(500);
