@@ -128,13 +128,13 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
             
             }).catch(error => {
                 res.sendStatus(500);
+            })
+        }).catch(error => {
+            res.sendStatus(500);
         })
     }).catch(error => {
-            res.sendStatus(500);
-    })
-}).catch(error => {
-    res.sendStatus(500);
-});
+        res.sendStatus(500);
+    });
 });
 
 

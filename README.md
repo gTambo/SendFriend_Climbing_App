@@ -1,24 +1,23 @@
+![MIT LICENSE](https://img.shields.io/github/license/scottbromander/the_marketplace.svg?style=flat-square)
+![REPO SIZE](https://img.shields.io/github/repo-size/scottbromander/the_marketplace.svg?style=flat-square)
+![TOP_LANGUAGE](https://img.shields.io/github/languages/top/scottbromander/the_marketplace.svg?style=flat-square)
+![FORKS](https://img.shields.io/github/forks/scottbromander/the_marketplace.svg?style=social)
 
 
 # Tag Tender
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
-
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+This is an app intended for public use that will keep track of climbable routes within a rock climbing gym. Major features of the app will include a user’s ability to view route details and leave three types of feedback on a given route: perceived grade accuracy, rank overall quality, and optional additional comments. After submission, users will also be able to review their feedback and edit or remove it.
 
 Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
 
 (View Raw will give you the markdown that you can copy to your repos!)
 
 
-![MIT LICENSE](https://img.shields.io/github/license/scottbromander/the_marketplace.svg?style=flat-square)
-![REPO SIZE](https://img.shields.io/github/repo-size/scottbromander/the_marketplace.svg?style=flat-square)
-![TOP_LANGUAGE](https://img.shields.io/github/languages/top/scottbromander/the_marketplace.svg?style=flat-square)
-![FORKS](https://img.shields.io/github/forks/scottbromander/the_marketplace.svg?style=social)
-
 # PROJECT NAME
+
+TAGTENDER
 
 ## Description
 
@@ -59,17 +58,33 @@ If your application has secret keys (for example --  Twilio), make sure you tell
 ## Usage
 How does someone use this application? Tell a user story here.
 
-1. xxx
-2. xxx
-3. xxx
-4. xxx
-5. xxx
-6. xxx
+1. Create a new user on the register page, or login an existing user
+2. Select the climbing gym and type of climbing you would like to view
+3. Scroll through list of climbs, click or tap on one for more details
+4. Click button to make edits if information is incorrect
+5. Use 'Back' or "Cancel' button on any page to go back to climb list page
+5. Click delete if climb no longer exists
+6. Back on list of climbs, click add new climb if there is a climb you want to add
+7. Fill in the basic info, then click add photo
+8. Select a photo from your device for the climb, and save it
+9. Home button on the nav bar shows your profile information
+10. Logout button on the nav bar logs you out of the application.
 
 
 ## Built With
 
 List technologies and frameworks here
+
+1. JavaScript
+2. React
+3. Redux
+4. AWS-sdk
+5. Material-UI
+6. Express
+7. Postgres
+8. SQL
+9. HTML/css
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
@@ -77,7 +92,7 @@ List technologies and frameworks here
 _Note, include this only if you have a license file. GitHub will generate one for you if you want!_
 
 ## Acknowledgement
-Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. (Thank your people)
+Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. Thanks to the Proth cohort
 
 ## Support
 If you have suggestions or issues, please email me at [youremail@whatever.com](www.google.com)
