@@ -15,12 +15,11 @@
     - [x] client Routes boilerplate
 - [x] Database tables initial setup (seed tables with example data)
 - [ ] minor css changes
-- [ ] 
 
 Milestone: login functionality display on DOM
 
 ## Tuesday Stretch 
-- [ ] start on Wednesday
+- [x] start on Wednesday
 - [ ] Schedule 1-on-1 weith Christy
 - [ ] work on resume/linkedin stuff
 
@@ -45,9 +44,9 @@ Milestone: login functionality display on DOM
     - [x] server 
     - [x] saga
     - [x] reducer
-    - [ ] get comments
-    - [ ] get ratings
-    - [ ] comments and ratings on dom
+    - [x] get comments
+    - [x] get ratings
+    - [x] comments and ratings on dom
 - [ ] update navigate
 - [x] base components for Add new climb.
 - [ ] Add new climb form
@@ -102,17 +101,14 @@ Styling TO DO's:
 - [ ] attempt test on phone browser
 
 General To-Do's:
-reroute login page to gym select 
+- [x] fix register functionality (it was wrong date type)
+- [ ] fix rating update
+- [ ] reroute login page to gym select 
 - [ ] find way to open camera from within app
 - [ ] review and test async await lecture/notes
 - [ ] Update linkedin/cover letter and apply for a job
 - [ ] post a question to stackoverflow
 - [ ] review recursion
-
-
-
-### old readme/Instructions
-
 
 
 

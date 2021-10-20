@@ -52,10 +52,10 @@ function ClimbDetail() {
         alert("Okay, log the route!");
     }
 
-    const deleteClimb = (id) => {
-        console.log('confirmed delete climb: ', id);
-        dispatch({ type: 'DELETE_CLIMB_TAG', payload: id });
-        alert(`Deleted Climb: #${id}`);
+    const deleteClimb = () => {
+        console.log('clicked delete climb: ', climbId);
+        dispatch({ type: 'DELETE_CLIMB_TAG', payload: {idToDelete: climbId, gymId: gymId, styleId: styleId}});
+        // alert(`Deleted Climb: #${id}`);
         history.push(`/climbs/${gymId}/${styleId}`);
     }
 
@@ -79,10 +79,15 @@ function ClimbDetail() {
         dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
     }
 
+    const handleGoBack = () => {
+        history.goBack();
+        dispatch({ type: 'UNSET_DETAILS' });
+    } 
+
     return(
         <div>
             <p>Details here</p>
-            <button onClick={ () => history.goBack() }>Back to Climbs</button>
+            <button onClick={ handleGoBack }>Back to Climbs</button>
             {/* {JSON.stringify(climbDetails)}
             Gym Id:{JSON.stringify(gymId)}
             Style Id:{JSON.stringify(styleId)} */}
@@ -134,11 +139,12 @@ function ClimbDetail() {
                     onChange={(event) => setRating(event.target.value)}
                 />
             </Box>
+            <p>Contribued by: {climbDetails.username}</p>
             <button onClick={ rateClimb }>Save Rating</button>
             <button onClick={ logRoute }>Log Your Send</button>
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
             <button onClick={ toEditPage } >Edit Climb</button>
-            <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb(climbId) } }>
+            <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
               Delete
             </button>
         </div>

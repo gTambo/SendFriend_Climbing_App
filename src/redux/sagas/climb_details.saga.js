@@ -25,10 +25,11 @@ function* deleteClimbTag(action) {
             headers: { 'Content-Type': 'application/json'},
             withCredentials: true,
         }
-        const idToDelete = action.payload;
+        const idToDelete = action.payload.idToDelete;
         console.log('request to delete: ', idToDelete);
-        yield axios.delete(`/api/climbs/${idToDelete}`, config);
-        yield put({ type: 'FETCH_ALL_CLIMBS' })
+        const response = yield axios.delete(`/api/climbs/${idToDelete}`, config);
+        console.log('DELETE response: ', response);
+        yield put({ type: 'FETCH_ALL_CLIMBS', payload: action.payload })
     } catch (err) {
         console.log('Error in delete saga: ', err);
     }
