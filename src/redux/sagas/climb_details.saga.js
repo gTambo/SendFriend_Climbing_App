@@ -29,8 +29,13 @@ function* deleteClimbTag(action) {
         console.log('request to delete: ', idToDelete);
         const response = yield axios.delete(`/api/climbs/${idToDelete}`, config);
         console.log('DELETE response: ', response)
-        console.log('Row Count: ', response.data);
-        yield put({ type: 'FETCH_ALL_CLIMBS', payload: action.payload })
+        console.log('Row Count: ', response.data.rCount);
+        if(response.data.rCount === 0) {
+            alert(response.data.message);
+        } else {
+            yield put({ type: 'FETCH_ALL_CLIMBS', payload: action.payload });
+        }
+        
     } catch (err) {
         console.log('Error in delete saga: ', err);
     }
