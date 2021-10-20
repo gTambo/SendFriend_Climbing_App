@@ -100,6 +100,12 @@ Styling TO DO's:
 - [ ] some Styling
 - [ ] attempt test on phone browser
 
+    Wednesday ToDo
+- [ ] make a log book page
+- [ ] make a log send page
+- [ ] put a climb into the db @logbook table
+- [ ] see that climb in the logbook, in a table element
+
 General To-Do's:
 - [x] fix register functionality (it was wrong date type)
 - [ ] fix rating update
@@ -109,7 +115,8 @@ General To-Do's:
 - [ ] Update linkedin/cover letter and apply for a job
 - [ ] post a question to stackoverflow
 - [ ] review recursion
-
+- [ ] add unit testing
+- [ ] add api documentation
 
 
 

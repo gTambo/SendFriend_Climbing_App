@@ -19,6 +19,7 @@ function* fetchClimbs(action) {
             // send dispatch and payload to reducer
         yield put({ type: 'SET_CLIMBS_LIST', payload: response.data})
         } else {
+            // if no climbs match the request, don't show anything already in reducer
             yield put({ type: 'RESET_CLIMBS' });
         }
         

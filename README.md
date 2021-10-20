@@ -8,26 +8,10 @@
 
 ## Description
 
-This is an app intended for public use that will keep track of climbable routes within a rock climbing gym. Major features of the app will include a user’s ability to view route details and leave three types of feedback on a given route: perceived grade accuracy, rank overall quality, and optional additional comments. After submission, users will also be able to review their feedback and edit or remove it.
-
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
-
-(View Raw will give you the markdown that you can copy to your repos!)
-
-
-# PROJECT NAME
-
-TAGTENDER
-
-## Description
-
 _Duration: 2 Week Sprint_
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it? 
+This is an app intended for public use that will keep track of climbable routes within a rock climbing gym. Major features of the app will include a user’s ability to view route details and leave three types of feedback on a given route: perceived grade accuracy, rank overall quality, and optional additional comments. After submission, users will also be able to review their feedback and edit or remove it.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam at massa in faucibus. Etiam volutpat, risus non mollis convallis, velit nisi pulvinar mi, eu faucibus orci nisi eget nibh. Integer a velit pretium, volutpat arcu eleifend, fringilla elit. Cras erat sapien, convallis venenatis tellus vitae, feugiat dictum felis.
-
-Suspendisse euismod volutpat aliquet. Maecenas vulputate mauris in pellentesque facilisis. Phasellus varius malesuada semper. Cras sollicitudin diam mollis maximus aliquam.
 
 To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
 

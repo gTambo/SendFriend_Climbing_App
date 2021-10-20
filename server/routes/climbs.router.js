@@ -148,6 +148,7 @@ pool.query((query), [
         await s3.upload(params).promise();
  
         // INSERT photo path into the database
+        // 
         await pool.query((`UPDATE "climbs" SET ("thumb_url", "photo") = ($1, $2) WHERE "id" = $3;`), [
             `https://climbtags1.s3.amazonaws.com/${thumbKey}`,
             `https://climbtags1.s3.amazonaws.com/${mediumKey}`,

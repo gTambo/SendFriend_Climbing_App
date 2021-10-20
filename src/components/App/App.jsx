@@ -24,6 +24,8 @@ import ClimbDetail from '../ClimbDetail/ClimbDetail';
 import AddNewClimb from '../AddClimbPage/AddClimbPage';
 import EditClimb from '../EditClimb/EditClimb';
 import UploadPhoto from '../S3Upload/S3Upload';
+import LogASend from '../LogSendPage/LogSendPage';
+import Logbook from '../Logbook/Logbook';
 
 import './App.css';
 
@@ -66,6 +68,14 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            // logged in shows Logbook else shows LoginPage
+            exact
+            path="/logbook"
+          >
+            <Logbook />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows AddNewClimb else shows LoginPage
             exact
             path="/climbs/:gymId/:styleId/addclimb"
@@ -90,7 +100,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows ClimbList else shows LoginPage
             exact
             path="/climbs/:gymId/:styleId"
           >
@@ -106,11 +116,19 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows ClimbDetail else shows LoginPage
+            // logged in shows EditClimb else shows LoginPage
             exact
             path="/climbs/:gymId/:styleId/edit/:climbId"
           >
             <EditClimb />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows LogASend else shows LoginPage
+            exact
+            path="/climbs/:gymId/:styleId/logsend/:climbId"
+          >
+            <LogASend />
           </ProtectedRoute>
 
           <Route
