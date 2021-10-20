@@ -92,18 +92,18 @@ Styling TO DO's:
 - [ ] ???
 
     Friday to-dos:
-- [ ] look deeper into s3 BUCKET
+- [x] look deeper into s3 BUCKET
 - [ ] update resume
 - [x] ratings on climb details
 - [x] comments on climb-details
 - [ ] update README!
 - [ ] some Styling
-- [ ] attempt test on phone browser
+- [x] attempt test on phone browser
 
 General To-Do's:
 - [x] fix register functionality (it was wrong date type)
-- [ ] fix rating update
-- [ ] reroute login page to gym select 
+- [x] fix rating update
+- [x] reroute login page to gym select 
 - [ ] find way to open camera from within app
 - [ ] review and test async await lecture/notes
 - [ ] Update linkedin/cover letter and apply for a job
