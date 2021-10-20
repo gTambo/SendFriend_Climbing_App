@@ -19,7 +19,7 @@ function UploadPhoto () {
     const newClimb = useSelector(store => store.newClimb);
     // code for aws-sdk /s3Bucket
     const imageConfig = {
-        quality: 1.0,
+        quality: 1,
         maxHeight: 300,
         autoRotate: false,
     };
@@ -54,7 +54,9 @@ function UploadPhoto () {
     }
 
     return(
-        <div>
+        <>
+        
+        <form onSubmit={sendFormDataToServer}>
             { preview && (
                 <img
                     className="placeholder-photo-preview"
@@ -62,14 +64,17 @@ function UploadPhoto () {
                     alt="Photo preview"
                 />)
             }
-            <input id="photoInput" type="file" accept="image/*" encType="multipart/form-data" onChange={onFileChange} />
-            <button onClick={() => sendFormDataToServer()}>Save Photo</button>
-            <button onClick={ () => history.push(`/climbs/${gymId}/${styleId}`)}>Skip Photo</button>
-        </div>
+            <input id="photo-input" type="file" accept="image/*" onChange={onFileChange} />
+            <input type="submit" value="Save Photo" />
+        </form>
+        <button onClick={ () => history.push(`/climbs/${gymId}/${styleId}`)}>Skip Photo</button>
+        </>
     )
 }
 
 export default UploadPhoto;
+
+// Removed from photoInput: encType="multipart/form-data"
 
 // BELOW: using react-dropzone-s3-uploader
 

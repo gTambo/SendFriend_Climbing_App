@@ -15,7 +15,7 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   console.log("req.user: ", req.user);
   console.log('Params: ', req.params);
   const query = `
-        SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "movement_style" FROM "climbs" 
+        SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "movement_style", "thumb_url" FROM "climbs" 
         JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
         WHERE "gym_id" = $1 AND "climb_style_id" = $2
         GROUP BY "climbs"."id", "grade"."id", "grade"."difficulty", "color", "photo"
@@ -125,7 +125,7 @@ pool.query((query), [
         const climbId = req.body.climbId;
         console.log('imageData', imageData);
         console.log('climb Id: ', climbId);
-        const mediumKey = `photos/medium/${imageProps.name}`;
+        const mediumKey = `photos/medium/${req.user.id}/${imageProps.name}`;
         // Optionally, resize the image
         const mediumFileContent = await sharp(imageData).resize(300, 300).toBuffer();
  

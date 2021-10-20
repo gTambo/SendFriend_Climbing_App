@@ -1,8 +1,8 @@
 const newClimb = (state = {}, action) => {
     switch(action.type) {
-        case 'NEW_CLIMB':
+        case 'SET_CLIMB_ID':
             return action.payload;
-        case 'UNSET_NEW_CLIMB':
+        case 'UNSET_CLIMB_ID':
             return {};
         default:
           return state;

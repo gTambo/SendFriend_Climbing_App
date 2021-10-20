@@ -71,11 +71,11 @@ function AddClimbForm({gymId, styleId}) {
         history.push(`/climbs/${gymId}/${styleId}/addPhoto`);
     }
 
-    const sendFormDataToServer = () => {
-        // console.log('sending to saga: ', formData.has('image'));
-        dispatch({ type: 'UPLOAD_PHOTO', payload: {selectedFile, resizedFile}});
-        setPreview('');
-    }
+    // const sendFormDataToServer = () => {
+    //     // console.log('sending to saga: ', formData.has('image'));
+    //     dispatch({ type: 'UPLOAD_PHOTO', payload: {selectedFile, resizedFile}});
+    //     setPreview('');
+    // }
 
     return(
         <>

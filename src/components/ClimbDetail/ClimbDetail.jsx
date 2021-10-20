@@ -63,6 +63,11 @@ function ClimbDetail() {
         history.push(`/climbs/${gymId}/${styleId}/edit/${climbId}`);
     }
 
+    const toEditPhoto = () => {
+        dispatch({ type: 'SET_CLIMB_ID', payload: {id: climbId} });
+        history.push(`/climbs/${gymId}/${styleId}/addPhoto`);
+    }
+
     const rateClimb = (event) => {
         event.preventDefault();
         console.log('rating to add: ', rating);
@@ -143,7 +148,8 @@ function ClimbDetail() {
             <button onClick={ rateClimb }>Save Rating</button>
             <button onClick={ logRoute }>Log Your Send</button>
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
-            <button onClick={ toEditPage } >Edit Climb</button>
+            <button onClick={ toEditPage } >Edit Climb Info</button>
+            <button onClick={ toEditPhoto }>Edit Photo</button>
             <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
               Delete
             </button>

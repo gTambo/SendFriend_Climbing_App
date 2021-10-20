@@ -7,7 +7,7 @@ import climbList from './climblist.reducer';
 import climbDetails from './climb_details.reducer';
 import grades from './grades.reducer';
 import comments from './comments.router';
-import newClimb from './new_climb.reducer';
+import newClimb from './climb_ID.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.

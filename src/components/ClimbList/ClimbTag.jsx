@@ -6,6 +6,8 @@ function ClimbTag({gymId, styleId, climb}) {
     //  use history to view details page
     const history = useHistory();
 
+    let photoUrl;
+    if(climb.thumb_url != null)
 
     const viewClimbDetails = () => {
         history.push(`/climbs/${gymId}/${styleId}/climbdetail/${climb.id}`)

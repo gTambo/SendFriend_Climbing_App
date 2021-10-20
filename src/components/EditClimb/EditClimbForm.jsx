@@ -79,7 +79,7 @@ function EditClimbForm({ gymId, styleId, climbId, climb }) {
                    value={editedClimb.photo}
                    onChange={ (event) => setEditedClimb({...editedClimb, photo: event.target.value})} 
             /> */}
-            <UploadDisplay id="photo" setNewClimb={setEditedClimb} newClimb={editedClimb} />
+            {/* <UploadDisplay id="photo" setClimbToAdd={setEditedClimb} climbToAdd={editedClimb} /> */}
             <label htmlFor="movement">Movement Style</label>
             <input 
                    id="movement" 
