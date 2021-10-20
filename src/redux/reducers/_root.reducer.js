@@ -7,6 +7,7 @@ import climbList from './climblist.reducer';
 import climbDetails from './climb_details.reducer';
 import grades from './grades.reducer';
 import comments from './comments.router';
+import newClimb from './new_climb.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   climbDetails,
   grades,
   comments,
+  newClimb,
 });
 
 export default rootReducer;

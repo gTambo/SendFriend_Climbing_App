@@ -30,7 +30,7 @@ function ClimbDetail() {
     // use params to get climb ID
     const { gymId, climbId, styleId } = useParams();
     // use moment.js to make the date look nice
-    const addDate = moment(climbDetails.date_added).format("MMMM, do YYYY");
+    const addDate = moment(climbDetails.date_added).format("MMMM, YYYY");
     // On page load, get climb details, using id from params
     useEffect( () => {
         dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
