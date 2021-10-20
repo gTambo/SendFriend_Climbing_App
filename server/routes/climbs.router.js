@@ -3,6 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+const aws = require('aws-sdk');
+const sharp = require('sharp');
+
 /**
  * GET climbs from specified gym with specified style
  */
@@ -46,17 +49,28 @@ router.get('/grades', rejectUnauthenticated, (req, res) => {
     });
 });
 
+
+const { S3_BUCKET, AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
+aws.config.region = AWS_REGION;
+aws.config.update({
+   accessKeyId: AWS_ACCESS_KEY_ID,
+   secretAccessKey: AWS_SECRET_ACCESS_KEY
+});
 /**
  * POST new climb
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
+  if (!S3_BUCKET || !AWS_REGION || !AWS_ACCESS_KEY_ID || !AWS_SECRET_ACCESS_KEY) {
+        res.status(500).send('Missing environment variables for AWS bucket.');
+        return;
+    }
     console.log('Posting new climb: ', req.body);
     console.log('User: ', req.user);
     const query = `INSERT INTO "climbs" 
 	("grade_id", "color", "gym_id", "climb_style_id", "photo", "movement_style", "user_id")
     VALUES
-	($1, $2, $3, $4, $5, $6, $7)
+	($1, $2, $3, $4, $5, $6, $7) 
     RETURNING "id";
 `;
 pool.query((query), [
@@ -69,11 +83,94 @@ pool.query((query), [
         req.user.id // $7
     ]).then((result) => {
         console.log("result: ", result);
-        res.send(result.rows);
+        res.send(result.rows[0]);
     }).catch((err) => {
         console.log('Error in post: ', err);
         res.sendStatus(500);
     })
+});
+
+/**
+ * S3 BUCKET HERE
+ */
+
+
+ /**
+  * @api {post} /s3 Upload Photo
+  * @apiPermission user
+  * @apiName PostPhoto
+  * @apiGroup Photo
+  * @apiDescription This route uploads a photo.
+  *
+  * @apiParam {String} name              Mandatory image file name.
+  * @apiParam {String} type              Mandatory image file type.
+  * @apiParam {String} size              Mandatory image file size.
+  * @apiParam {File}   image             Mandatory image
+  *
+  * @apiSuccessExample {json} Success-Response:
+  *      HTTP/1.1 201 OK
+  */
+ router.put('/s3', rejectUnauthenticated, async (req, res) => {
+     console.log("in s3 router");
+     if (!S3_BUCKET || !AWS_REGION || !AWS_ACCESS_KEY_ID || !AWS_SECRET_ACCESS_KEY) {
+         res.status(500).send('Missing environment variables for AWS bucket.');
+         return;
+     }
+     try {
+        //  console.log("request", req);
+        //  console.log('req Query: ', req.query);
+        console.log('req.BODY ', req.body);
+        const imageProps = req.query;
+        const imageData = req.files.image.data;
+        const climbId = req.body.climbId;
+        console.log('imageData', imageData);
+        console.log('climb Id: ', climbId);
+        const mediumKey = `photos/medium/${imageProps.name}`;
+        // Optionally, resize the image
+        const mediumFileContent = await sharp(imageData).resize(300, 300).toBuffer();
+ 
+        // Setting up S3 upload parameters
+        const params = {
+            Bucket: S3_BUCKET,
+            Key: mediumKey,
+            Body: mediumFileContent,
+            ACL: 'public-read',
+        };
+        const s3 = new aws.S3();
+        // Uploading files to the bucket
+        const data = await s3.upload(params).promise();
+ 
+        // Optionally, create a thumbnail
+        const thumbFileConent = await sharp(imageData).resize(100, 100).toBuffer();
+        const thumbKey = `photos/thumb/${req.user.id}/${imageProps.name}`;
+        params.Key = thumbKey;
+        params.Body = thumbFileConent;
+        await s3.upload(params).promise();
+ 
+        // INSERT photo path into the database
+        await pool.query((`UPDATE "climbs" SET ("thumb_url", "photo") = ($1, $2) WHERE "id" = $3;`), [
+            `https://climbtags1.s3.amazonaws.com/${thumbKey}`,
+            `https://climbtags1.s3.amazonaws.com/${mediumKey}`,
+            climbId
+        ]);
+        
+        console.log('sending data somewhere:', data);
+        // Send back medium image data.
+        res.send(data);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+});
+ 
+router.post('/photourl', (req, res) => {
+    const query = `INSERT INTO "climbs" ("photo") VALUES ($1);`
+    pool.query(query, [req.body.selectedFile])
+    .then(results => {
+        console.log('Photo url from s3bucket: ', results);
+        res.sendStatus(200);
+    });
+    // to do; write catch
 });
 
 /**
