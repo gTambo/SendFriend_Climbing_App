@@ -216,7 +216,7 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
     const idToDelete = req.params.id;
     const deleteComments = `DELETE FROM "comment" WHERE "climb_id" = $1;`;
     pool.query((deleteComments), [idToDelete]).then(dCResult => { 
-
+        // CONSIDER Delete cascade, or a "soft delete" / archive
         console.log('DELETED Comments for climb: ', idToDelete, dCResult.rowCount);
         const deleteRating = `DELETE FROM "rating" WHERE "climb_id" = $1;`;
         pool.query((deleteRating), [idToDelete]).then(dRResult=> {

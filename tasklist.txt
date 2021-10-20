@@ -74,7 +74,7 @@ Milestone: login functionality display on DOM
 - [ ] S3 BUCKET!!
     - [x] get the dropZone
     - [x] add fliename to database
-    - [ ] look into Chris' code, and implement
+    - [x] look into Chris' code, and implement
 
 Styling TO DO's:
 - [x] star rating component 
@@ -104,11 +104,14 @@ General To-Do's:
 - [x] fix register functionality (it was wrong date type)
 - [x] fix rating update
 - [x] reroute login page to gym select 
+- [ ] add conditional render for climb contributor and delete buttons
 - [ ] find way to open camera from within app
 - [ ] review and test async await lecture/notes
 - [ ] Update linkedin/cover letter and apply for a job
 - [ ] post a question to stackoverflow
 - [ ] review recursion
+
+
 
 
 
