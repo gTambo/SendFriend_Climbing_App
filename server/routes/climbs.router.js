@@ -130,10 +130,10 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
                 console.log('DELETEd Climb:',idToDelete, result.rowCount);
                 if (result.rowCount > 0) {
                     // we deleted something
-                    res.send({message: 'You deleted the climb!'})
+                    res.send({rowCount: result.rowCount, message: 'You deleted the climb!'})
                 } else {
                     // we did not delete anything
-                    res.send({ message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
+                    res.send({rowCount: result.rowCount, message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
                 }
             
             }).catch(error => {
