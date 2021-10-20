@@ -7,8 +7,8 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background-color: #141310;
-  color: aliceblue;
+  background-color: #faf7ed;
+  color: rgb(1, 11, 20);
 }
 
 img {

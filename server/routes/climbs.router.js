@@ -8,6 +8,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
 router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
+  console.log('getting all climbs for Gym: ', req.params.gymId, 'of style: ', req.params.styleId);
   console.log("req.user: ", req.user);
   console.log('Params: ', req.params);
   const query = `
@@ -100,8 +101,13 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
         req.body.movement_style, // $6
         climbToEdit // $7
     ]).then( results => {
-
-    })
+        console.log('PUT result: ', results.rows);
+        res.sendStatus(200)
+        res.send(results.rows);
+    }).catch(error => {
+        console.log('ERROR in edit climb', error);
+        res.sendStatus(500);
+    });
 });
 
 /**
@@ -111,13 +117,17 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
     //  DELETE route code here
     console.log('DELETE Params(climb Id) and user id: ', req.params, req.user.id);
     const idToDelete = req.params.id;
-    const deleteComments = `DELETE FROM "comments" WHERE "id" = $1;`;
+    const deleteComments = `DELETE FROM "comment" WHERE "climb_id" = $1;`;
     pool.query((deleteComments), [idToDelete]).then(dCResult => { 
+
+        console.log('DELETED Comments for climb: ', idToDelete, dCResult.rowCount);
         const deleteRating = `DELETE FROM "rating" WHERE "climb_id" = $1;`;
         pool.query((deleteRating), [idToDelete]).then(dRResult=> {
+
+            console.log('DELETED Ratings for climb: ', idToDelete, dRResult.rowCount);
             const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1;`;
             pool.query((deleteQuery), [req.params.id]).then( (result) => {
-                console.log('DELETE result: ',result);
+                console.log('DELETEd Climb:',idToDelete, result.rowCount);
                 if (result.rowCount > 0) {
                     // we deleted something
                     res.send({message: 'You deleted the climb!'})
@@ -127,12 +137,15 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
                 }
             
             }).catch(error => {
+                console.log('ERROR in DELETE Climb ', error);
                 res.sendStatus(500);
             })
         }).catch(error => {
+            console.log('ERROR in DELETE Ratings ', error);
             res.sendStatus(500);
         })
     }).catch(error => {
+        console.log('ERROR in DELETE Comments ' ,error);
         res.sendStatus(500);
     });
 });
