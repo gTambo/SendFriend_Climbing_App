@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Link, NavLink } from 'react-router-dom';
 
 import ClimbTag from './ClimbTag';
+import './ClimbList.css';
 
 function ClimbList() {
     const history = useHistory();

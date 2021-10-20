@@ -1,13 +1,19 @@
 // import React, { useState, useEffect } from 'react';
 // import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './ClimbList.css';
+
 
 function ClimbTag({gymId, styleId, climb}) {
     //  use history to view details page
     const history = useHistory();
 
     let photoUrl;
-    if(climb.thumb_url != null)
+    if(climb.thumb_url) {
+        photoUrl = climb.thumb_url;
+    } else {
+        photoUrl = climb.photo;
+    }
 
     const viewClimbDetails = () => {
         history.push(`/climbs/${gymId}/${styleId}/climbdetail/${climb.id}`)
@@ -17,7 +23,7 @@ function ClimbTag({gymId, styleId, climb}) {
         <li>
             <p>{climb.difficulty}</p>
             <p>{climb.color}</p>
-            <img className="small-photo" src={climb.photo} />
+            <img className="small-photo" src={photoUrl} />
             <button onClick={ viewClimbDetails }>View Details</button>
         </li>
     )
