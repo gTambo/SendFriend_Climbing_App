@@ -12,27 +12,28 @@ The Tag-Tender app is intended to give indoor climbers a way to view and keep tr
 ## Screen Shot
 
 The current state of the climb list view (for mobile):
+
 ![List_Page](public/images/ClimbListView_a.png)
 
-and a peek at the Climb Details page:
+And a peek at the Climb Details page:
+
 ![Climb_Details_1](public/images/details_view_a.png)
+
 ![Climb_Details_1](public/images/Details_View_b.png)
 
 ### Prerequisites
 
-Link to software that is required to install the app (e.g. node).
+Software that is required to install the app:
 
 - [Node.js](https://nodejs.org/en/)
 - [AWS S3](https://s3.console.aws.amazon.com/s3/home)
 - [Postgres](https://www.postgresql.org/download/)
-- Optimized for viewing with Google Chrome
+- _Note: Optimized for viewing with Google Chrome_
+
 
 ## Installation
 
-How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
-
-If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
-
+*To spin up the code for this project:*
 
 1. Create a database named `tagtender_project`,
 2. The queries in the `database.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
@@ -56,8 +57,8 @@ If your application has secret keys (for example --  Twilio), make sure you tell
 
 
 ## Usage
-How does someone use this application? Tell a user story here.
 
+*As a User:*
 1. Create a new user on the register page, or login an existing user
 2. Select the climbing gym and type of climbing you would like to view
 3. Scroll through list of climbs, click or tap on one for more details
@@ -73,7 +74,6 @@ How does someone use this application? Tell a user story here.
 
 ## Built With
 
-List technologies and frameworks here
 
 1. JavaScript
 2. React
