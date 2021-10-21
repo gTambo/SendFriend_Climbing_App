@@ -17,9 +17,9 @@ The current state of the climb list view (for mobile):
 
 And a peek at the Climb Details page:
 
-![Climb_Details_1](public/images/details_view_a.png)
+![Climb_Details_1](public/images/Details_View_1.png)
 
-![Climb_Details_1](public/images/Details_View_b.png)
+![Climb_Details_1](public/images/Details_View_2.png)
 
 ### Prerequisites
 
