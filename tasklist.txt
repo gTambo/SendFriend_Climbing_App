@@ -100,9 +100,9 @@ Styling TO DO's:
 - [x] some Styling
 - [x] attempt test on phone browser
 
-    Wednesday ToDo
-- [ ] make a log book page
-- [ ] make a log send page
+    Wednesday/Thursday ToDo
+- [x] make a log book page
+- [x] make a log send page
 - [ ] put a climb into the db @logbook table
 - [ ] see that climb in the logbook, in a table element
 - [ ] update README

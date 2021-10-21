@@ -160,9 +160,9 @@ function ClimbDetail() {
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
             <button onClick={ toEditPage } >Edit Climb Info</button>
             <button onClick={ toEditPhoto }>Edit Photo</button>
-            <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
+            {checkUsername() && (<button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
               Delete
-            </button>
+            </button>)}
         </div>
     )
 

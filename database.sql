@@ -7,6 +7,7 @@ CREATE DATABASE "tagtender_project";
 
 
 
+
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(80) NOT NULL UNIQUE,
@@ -32,6 +33,7 @@ CREATE TABLE "climbs" (
 	"movement_style" varchar(255),
 	"date_added" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	"photo" varchar(500),
+	"thumb_url" VARCHAR(500),
 	"user_id" integer NOT NULL,
 	CONSTRAINT "climbs_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -66,10 +68,12 @@ CREATE TABLE "climb_style" (
 
 
 CREATE TABLE "logbook" (
-	"user_id" integer NOT NULL,
-	"route_tag_id" integer NOT NULL,
-	"send_date" DATE NOT NULL DEFAULT CURRENT_DATE,
 	"id" serial NOT NULL,
+	"user_id" integer NOT NULL,
+	"climb_id" integer NOT NULL,
+	"send_date" DATE NOT NULL DEFAULT CURRENT_DATE,
+	"attempts" VARCHAR(124),
+	"grade_id_perceived" INTEGER REFERENCES "grade",
 	CONSTRAINT "logbook_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -89,8 +93,8 @@ CREATE TABLE "grade" (
 
 
 CREATE TABLE "rating" (
-	"rating" integer NOT NULL UNIQUE,
 	"id" serial NOT NULL,
+	"rating" integer DEFAULT '0',
 	"user_id" integer NOT NULL,
 	"climb_id" integer NOT NULL,
 	CONSTRAINT "rating_pk" PRIMARY KEY ("id")
@@ -101,12 +105,12 @@ CREATE TABLE "rating" (
 
 
 CREATE TABLE "comment" (
-	"comment" varchar(1000),
 	"id" serial NOT NULL,
+	"comment" varchar(1000),
 	"user_id" integer NOT NULL,
-	"route_tag_id" integer NOT NULL,
+	"climb_id" integer NOT NULL,
 	"created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	"flagged" BOOLEAN NOT NULL,
+	"flagged" BOOLEAN NOT NULL DEFAULT 'FALSE',
 	CONSTRAINT "comment_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -125,18 +129,17 @@ ALTER TABLE "climbs" ADD CONSTRAINT "climbs_fk3" FOREIGN KEY ("user_id") REFEREN
 
 
 ALTER TABLE "logbook" ADD CONSTRAINT "logbook_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("id");
-ALTER TABLE "logbook" ADD CONSTRAINT "logbook_fk1" FOREIGN KEY ("route_tag_id") REFERENCES "climbs"("id");
+ALTER TABLE "logbook" ADD CONSTRAINT "logbook_fk1" FOREIGN KEY ("climb_id") REFERENCES "climbs"("id");
 
 
 ALTER TABLE "rating" ADD CONSTRAINT "rating_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("id");
 ALTER TABLE "rating" ADD CONSTRAINT "rating_fk1" FOREIGN KEY ("climb_id") REFERENCES "climbs"("id");
 
 ALTER TABLE "comment" ADD CONSTRAINT "comment_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("id");
-ALTER TABLE "comment" ADD CONSTRAINT "comment_fk1" FOREIGN KEY ("route_tag_id") REFERENCES "climbs"("id");
+ALTER TABLE "comment" ADD CONSTRAINT "comment_fk1" FOREIGN KEY ("climb_id") REFERENCES "climbs"("id");
 
-INSERT INTO "gym" ("name", "city", "address") VALUES ('Baoulder Gym', 'AwesomeTown', '1111 Sendit Way');
 
-INSERT INTO "climb_style" ("style", "roped") VALUES ('Boulder', 'FALSE'), ('Sport-lead', 'TRUE'), ('Top-rope', 'TRUE'), ('Auto-belay', 'TRUE');
+--Populate grades table
 
 INSERT INTO "grade" ("boulder", "difficulty")
 VALUES 
@@ -199,6 +202,8 @@ VALUES
 	('FALSE', '5.15a'),
 	('FALSE', 'unknown');
 	
+
+--Optional in-between grades
 	
 INSERT INTO "grade" ("boulder", "difficulty")
 VALUES 
@@ -217,5 +222,42 @@ VALUES
 	('TRUE', 'V11/12'),
 	('TRUE', 'V12/13'),
 	('TRUE', 'V13/14');
+
+
+
+-- Optionally, seed gym table data
+INSERT INTO "gym" ("name", "city", "address", "latitude", "longitude") VALUES ('VE - Twin Cities Bouldering', 'Saint Paul', '2550 Wabash Ave', '44.960845915367464', '-93.2061154539711');
+INSERT INTO "gym" ("name", "city", "address", "latitude", "longitude") VALUES ('VE - Minneapolis', 'Minneapolis', '2540 Nicollet Ave', '44.95641572229102', '-93.27872893044365');
+--INSERT INTO "gym" ("name", "city", "address") VALUES ('Baoulder Gym', 'AwesomeTown', '1111 Sendit Way');
+
+
+
+--Optionally, seed climbs table data 
+INSERT INTO "climbs" 
+	("grade_id", "color", "gym_id", "climb_style_id", "photo", "user_id")
+VALUES
+	('7', 'Yellow', '3', '1', 'images/IMG_3544.JPG', '1');
+
+INSERT INTO "climbs" 
+	("grade_id", "color", "gym_id", "climb_style_id", "photo", "user_id")
+VALUES
+	('34', 'Yellow', '4', '2', 'public/images/IMG_3201.JPG', '1'),
+	('26', 'Blue', '4', '2', 'public/images/IMG_3201.JPG', '1');
 	
---DELETE FROM "public"."grade" WHERE "id"=17 OR "id"=18 OR "id"=53 OR "id"=54 OR "id"=55 OR "id"=56;
+
+--Optiopnally, seed comment table data
+INSERT INTO "comment" ("comment", "climb_id", "user_id") 
+VALUES ('Good flow.', '1', '1');
+
+--Optionally, seed rating table data
+INSERT INTO "rating" ("rating", "user_id", "climb_id")
+VALUES ('3', '2', '1');
+
+
+SELECT * FROM "climbs" WHERE "gym_id" = 3 AND "climb_style_id" = 1
+ORDER BY "grade_id" ASC;
+
+--Optionally, seed climb_style table data
+INSERT INTO "climb_style" ("style", "roped") VALUES ('Boulder', 'FALSE'), ('Sport-lead', 'TRUE'), ('Top-rope', 'TRUE'), ('Auto-belay', 'TRUE');
+
+
