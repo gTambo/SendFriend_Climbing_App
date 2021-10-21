@@ -28,27 +28,6 @@ function* fetchClimbs(action) {
 }
 
 
-// try {
-//     const { selectedFile, resizedFile } = action.payload;
-//     // The name seems to be dropped on resize, send the name from the
-//     // original selected file instead.
-//     const fileName = encodeURIComponent(selectedFile.name);
-//     const fileType = encodeURIComponent(resizedFile.type);
-//     const fileSize = encodeURIComponent(resizedFile.size);
-//     // const fileData = encodeURIComponent(resizedFile);
-//     console.log('File name/type: ', fileName, fileType,);
-//     const formData = new FormData();
-//     formData.append('image', resizedFile );
-//     console.log(resizedFile);
-//     console.log('Saga posting to the server: ', formData);
-//     const resp = yield axios.post(`/api/climbs/s3?name=${fileName}&type=${fileType}&size=${fileSize}`,  formData );
-//     console.log(resp);
-// } catch (error) {
-//     alert('Something went wrong when uploading a photo');
-//     console.log('Photo Upload - post request failed', error);
-// }
-
-
 function* addClimb(action) {
     try {
         const config = {

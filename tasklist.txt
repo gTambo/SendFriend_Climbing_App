@@ -10,18 +10,18 @@
 - [x] register component, 
     - [x] profile info form (in the register)
 - [x] Client side App, 
-    - [ ] Header (tweak styling)
-    - [ ] Footer (minimal styling), 
+    - [x] Header (tweak styling)
+    - [x] Footer (minimal styling), 
     - [x] client Routes boilerplate
 - [x] Database tables initial setup (seed tables with example data)
-- [ ] minor css changes
+- [x] minor css changes
 
 Milestone: login functionality display on DOM
 
 ## Tuesday Stretch 
 - [x] start on Wednesday
-- [ ] Schedule 1-on-1 weith Christy
-- [ ] work on resume/linkedin stuff
+- [x] Schedule 1-on-1 weith Christy
+- [x] work on resume/linkedin stuff
 
 ## Wednesday 
 - [x] gym select Page
@@ -32,7 +32,7 @@ Milestone: login functionality display on DOM
     - [x] climb style saga
     - [x] climb style reducer
     - [x] useParams to navigate to climb list with gym info?
-- [ ] Display Selected routes for Selected Gym
+- [x] Display Selected routes for Selected Gym
     - [x] server route and query for correct climbs
     - [x] saga for climbs
     - [x] reducer for climbs
@@ -40,16 +40,16 @@ Milestone: login functionality display on DOM
     - [x] client display climbs on dom
     - [x] buttons and clickability
     - [x] functions to details page, 
-- [ ] Climb Detail page
+- [x] Climb Detail page
     - [x] server 
     - [x] saga
     - [x] reducer
     - [x] get comments
     - [x] get ratings
     - [x] comments and ratings on dom
-- [ ] update navigate
+- [x] update navigate
 - [x] base components for Add new climb.
-- [ ] Add new climb form
+- [x] Add new climb form
     - [x] get grades into dropdown select
     - [x] colors select
     - [x] other inputs
@@ -71,7 +71,7 @@ Milestone: login functionality display on DOM
     - [x] test it
 
 
-- [ ] S3 BUCKET!!
+- [x] S3 BUCKET!!
     - [x] get the dropZone
     - [x] add fliename to database
     - [x] look into Chris' code, and implement
@@ -97,22 +97,31 @@ Styling TO DO's:
 - [x] ratings on climb details
 - [x] comments on climb-details
 - [ ] update README!
-- [ ] some Styling
+- [x] some Styling
 - [x] attempt test on phone browser
+
+    Wednesday ToDo
+- [ ] make a log book page
+- [ ] make a log send page
+- [ ] put a climb into the db @logbook table
+- [ ] see that climb in the logbook, in a table element
+- [ ] update README
+    - [ ] add some photos
 
 General To-Do's:
 - [x] fix register functionality (it was wrong date type)
 - [x] fix rating update
 - [x] reroute login page to gym select 
 - [ ] add conditional render for climb contributor and delete buttons
-- [ ] find way to open camera from within app
 - [ ] review and test async await lecture/notes
+- [x] rewrite Delete function with async await
+- [ ] write and rewire routes to "soft delete" or archive a climb.
+- [ ] find way to open camera from within app
 - [ ] Update linkedin/cover letter and apply for a job
 - [ ] post a question to stackoverflow
 - [ ] review recursion
-
-
-
+- [ ] add unit testing
+- [ ] add api documentation
 
 
 

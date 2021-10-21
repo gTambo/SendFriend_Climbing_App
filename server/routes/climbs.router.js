@@ -163,15 +163,6 @@ pool.query((query), [
     }
 });
  
-router.post('/photourl', (req, res) => {
-    const query = `INSERT INTO "climbs" ("photo") VALUES ($1);`
-    pool.query(query, [req.body.selectedFile])
-    .then(results => {
-        console.log('Photo url from s3bucket: ', results);
-        res.sendStatus(200);
-    });
-    // to do; write catch
-});
 
 /**
  * PUT route template
@@ -198,9 +189,9 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
         req.body.movement_style, // $6
         climbToEdit // $7
     ]).then( results => {
-        console.log('PUT result: ', results.rows);
+        console.log('PUT result: ', results);
         res.sendStatus(200)
-        res.send(results.rows);
+        // res.send(results.rows);
     }).catch(error => {
         console.log('ERROR in edit climb', error);
         res.sendStatus(500);
@@ -210,42 +201,45 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
 /**
  * DELETE route template
  */
- router.delete('/:id', rejectUnauthenticated, (req, res) => {
+ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     //  DELETE route code here
-    console.log('DELETE Params(climb Id) and user id: ', req.params, req.user.id);
-    const idToDelete = req.params.id;
-    const deleteComments = `DELETE FROM "comment" WHERE "climb_id" = $1;`;
-    pool.query((deleteComments), [idToDelete]).then(dCResult => { 
+    try{ console.log('DELETE Params(climb Id) and user id: ', req.params, req.user.id);
+        const idToDelete = req.params.id;
+        const deleteComments = `DELETE FROM "comment" WHERE "climb_id" = $1;`;
+        await pool.query((deleteComments), [idToDelete]);
         // CONSIDER Delete cascade, or a "soft delete" / archive
-        console.log('DELETED Comments for climb: ', idToDelete, dCResult.rowCount);
+        // console.log('DELETED Comments for climb: ', idToDelete, dCResult.rowCount);
         const deleteRating = `DELETE FROM "rating" WHERE "climb_id" = $1;`;
-        pool.query((deleteRating), [idToDelete]).then(dRResult=> {
+        await pool.query((deleteRating), [idToDelete])
 
-            console.log('DELETED Ratings for climb: ', idToDelete, dRResult.rowCount);
-            const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1;`;
-            pool.query((deleteQuery), [req.params.id]).then( (result) => {
-                console.log('DELETEd Climb:',idToDelete, result.rowCount);
-                if (result.rowCount > 0) {
-                    // we deleted something
-                    res.send({rCount: result.rowCount, message: 'You deleted the climb!'})
-                } else {
-                    // we did not delete anything
-                    res.send({rCount: result.rowCount, message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
-                }
-            
-            }).catch(error => {
-                console.log('ERROR in DELETE Climb ', error);
-                res.sendStatus(500);
-            })
-        }).catch(error => {
-            console.log('ERROR in DELETE Ratings ', error);
-            res.sendStatus(500);
-        })
-    }).catch(error => {
-        console.log('ERROR in DELETE Comments ' ,error);
+        // console.log('DELETED Ratings for climb: ', idToDelete, dRResult.rowCount);
+        const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1;`;
+        await pool.query((deleteQuery), [req.params.id]);
+        // console.log('Delete response: ', response);
+        // console.log('DELETEd Climb:',idToDelete, result.rowCount);
+        // if (result.rowCount > 0) {
+        //     // we deleted something
+        //     res.send({rCount: result.rowCount, message: 'You deleted the climb!'})
+        // } else {
+        //     // we did not delete anything
+        //     res.send({rCount: result.rowCount, message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
+        // }
+        console.log('END OF DELETE CLIMB', idToDelete );
+    } catch (error) {
+        console.log('ERROR in DELETE Climb ', error);
+        next(error);
         res.sendStatus(500);
-    });
+    }
 });
+    //     }).catch(error => {
+    //         console.log('ERROR in DELETE Ratings ', error);
+    //         res.sendStatus(500);
+    //     })
+    // }).catch(error => {
+    //     console.log('ERROR in DELETE Comments ' ,error);
+    //     res.sendStatus(500);
+    // });
+// });
 
 
 

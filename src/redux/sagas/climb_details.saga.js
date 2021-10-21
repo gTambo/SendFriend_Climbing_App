@@ -53,7 +53,7 @@ function* editClimbTag(action) {
         // send to server 
         yield axios.put(`/api/climbs/edit/${idToEdit}`, action.payload, config);
         // update climbs list
-        yield put({ type: 'FETCH_ALL_CLIMBS' });
+        yield put({ type: 'FETCH_ALL_CLIMBS', payload: { gymId: action.payload.gym_id, styleId: action.payload.climb_style_id } });
     } catch (err) {
         console.log('Error in edit saga: ', err);
     }

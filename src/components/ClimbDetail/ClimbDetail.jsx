@@ -23,10 +23,11 @@ function ClimbDetail() {
     // use local state to store rating, comments
     const [rating, setRating] = useState(0);
     const [newComment, setNewComment] = useState('');
+    // const [isContributor, setIsContributor] = useState(false);
     // const [comments, setComments] = useState([]);
     //  use Selector to get details from redux
     const reduxStore = useSelector(store => store);
-    const { climbDetails, comments } = reduxStore;
+    const { climbDetails, comments, user } = reduxStore;
     // use params to get climb ID
     const { gymId, climbId, styleId } = useParams();
     // use moment.js to make the date look nice
@@ -45,6 +46,15 @@ function ClimbDetail() {
     // }
     let avgRating = parseInt(climbDetails.coalesce);
     let ratingToAdd = parseInt(rating);
+
+    // Compare logged in user to climb contributor
+    const checkUsername = () => {
+        if (user.username === climbDetails.username) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     const logRoute = () => {
         // STRETCH TO DO: Navigate to log route page
@@ -144,7 +154,7 @@ function ClimbDetail() {
                     onChange={(event) => setRating(event.target.value)}
                 />
             </Box>
-            <p>Contribued by: {climbDetails.username}</p>
+            {checkUsername() ? (<p>You contributed this climb</p>) : (<p>Contribued by: {climbDetails.username}</p>)}
             <button onClick={ rateClimb }>Save Rating</button>
             <button onClick={ logRoute }>Log Your Send</button>
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
