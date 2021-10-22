@@ -12,13 +12,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 //   console.log("req.user: ", req.user);
 //   console.log('Params: ', req.params);
   const query = `
-                SELECT "logbook"."id", "send_date", "attempts", "grade_id_perceived",  
+                SELECT "logbook"."id", "climb_id", "send_date", "attempts", "grade_id_perceived",  
                 "grade"."difficulty", "climbs"."color", "climbs"."movement_style", "climbs"."thumb_url" 
                 FROM "logbook"
                 JOIN "climbs" ON "logbook"."climb_id" = "climbs"."id"
                 JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
                 WHERE "logbook"."user_id" = $1
-                GROUP BY "logbook"."id", "send_date", "attempts", "grade_id_perceived", "grade"."difficulty", "climbs"."color", "climbs"."movement_style", "climbs"."thumb_url";
+                GROUP BY "logbook"."id", "climb_id", "send_date", "attempts", "grade_id_perceived", "grade"."difficulty", "climbs"."color", "climbs"."movement_style", "climbs"."thumb_url";
                 `;
 
   pool.query((query), [req.user.id])
@@ -92,20 +92,19 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     const climbToEdit = req.params.id;
     const query = `
             UPDATE "logbook" SET 
-                ("user_id", "climb_id", "attempts", "grade_id_perceived") 
-                = ($1, $2, $3, $4)
-                WHERE "id" = $5;
+                ("climb_id", "attempts", "grade_id_perceived") 
+                = ($1, $2, $3)
+                WHERE "id" = $4;
         `;
     pool.query((query), [
-        req.body.user_id, // $1
-        req.body.climb_id, // $2
-        req.body.attempts, // $3
-        req.body.gradeId, // $4
-        climbToEdit // $7
+        req.body.climb_id, // $1
+        req.body.attempts, // $2
+        req.body.gradeId, // $3
+        climbToEdit // $4
     ]).then( results => {
-        console.log('PUT result: ', results.rows);
+        console.log('PUT result: ', results.rowCount);
         res.sendStatus(200)
-        res.send(results.rows);
+        res.send({rowsEdited: results.rowCount});
     }).catch(error => {
         console.log('ERROR in edit climb', error);
         res.sendStatus(500);

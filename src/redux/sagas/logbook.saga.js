@@ -13,7 +13,7 @@ function* addToLogbook(action) {
         console.log('logging climb: ', climbToLog);
         const postRes = yield axios.post('/api/logbook', climbToLog, config);
         console.log('Response from server, expecting id: ', postRes.data.id);
-        yield put({ type: 'SET_CLIMB_ID', payload: postRes.data});
+        yield put({ type: 'FETCH_LOGBOOK' });
     } catch (error) {
         console.log('ERROR adding to logbook', error);
     }

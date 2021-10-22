@@ -26,6 +26,7 @@ function GymForm () {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('Clicked Submit');
+        dispatch({ type: 'SET_GYM_CHOICE', payload: {gymId: chosenGym, styleId: chosenStyle}})
         history.push(`/climbs/${chosenGym}/${chosenStyle}`);
     }
 

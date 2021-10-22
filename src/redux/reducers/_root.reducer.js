@@ -10,6 +10,7 @@ import comments from './comments.router';
 import newClimb from './climb_ID.reducer';
 import limitGrades from './limited_grades.reducer';
 import logbook from './logbook.reducer';
+import gymChoice from './chosen_gym_style.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   newClimb,
   limitGrades,
   logbook,
+  gymChoice,
 });
 
 export default rootReducer;

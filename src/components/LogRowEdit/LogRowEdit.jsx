@@ -11,31 +11,31 @@ import { useHistory, useParams } from 'react-router-dom';
 //     FormControl, 
 // } from '@mui/material';
 
-function LogASend() {
+function EditASend() {
     // get climbId from params
     const allParams = useParams();
-    const climbId = allParams.climbId;
+    const rowIndex = allParams.id;
 
     // get climb details from redux
     const reduxStore = useSelector(store => store);
-    const { limitGrades, climbDetails, comments, ratings } = reduxStore;
+    const { limitGrades, climbDetails, logbook, newClimb } = reduxStore;
     // prepare dispatch and history
     const dispatch = useDispatch();
     const history = useHistory();
+    
+    const climbId = logbook[rowIndex].climb_id;
+    console.log('Climb id: ', climbId);
 
-    // climbDetails should still be inreducer from previous page
-    // get the grade and use to set grades in selector
     let gradeId = climbDetails.grade_id;
     // use local state object to store climb to log
-    let defaultClimb = {
-        climb_id: climbId,
-        attempts: '',
-        grade_id: '',
-    };
+    // set default climb from logbook
+    let defaultClimb = logbook[rowIndex];
+    console.log('Default Climb: ', defaultClimb);
     const [climbToLog, setClimbToLog] = useState(defaultClimb)
     
     // get grades on page load
     useEffect(() => {
+        dispatch({ type: 'FETCH_CLIMB_DETAILS', payload: {id: climbId} })
         console.log('grade_id, expecting an integer: ', gradeId);
         dispatch({ type: 'GET_THESE_GRADES', payload: {id: gradeId}})
     }, [dispatch])
@@ -43,14 +43,15 @@ function LogASend() {
     // handle form submission
     const logASend = (event) => {
         event.preventDefault();
-        dispatch({ type: 'ADD_TO_LOGBOOK', payload: climbToLog });
+        console.log('Sending to logbook saga for edit:', climbToLog);
+        dispatch({ type: 'EDIT_LOGGED_CLIMB', payload: climbToLog });
         history.push('/logbook');
     }
 
     return(
         <div>
-            <h2>You are logging this climb:</h2>
-            {/* <p>Climb details: {JSON.stringify(climbDetails)}</p> */}
+            <h2>You are editing this logged climb:</h2>
+            <p>Climb details: {JSON.stringify(climbDetails)}</p>
             <p>{climbDetails.color}, &nbsp; {climbDetails.difficulty}</p>
             <p>at {climbDetails.name}</p>
             <form onSubmit={logASend}>
@@ -84,12 +85,12 @@ function LogASend() {
 
                             })}
                 </select>
-                <input type="submit" value="Log It!" />
+                <input type="submit" value="Save Edit!" />
             </form>
             <button onClick={() => history.goBack()}>Cancel</button>
-            {/* <p>Grades: {JSON.stringify(limitGrades)}</p> */}
+            <p>Grades: {JSON.stringify(limitGrades)}</p>
         </div>
     )
 }
 
-export default LogASend;
+export default EditASend;

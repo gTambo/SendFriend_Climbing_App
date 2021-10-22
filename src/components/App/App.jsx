@@ -26,6 +26,7 @@ import EditClimb from '../EditClimb/EditClimb';
 import UploadPhoto from '../S3Upload/S3Upload';
 import LogASend from '../LogSendPage/LogSendPage';
 import Logbook from '../Logbook/Logbook';
+import EditASend from '../LogRowEdit/LogRowEdit';
 
 import './App.css';
 
@@ -73,6 +74,14 @@ function App() {
             path="/logbook"
           >
             <Logbook />
+          </ProtectedRoute>
+          
+          <ProtectedRoute
+            // logged in shows EditASend else shows LoginPage
+            exact
+            path="/logbook/edit/:id"
+          >
+            <EditASend />
           </ProtectedRoute>
 
           <ProtectedRoute

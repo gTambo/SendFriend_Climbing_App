@@ -15,15 +15,15 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
 //   console.log("req.user: ", req.user);
 //   console.log('Params: ', req.params);
   const query = `
-                SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "thumb_url", "movement_style", 
+                SELECT "climbs"."id", "grade"."difficulty", "grade_id", "color", "photo", "thumb_url", "movement_style", 
                         "gym"."name", "climb_style"."style" 
                 FROM "climbs" 
                 JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
                 JOIN "gym" ON "climbs"."gym_id" = "gym"."id"
                 JOIN "climb_style" ON "climbs"."climb_style_id" = "climb_style"."id"
                 WHERE "gym_id" = $1 AND "climb_style_id" = $2
-                GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "climb_style"."style"
-                ORDER BY "grade"."difficulty" ASC;
+                GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "climb_style"."style", "grade_id"
+                ORDER BY "grade_id" ASC;
     `;
 
   pool.query((query), [req.params.gymId, req.params.styleId])
