@@ -56,4 +56,61 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   });
 });
 
+/**
+ * DELETE route template
+ */
+ router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    //  DELETE route code here
+    console.log('DELETE from logbook : ', req.params, req.user.id);
+    const idToDelete = req.params.id;
+    const deleteQuery = `DELETE FROM "logbook" WHERE "id" = $1 and "user_id" = $2;`;
+    pool.query((deleteQuery), [req.params.id, req.user.id])
+    .then( (result) => {
+    console.log('DELETEd Climb:',idToDelete, result.rowCount);
+        if (result.rowCount > 0) {
+            // we deleted something
+            res.send({rCount: result.rowCount, message: 'You deleted the log entry!'})
+        } else {
+            // we did not delete anything
+            res.send({rCount: result.rowCount, message: 'Nothing was deleted.'})
+        }           
+    }).catch(error => {
+        console.log('ERROR in DELETE Climb ', error);
+        res.sendStatus(500);
+    });
+});
+
+
+
+/**
+ * PUT route template
+ */
+ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
+    // PUT route code here
+    console.log('Params: ', req.params.id);
+    console.log('Body: ', req.body);
+    const climbToEdit = req.params.id;
+    const query = `
+            UPDATE "logbook" SET 
+                ("user_id", "climb_id", "attempts", "grade_id_perceived") 
+                = ($1, $2, $3, $4)
+                WHERE "id" = $5;
+        `;
+    pool.query((query), [
+        req.body.user_id, // $1
+        req.body.climb_id, // $2
+        req.body.attempts, // $3
+        req.body.gradeId, // $4
+        climbToEdit // $7
+    ]).then( results => {
+        console.log('PUT result: ', results.rows);
+        res.sendStatus(200)
+        res.send(results.rows);
+    }).catch(error => {
+        console.log('ERROR in edit climb', error);
+        res.sendStatus(500);
+    });
+});
+
+
 module.exports = router;
