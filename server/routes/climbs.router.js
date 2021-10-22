@@ -11,20 +11,24 @@ const sharp = require('sharp');
  */
 router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
-  console.log('getting all climbs for Gym: ', req.params.gymId, 'of style: ', req.params.styleId);
+  console.log('getting all climbs for Gym:', req.params.gymId, 'of style:', req.params.styleId);
 //   console.log("req.user: ", req.user);
 //   console.log('Params: ', req.params);
   const query = `
-        SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "movement_style", "thumb_url" FROM "climbs" 
-        JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
-        WHERE "gym_id" = $1 AND "climb_style_id" = $2
-        GROUP BY "climbs"."id", "grade"."id", "grade"."difficulty", "color", "photo"
-        ORDER BY "grade"."id", "climbs"."id" ASC;
+                SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "thumb_url", "movement_style", 
+                        "gym"."name", "climb_style"."style" 
+                FROM "climbs" 
+                JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
+                JOIN "gym" ON "climbs"."gym_id" = "gym"."id"
+                JOIN "climb_style" ON "climbs"."climb_style_id" = "climb_style"."id"
+                WHERE "gym_id" = $1 AND "climb_style_id" = $2
+                GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "climb_style"."style"
+                ORDER BY "grade"."difficulty" ASC;
     `;
 
   pool.query((query), [req.params.gymId, req.params.styleId])
   .then( (result) => {
-    // console.log('Sending back: ', result.rows); // Show me what I got
+    console.log('Sending back:', result.rowCount, 'rows'); // Show me how many I got
     res.send(result.rows)
   }).catch(error => {
       console.log('Error getting climbs: ', error);
