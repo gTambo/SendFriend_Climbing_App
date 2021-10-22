@@ -82,7 +82,7 @@ Software that is required to install the app:
 5. Material-UI
 6. Express
 7. Postgres
-8. SQL
+8. Node.js
 9. HTML/css
 
 

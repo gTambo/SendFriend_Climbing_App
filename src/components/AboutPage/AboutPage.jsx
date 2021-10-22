@@ -10,7 +10,17 @@ function AboutPage() {
     <div className="container">
       <div>
         <p>This about page is for anyone to read!</p>
-      <p>Tag-Tender is a Climbing app for logging specific routes in climbing gyms and viewing that information as provided by other users - like you!</p>
+        <p>Tag-Tender is a Climbing app for logging specific routes in climbing gyms and viewing that information as provided by other users - like you!</p>
+        <ul>
+          <li>React</li>
+          <li>Redux</li>
+          <li>AWS S3/aws-sdk</li>
+          <li>Express</li>
+          <li>Postgres</li>
+          <li>Material-UI</li>
+          <li>Node.js</li>
+          <li>JavaScript</li>
+        </ul>
       </div>
     </div>
   );

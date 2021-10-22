@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // To Do: import MUI Select components for dropdown
+import { Button } from '@mui/material';
 
 function GymForm () {
     // local state variables
@@ -65,7 +66,8 @@ function GymForm () {
                 })}
             </select>
             <br/>
-            <input type="submit" value="Submit" />
+            {/* <input type="submit" value="Submit" /> */}
+            <Button type="submit" variant="outlined">Submit</Button>
         </form>
         <ul>
             <li>Chosen Gym: {chosenGym}</li>
