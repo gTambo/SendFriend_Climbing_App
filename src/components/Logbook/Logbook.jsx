@@ -16,14 +16,16 @@ function Logbook() {
         dispatch({ type: 'FETCH_LOGBOOK' });
     }, []);
 
-    const editRow = () => {
+    const editRow = (rowId) => {
         console.log('okay, edit row');
         // dispatch something
+        dispatch({ type: 'EDIT_LOGGED_CLIMB', payload: {id: rowId} });
     }
 
-    const deleteRow = () => {
+    const deleteRow = (rowId) => {
         console.log('Okay, delete row');
         // dispatch something
+        dispatch({ type: 'DELETE_LOGGED_CLIMB', payload: {id: rowId} });
     }
 
     return(
@@ -47,13 +49,13 @@ function Logbook() {
                 </thead>
                 <tbody>
                     {logbook.map(log => (<tr key={log.id}>
-                        <td><button onClick={ editRow }>Edit Row</button></td>
+                        <td><button onClick={() => editRow(log.id) }>Edit Row</button></td>
                         <td>{log.difficulty}</td>
                         <td>{log.color}</td>
                         <td>{log.attempts}</td>
                         <td>{log.style}</td>
                         <td>{moment(log.send_date).format('dddd, MMMM do YYYY')}</td>
-                        <td><button onClick={ deleteRow }>Delete Row</button></td>
+                        <td><button onClick={() => deleteRow(log.id) }>Delete Row</button></td>
                     </tr>))}
                 </tbody>
             </table>

@@ -147,16 +147,6 @@ pool.query((query), [
         res.sendStatus(500);
     }
 });
- 
-// router.post('/photourl', (req, res) => {
-//     const query = `INSERT INTO "climbs" ("photo") VALUES ($1);`
-//     pool.query(query, [req.body.selectedFile])
-//     .then(results => {
-//         console.log('Photo url from s3bucket: ', results);
-//         res.sendStatus(200);
-//     });
-//     // to do; write catch
-// });
 
 /**
  * PUT route template
@@ -183,9 +173,9 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
         req.body.movement_style, // $6
         climbToEdit // $7
     ]).then( results => {
-        console.log('PUT result: ', results.rows);
+        console.log('PUT result: ', results.rowsCount);
         res.sendStatus(200)
-        res.send(results.rows);
+        res.send(results.rowCount);
     }).catch(error => {
         console.log('ERROR in edit climb', error);
         res.sendStatus(500);
