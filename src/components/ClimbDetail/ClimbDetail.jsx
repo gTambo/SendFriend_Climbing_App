@@ -49,8 +49,8 @@ function ClimbDetail() {
     const logRoute = () => {
         // STRETCH TO DO: Navigate to log route page
         console.log('clicked log route!');
+        dispatch({ type: 'UNSET_GRADES' });
         history.push(`/climbs/${gymId}/${styleId}/logsend/${climbId}`);
-        // alert("Okay, log the route!");
     }
 
     const deleteClimb = () => {

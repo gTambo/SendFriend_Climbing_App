@@ -12,8 +12,8 @@ const sharp = require('sharp');
 router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
   console.log('getting all climbs for Gym: ', req.params.gymId, 'of style: ', req.params.styleId);
-  console.log("req.user: ", req.user);
-  console.log('Params: ', req.params);
+//   console.log("req.user: ", req.user);
+//   console.log('Params: ', req.params);
   const query = `
         SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "movement_style", "thumb_url" FROM "climbs" 
         JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
@@ -24,7 +24,7 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
 
   pool.query((query), [req.params.gymId, req.params.styleId])
   .then( (result) => {
-    console.log('Sending back: ', result.rows); // Show me what I got
+    // console.log('Sending back: ', result.rows); // Show me what I got
     res.send(result.rows)
   }).catch(error => {
       console.log('Error getting climbs: ', error);
@@ -32,22 +32,6 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   });
 });
 
-/**
- * GET all the climb styles
- */
-router.get('/grades', rejectUnauthenticated, (req, res) => {
-    // We'll just take all the grades
-    //  TO DO: limit grades by boulder or rope, once client can send specifics
-    console.log('Getting grades', req.params);
-    const query = `SELECT * FROM "grade";`;
-    pool.query(query).then( (result) => {
-        console.log('Sending grades from DB: ', result.rows); // let's see 'em
-        res.send(result.rows);
-    }).catch((err) => { // uh-oh
-        console.log('There was an error getting grades: ', err);
-        res.sendStatus(500);
-    });
-});
 
 
 const { S3_BUCKET, AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
@@ -164,15 +148,15 @@ pool.query((query), [
     }
 });
  
-router.post('/photourl', (req, res) => {
-    const query = `INSERT INTO "climbs" ("photo") VALUES ($1);`
-    pool.query(query, [req.body.selectedFile])
-    .then(results => {
-        console.log('Photo url from s3bucket: ', results);
-        res.sendStatus(200);
-    });
-    // to do; write catch
-});
+// router.post('/photourl', (req, res) => {
+//     const query = `INSERT INTO "climbs" ("photo") VALUES ($1);`
+//     pool.query(query, [req.body.selectedFile])
+//     .then(results => {
+//         console.log('Photo url from s3bucket: ', results);
+//         res.sendStatus(200);
+//     });
+//     // to do; write catch
+// });
 
 /**
  * PUT route template

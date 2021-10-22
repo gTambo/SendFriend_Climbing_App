@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga-effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 
 function* addToLogbook(action) {
@@ -19,9 +19,9 @@ function* addToLogbook(action) {
     }
 }
 
-function* fetchLogbook(action) {
+function* fetchLogbook() {
     try {
-        console.log('Fetching logged climbs ', action.payload);
+        console.log('Fetching logged climbs ');
         const config = {
             headers: { 'Content-Type': 'application/json'},
             withCredentials: true,
@@ -42,7 +42,7 @@ function* fetchLogbook(action) {
 
 function* logbookSaga() {
     yield takeLatest('ADD_TO_LOGBOOK', addToLogbook);
-    yield takeLatest('FETCH_LOGBOOK', fetchLogbook)
+    yield takeLatest('FETCH_LOGBOOK', fetchLogbook);
 }
 
 export default logbookSaga;
