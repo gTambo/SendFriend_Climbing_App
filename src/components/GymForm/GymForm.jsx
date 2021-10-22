@@ -34,8 +34,8 @@ function GymForm () {
             {/* <p>{JSON.stringify(gyms)}</p>
             <p>{JSON.stringify(climbStyles)}</p> */}
         <form className="entry-form" onSubmit={ handleSubmit }>
-            <h2>Gym Selection</h2>
-            <p>**gym selector here**</p>
+            <h3>Gym Name:</h3>
+            
             <select defaultValue="select a gym" 
                     onChange={ (event) => setChosenGym(event.target.value) }
             >
@@ -50,7 +50,7 @@ function GymForm () {
                     )
                 })}
             </select>
-            <p>route style selector here</p>
+            <h3>What type of climbing?</h3>
             <select defaultValue="type of climbing"
                     onChange={ (event) => setChosenStyle(event.target.value) }
             >
@@ -69,10 +69,10 @@ function GymForm () {
             {/* <input type="submit" value="Submit" /> */}
             <Button type="submit" variant="outlined">Submit</Button>
         </form>
-        <ul>
+        {/* <ul>
             <li>Chosen Gym: {chosenGym}</li>
             <li>Chosen Style: {chosenStyle}</li>
-        </ul>
+        </ul> */}
         </div>
     )
 }
