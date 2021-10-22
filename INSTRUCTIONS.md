@@ -8,6 +8,10 @@ We **STRONGLY** recommend following these instructions carefully. It's a lot, an
 
 - Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
 
+- Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+
+- To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+
 
 ## Prerequisites
 

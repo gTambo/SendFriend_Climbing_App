@@ -9,7 +9,7 @@ function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [hometown, setHometown] = useState('');
-  const [climbingExp, setClimbingExp] = useState(2021-10-12)
+  const [climbingExp, setClimbingExp] = useState('')
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 

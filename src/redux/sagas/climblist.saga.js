@@ -29,8 +29,6 @@ function* fetchClimbs(action) {
 }
 
 
-
-
 function* addClimb(action) {
     try {
         const config = {

@@ -3,6 +3,20 @@
 import { useHistory } from 'react-router-dom';
 import './ClimbList.css';
 
+// MUI styles
+import {
+    Grid, 
+    Box,
+    Card,
+    CardContent,
+    CardMedia,
+    Typography,
+    CardActionArea,
+    CardActions,
+    Button,
+    Fab,
+
+ } from '@mui/material';
 
 function ClimbTag({gymId, styleId, climb}) {
     //  use history to view details page
@@ -20,12 +34,25 @@ function ClimbTag({gymId, styleId, climb}) {
     }
 
     return(
-        <li>
-            <p>{climb.difficulty}</p>
-            <p>{climb.color}</p>
-            <img className="small-photo" src={photoUrl} />
-            <button onClick={ viewClimbDetails }>View Details</button>
-        </li>
+        <Grid item sx={12} >
+            <Card>
+                <CardActionArea onClick={ viewClimbDetails }>
+                    
+                    <CardContent>
+                        <Typography> {climb.color} &nbsp; {climb.difficulty}</Typography>
+                        <Typography></Typography></CardContent>
+                    {/* <img className="small-photo" src={photoUrl} /> */}
+                    <CardContent>
+                        <CardMedia  component="img"
+                        height="200"
+                        maxWidth="200"
+                        image={climb.photo}
+                        alt="a photo" />
+                    {/* <Button variant="outlined" onClick={ viewClimbDetails }>View Details</Button> */}
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+        </Grid>
     )
 }
 

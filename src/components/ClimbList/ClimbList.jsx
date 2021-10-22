@@ -5,6 +5,9 @@ import { useHistory, useParams, Link, NavLink } from 'react-router-dom';
 import ClimbTag from './ClimbTag';
 import './ClimbList.css';
 
+// Mui styles
+import { Grid, Box, } from '@mui/material';
+
 function ClimbList() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -27,13 +30,16 @@ function ClimbList() {
             <button onClick={ addNewClimb }>ADD A NEW CLIMB!</button>
             <p>list of climbs here</p>
             {/* {JSON.stringify(climbList)} */}
-            <ul>
+            <Grid container 
+                direction="column"
+                justifyContent="center"
+                alignItems="flex-start">
                 {climbList.map(climb => {
                     return(
                         <ClimbTag key={climb.id} gymId={gymId} styleId={styleId} climb={climb}/>
                     )
                 })}
-            </ul>
+            </Grid>
         </div>
     )
 }
