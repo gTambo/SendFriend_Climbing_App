@@ -58,9 +58,10 @@ function GymForm () {
                          color="primary"  
                          fullWidth >
             {/* <h3>Gym Name:</h3> */}
-            <InputLabel htmlFor="gym-select" id="gym-select-label">Gym</InputLabel>
-            <Select variant="standard"
-                    labelId="gym-select-label"
+            {/* <InputLabel htmlFor="gym-select" id="gym-select-label">Gym</InputLabel> */}
+            <TextField select
+                    variant="standard"
+                    // labelId="gym-select-label"
                     id="gym-select"
                     label="Gym" 
                     input={<OutlinedInput label="Gym"/>}
@@ -77,16 +78,18 @@ function GymForm () {
                         </MenuItem>
                     )
                 })}
-            </Select>
+            </TextField>
+
             </FormControl>
             <FormControl margin="normal" 
                          color="secondary"  
                          fullWidth>
             {/* <h3>What type of climbing?</h3> */}
             <br/>
-            <InputLabel htmlFor="style-select" id="style-select-label">Climbing Style</InputLabel>
-            <Select variant="standard"
-                    labelId="style-select-label"
+            {/* <InputLabel htmlFor="style-select" id="style-select-label">Climbing Style</InputLabel> */}
+            <TextField select
+                    variant="standard"
+                    // labelId="style-select-label"
                     id="style-select"
                     label="Climbing Style"
                     // style={{marginBottom: '1em'}}
@@ -104,7 +107,8 @@ function GymForm () {
                         </MenuItem>
                     )
                 })}
-            </Select>
+            </TextField>
+
             </FormControl>
             <br/>
             {/* <input type="submit" value="Submit" /> */}

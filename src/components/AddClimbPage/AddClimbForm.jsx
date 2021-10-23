@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { readAndCompressImage } from 'browser-image-resizer';
 
 import { Button, TextField, Select, MenuItem, InputLabel, Box } from '@mui/material';
-import { flexbox } from '@mui/system';
 
 function AddClimbForm({gymId, styleId}) {
 

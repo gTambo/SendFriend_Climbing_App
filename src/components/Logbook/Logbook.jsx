@@ -76,7 +76,7 @@ function Logbook() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {logbook.map((log, index) => (<TableRow gutterBottom key={log.id}>
+                    {logbook.map((log, index) => (<TableRow key={log.id}>
                         <TableCell><Button onClick={() => editRow(index, log.climb_id) }>Edit Row</Button></TableCell>
                         <TableCell>{log.difficulty}</TableCell>
                         <TableCell>{log.color}</TableCell>

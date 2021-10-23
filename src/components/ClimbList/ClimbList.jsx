@@ -58,7 +58,7 @@ function ClimbList() {
                     <Grid container direction="row" justifyContent="space-between" >
                         <Grid item xs={6} >
                             <Paper elevation={3} sx={{marginBottom: '1em'}}>
-                                <Typography variant="h5" style={{ "backgroundColor": '#0872af', "color": '#ffca58' }}>
+                                <Typography variant="h5" style={{ padding: '0.5em', "backgroundColor": '#0872af', "color": '#ffca58' }}>
                                     {styleName}s at {gymName}
                                 </Typography>
                             </Paper>

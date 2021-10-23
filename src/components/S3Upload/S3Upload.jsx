@@ -7,6 +7,7 @@ import './S3Upload.css';
 // TO DO: REPLACE WITH MORE CURRENT VERSION OF S3BUCKET
 import { readAndCompressImage } from 'browser-image-resizer';
 
+import { Button, TextField, Select, MenuItem, InputLabel, Box } from '@mui/material';
 
 
 function UploadPhoto () {
@@ -55,19 +56,23 @@ function UploadPhoto () {
 
     return(
         <>
-        
-        <form onSubmit={sendFormDataToServer}>
-            { preview && (
-                <img
-                    className="placeholder-photo-preview"
-                    src={preview}
-                    alt="Photo preview"
-                />)
-            }
-            <input id="photo-input" type="file" accept="image/*" onChange={onFileChange} />
-            <input type="submit" value="Save Photo" />
-        </form>
-        <button onClick={ () => history.push(`/climbs/${gymId}/${styleId}`)}>Skip Photo</button>
+
+            <form marginLeft={3} onSubmit={sendFormDataToServer}>
+                {preview && (
+                    <img
+                        className="placeholder-photo-preview"
+                        src={preview}
+                        alt="Photo preview"
+                    />)
+                }
+                {!preview ? (
+                    <input id="photo-input" type="file" accept="image/*" onChange={onFileChange} />
+                ) : (
+                    <Button variant="outlined" type="submit" value="Save Photo">SavePhoto</Button>
+                )
+                }
+            </form>
+            <Button onClick={() => history.push(`/climbs/${gymId}/${styleId}`)}>Skip Photo</Button>
         </>
     )
 }
