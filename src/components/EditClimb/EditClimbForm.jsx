@@ -7,6 +7,7 @@ import UploadDisplay from '../S3Upload/S3Upload';
 function EditClimbForm({ gymId, styleId, climbId, climb }) {
     const dispatch = useDispatch();
     const history = useHistory();
+    
     // Use Redux to store grades
     const grades = useSelector(store => store.grades);
     let defaultClimb = {
@@ -19,7 +20,7 @@ function EditClimbForm({ gymId, styleId, climbId, climb }) {
         climb_style_id: styleId,
     };
     const [editedClimb, setEditedClimb] = useState(defaultClimb);
-    // get grades
+    // get list of grades
     useEffect(() => {
         dispatch({ type: 'FETCH_ALL_GRADES' })
     }, [dispatch]);

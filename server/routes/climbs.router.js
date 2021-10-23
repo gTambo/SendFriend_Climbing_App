@@ -11,20 +11,24 @@ const sharp = require('sharp');
  */
 router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
-  console.log('getting all climbs for Gym: ', req.params.gymId, 'of style: ', req.params.styleId);
-  console.log("req.user: ", req.user);
-  console.log('Params: ', req.params);
+  console.log('getting all climbs for Gym:', req.params.gymId, 'of style:', req.params.styleId);
+//   console.log("req.user: ", req.user);
+//   console.log('Params: ', req.params);
   const query = `
-        SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "movement_style", "thumb_url" FROM "climbs" 
-        JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
-        WHERE "gym_id" = $1 AND "climb_style_id" = $2
-        GROUP BY "climbs"."id", "grade"."id", "grade"."difficulty", "color", "photo"
-        ORDER BY "grade"."id", "climbs"."id" ASC;
+                SELECT "climbs"."id", "grade"."difficulty", "grade_id", "color", "photo", "thumb_url", "movement_style", 
+                        "gym"."name", "climb_style"."style" 
+                FROM "climbs" 
+                JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
+                JOIN "gym" ON "climbs"."gym_id" = "gym"."id"
+                JOIN "climb_style" ON "climbs"."climb_style_id" = "climb_style"."id"
+                WHERE "gym_id" = $1 AND "climb_style_id" = $2
+                GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "climb_style"."style", "grade_id"
+                ORDER BY "grade_id" ASC;
     `;
 
   pool.query((query), [req.params.gymId, req.params.styleId])
   .then( (result) => {
-    console.log('Sending back: ', result.rows); // Show me what I got
+    console.log('Sending back:', result.rowCount, 'rows'); // Show me how many I got
     res.send(result.rows)
   }).catch(error => {
       console.log('Error getting climbs: ', error);
@@ -32,22 +36,6 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   });
 });
 
-/**
- * GET all the climb styles
- */
-router.get('/grades', rejectUnauthenticated, (req, res) => {
-    // We'll just take all the grades
-    //  TO DO: limit grades by boulder or rope, once client can send specifics
-    console.log('Getting grades', req.params);
-    const query = `SELECT * FROM "grade";`;
-    pool.query(query).then( (result) => {
-        console.log('Sending grades from DB: ', result.rows); // let's see 'em
-        res.send(result.rows);
-    }).catch((err) => { // uh-oh
-        console.log('There was an error getting grades: ', err);
-        res.sendStatus(500);
-    });
-});
 
 
 const { S3_BUCKET, AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
@@ -148,6 +136,7 @@ pool.query((query), [
         await s3.upload(params).promise();
  
         // INSERT photo path into the database
+        // 
         await pool.query((`UPDATE "climbs" SET ("thumb_url", "photo") = ($1, $2) WHERE "id" = $3;`), [
             `https://climbtags1.s3.amazonaws.com/${thumbKey}`,
             `https://climbtags1.s3.amazonaws.com/${mediumKey}`,
@@ -163,15 +152,6 @@ pool.query((query), [
     }
 });
  
-router.post('/photourl', (req, res) => {
-    const query = `INSERT INTO "climbs" ("photo") VALUES ($1);`
-    pool.query(query, [req.body.selectedFile])
-    .then(results => {
-        console.log('Photo url from s3bucket: ', results);
-        res.sendStatus(200);
-    });
-    // to do; write catch
-});
 
 /**
  * PUT route template
@@ -198,9 +178,9 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
         req.body.movement_style, // $6
         climbToEdit // $7
     ]).then( results => {
-        console.log('PUT result: ', results.rows);
+        console.log('PUT result: ', results);
         res.sendStatus(200)
-        res.send(results.rows);
+        // res.send(results.rows);
     }).catch(error => {
         console.log('ERROR in edit climb', error);
         res.sendStatus(500);
@@ -210,42 +190,45 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
 /**
  * DELETE route template
  */
- router.delete('/:id', rejectUnauthenticated, (req, res) => {
+ router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     //  DELETE route code here
-    console.log('DELETE Params(climb Id) and user id: ', req.params, req.user.id);
-    const idToDelete = req.params.id;
-    const deleteComments = `DELETE FROM "comment" WHERE "climb_id" = $1;`;
-    pool.query((deleteComments), [idToDelete]).then(dCResult => { 
-
-        console.log('DELETED Comments for climb: ', idToDelete, dCResult.rowCount);
+    try{ console.log('DELETE Params(climb Id) and user id: ', req.params, req.user.id);
+        const idToDelete = req.params.id;
+        const deleteComments = `DELETE FROM "comment" WHERE "climb_id" = $1;`;
+        await pool.query((deleteComments), [idToDelete]);
+        // CONSIDER Delete cascade, or a "soft delete" / archive
+        // console.log('DELETED Comments for climb: ', idToDelete, dCResult.rowCount);
         const deleteRating = `DELETE FROM "rating" WHERE "climb_id" = $1;`;
-        pool.query((deleteRating), [idToDelete]).then(dRResult=> {
+        await pool.query((deleteRating), [idToDelete])
 
-            console.log('DELETED Ratings for climb: ', idToDelete, dRResult.rowCount);
-            const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1;`;
-            pool.query((deleteQuery), [req.params.id]).then( (result) => {
-                console.log('DELETEd Climb:',idToDelete, result.rowCount);
-                if (result.rowCount > 0) {
-                    // we deleted something
-                    res.send({rCount: result.rowCount, message: 'You deleted the climb!'})
-                } else {
-                    // we did not delete anything
-                    res.send({rCount: result.rowCount, message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
-                }
-            
-            }).catch(error => {
-                console.log('ERROR in DELETE Climb ', error);
-                res.sendStatus(500);
-            })
-        }).catch(error => {
-            console.log('ERROR in DELETE Ratings ', error);
-            res.sendStatus(500);
-        })
-    }).catch(error => {
-        console.log('ERROR in DELETE Comments ' ,error);
+        // console.log('DELETED Ratings for climb: ', idToDelete, dRResult.rowCount);
+        const deleteQuery = `DELETE FROM "climbs" WHERE "id" = $1;`;
+        await pool.query((deleteQuery), [req.params.id]);
+        // console.log('Delete response: ', response);
+        // console.log('DELETEd Climb:',idToDelete, result.rowCount);
+        // if (result.rowCount > 0) {
+        //     // we deleted something
+        //     res.send({rCount: result.rowCount, message: 'You deleted the climb!'})
+        // } else {
+        //     // we did not delete anything
+        //     res.send({rCount: result.rowCount, message: 'Nothing was deleted. Climbs may only be deleted by the original poster or an admin.'})
+        // }
+        console.log('END OF DELETE CLIMB', idToDelete );
+    } catch (error) {
+        console.log('ERROR in DELETE Climb ', error);
+        next(error);
         res.sendStatus(500);
-    });
+    }
 });
+    //     }).catch(error => {
+    //         console.log('ERROR in DELETE Ratings ', error);
+    //         res.sendStatus(500);
+    //     })
+    // }).catch(error => {
+    //     console.log('ERROR in DELETE Comments ' ,error);
+    //     res.sendStatus(500);
+    // });
+// });
 
 
 

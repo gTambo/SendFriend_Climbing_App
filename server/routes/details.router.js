@@ -12,7 +12,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     console.log('Params: ', req.params);
     const climbId = req.params.climbId;
     const query = `
-    SELECT "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "movement_style", "date_added", "user"."username", 
+    SELECT "climbs"."id", "grade"."difficulty", "climbs"."grade_id", "color", "photo", "gym"."name", "movement_style", "date_added", "user"."username", 
     COALESCE((AVG("rating"."rating")::NUMERIC(10)),0) 
     FROM "climbs" 
     JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
@@ -20,7 +20,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     JOIN "user" ON "climbs"."user_id" = "user"."id"
     LEFT JOIN "rating" ON "climbs"."id" = "rating"."climb_id"
     WHERE "climbs"."id" = $1
-    GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "user"."username";
+    GROUP BY "climbs"."id", "grade"."difficulty", "climbs"."grade_id", "color", "photo", "gym"."name", "user"."username";
             `;
   
     pool.query((query), [climbId])
@@ -70,7 +70,7 @@ router.get('/comment/:climbId', rejectUnauthenticated, (req, res) => {
  */
  router.post('/comment', rejectUnauthenticated, (req, res) => {
     console.log('comment router: ', req.body);
-    console.log('comment router, user: ', req.user);
+    // console.log('comment router, user: ', req.user);
     // rating to add is rating property
     const addComment = req.body.comment;
     const climb_id = req.body.climb_id;
@@ -92,7 +92,7 @@ router.get('/comment/:climbId', rejectUnauthenticated, (req, res) => {
  */
 router.post('/rating', rejectUnauthenticated, (req, res) => {
     console.log('rating router: ', req.body);
-    console.log('rating router, user: ', req.user);
+    // console.log('rating router, user: ', req.user);
     // rating to add is rating property
     const addRating = req.body.rating;
     const climb_id = req.body.climb_id;

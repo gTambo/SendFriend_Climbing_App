@@ -6,7 +6,7 @@ import GymForm from '../GymForm/GymForm';
 function GymSelect() {
   return (
     <div className="container">
-      <p>Select a Gym</p>
+      <h2>Select a Gym</h2>
       <GymForm />
     </div>
   );

@@ -13,7 +13,8 @@ const gymRouter = require('./routes/gym.router');
 const styleRouter = require('./routes/climb_style.router');
 const climbsRouter = require('./routes/climbs.router');
 const detailsRouter = require('./routes/details.router');
-
+const logbookRouter = require('./routes/logbook.router');
+const gradesRouter = require('./routes/grades.router.js');
 // const UploaderS3router = require('react-dropzone-s3-uploader/s3router');
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
@@ -35,8 +36,10 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/gym', gymRouter);
 app.use('/api/style', styleRouter);
+app.use('/api/grades', gradesRouter);
 app.use('/api/climbs', climbsRouter);
 app.use('/api/details', detailsRouter);
+app.use('/api/logbook', logbookRouter);
 
 // app.use('/s3', UploaderS3router({
 //   bucket: 'climbtags1',                           // required change to correct bucket name

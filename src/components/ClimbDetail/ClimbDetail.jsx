@@ -23,10 +23,11 @@ function ClimbDetail() {
     // use local state to store rating, comments
     const [rating, setRating] = useState(0);
     const [newComment, setNewComment] = useState('');
+    // const [isContributor, setIsContributor] = useState(false);
     // const [comments, setComments] = useState([]);
     //  use Selector to get details from redux
     const reduxStore = useSelector(store => store);
-    const { climbDetails, comments } = reduxStore;
+    const { climbDetails, comments, user } = reduxStore;
     // use params to get climb ID
     const { gymId, climbId, styleId } = useParams();
     // use moment.js to make the date look nice
@@ -46,10 +47,20 @@ function ClimbDetail() {
     let avgRating = parseInt(climbDetails.coalesce);
     let ratingToAdd = parseInt(rating);
 
+    // Compare logged in user to climb contributor
+    const checkUsername = () => {
+        if (user.username === climbDetails.username) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     const logRoute = () => {
         // STRETCH TO DO: Navigate to log route page
         console.log('clicked log route!');
-        alert("Okay, log the route!");
+        dispatch({ type: 'UNSET_GRADES' });
+        history.push(`/climbs/${gymId}/${styleId}/logsend/${climbId}`);
     }
 
     const deleteClimb = () => {
@@ -108,7 +119,7 @@ function ClimbDetail() {
                 {comments.map((aComment, i) => {
                     return(
                         <li key={aComment.id}>
-                            "{aComment.comment}" - {aComment.username}, {moment(aComment.created_at).format("MMMM do YYYY")}
+                            "{aComment.comment}" - {aComment.username}, {moment(aComment.created_at).format("dddd, MMMM do YYYY")}
                         </li>
                     )
                 })}
@@ -144,15 +155,15 @@ function ClimbDetail() {
                     onChange={(event) => setRating(event.target.value)}
                 />
             </Box>
-            <p>Contribued by: {climbDetails.username}</p>
+            {checkUsername() ? (<p>You contributed this climb</p>) : (<p>Contribued by: {climbDetails.username}</p>)}
             <button onClick={ rateClimb }>Save Rating</button>
             <button onClick={ logRoute }>Log Your Send</button>
             {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
             <button onClick={ toEditPage } >Edit Climb Info</button>
             <button onClick={ toEditPhoto }>Edit Photo</button>
-            <button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
+            {checkUsername() && (<button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
               Delete
-            </button>
+            </button>)}
         </div>
     )
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // To Do: import MUI Select components for dropdown
+import { Button } from '@mui/material';
 
 function GymForm () {
     // local state variables
@@ -25,6 +26,7 @@ function GymForm () {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log('Clicked Submit');
+        dispatch({ type: 'SET_GYM_CHOICE', payload: {gymId: chosenGym, styleId: chosenStyle}})
         history.push(`/climbs/${chosenGym}/${chosenStyle}`);
     }
 
@@ -33,8 +35,8 @@ function GymForm () {
             {/* <p>{JSON.stringify(gyms)}</p>
             <p>{JSON.stringify(climbStyles)}</p> */}
         <form className="entry-form" onSubmit={ handleSubmit }>
-            <h2>Gym Selection</h2>
-            <p>**gym selector here**</p>
+            <h3>Gym Name:</h3>
+            
             <select defaultValue="select a gym" 
                     onChange={ (event) => setChosenGym(event.target.value) }
             >
@@ -49,7 +51,7 @@ function GymForm () {
                     )
                 })}
             </select>
-            <p>route style selector here</p>
+            <h3>What type of climbing?</h3>
             <select defaultValue="type of climbing"
                     onChange={ (event) => setChosenStyle(event.target.value) }
             >
@@ -65,12 +67,13 @@ function GymForm () {
                 })}
             </select>
             <br/>
-            <input type="submit" value="Submit" />
+            {/* <input type="submit" value="Submit" /> */}
+            <Button type="submit" variant="outlined">Submit</Button>
         </form>
-        <ul>
+        {/* <ul>
             <li>Chosen Gym: {chosenGym}</li>
             <li>Chosen Style: {chosenStyle}</li>
-        </ul>
+        </ul> */}
         </div>
     )
 }
