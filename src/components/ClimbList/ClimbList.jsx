@@ -50,11 +50,11 @@ function ClimbList() {
         <div>
             {!showHeader && <LinearProgress />}
             {showHeader && (
-                <Box fullWidth sx={{ width: '100%' }}>
-                    <Button variant="outlined" color="secondary" onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
-                    <Grid container direction="row" justifyContent="space-between">
+                <Box fullWidth sx={{ margin: '1em', width: '100%' }}>
+                    <Button variant="outlined" color="secondary" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
+                    <Grid container direction="row" justifyContent="space-between" >
                         <Grid item xs={6} >
-                            <Paper elevation={3}>
+                            <Paper elevation={3} sx={{marginBottom: '1em'}}>
                                 <Typography variant="h5" style={{ "backgroundColor": '#0872af', "color": '#ffca58' }}>
                                     {styleName}s at {gymName}
                                 </Typography>
@@ -74,11 +74,13 @@ function ClimbList() {
             )}
             {/* {JSON.stringify(climbList)} */}
             {!showList && <LinearProgress />}
-            {showList && (<Grid container 
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={2}
+            {showList && (
+                <Grid container 
+                      sx={{marginLeft: '1em'}}
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="flex-start"
+                      spacing={2}
                 >
                 {climbList.map(climb => {
                     return(

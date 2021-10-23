@@ -65,7 +65,6 @@ function GymForm () {
                     label="Gym" 
                     input={<OutlinedInput label="Gym"/>}
                     // style={{marginBottom: '1em'}}
-                    value={chosenGym}
                     onChange={ (event) => setChosenGym(event.target.value) }
             >
                 <MenuItem>-select a gym-</MenuItem>
@@ -93,7 +92,6 @@ function GymForm () {
                     // style={{marginBottom: '1em'}}
                     input={<OutlinedInput label="Climbing Style"/>}
                     alignContent="center"
-                    // value={chosenStyle}
                     onChange={ (event) => setChosenStyle(event.target.value) }
             >
                 <MenuItem>-select a style-</MenuItem>

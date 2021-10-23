@@ -12,6 +12,7 @@ import {
     Typography, 
     TextField,
     Button, 
+    Paper,
 } from '@mui/material';
 
 
@@ -101,13 +102,15 @@ function ClimbDetail() {
     } 
 
     return(
-        <div>
-            <p>Details here</p>
-            <button onClick={ handleGoBack }>Back to Climbs</button>
+        <Box sx={{margin: '1em'}}>
+            <Button onClick={ handleGoBack }>Back to Climbs</Button>
             {/* {JSON.stringify(climbDetails)}
             Gym Id:{JSON.stringify(gymId)}
             Style Id:{JSON.stringify(styleId)} */}
-            <img className="big-photo" src={climbDetails.photo} />
+            <br/>
+            <img 
+                  className="big-photo" 
+                  src={climbDetails.photo} />
             <p>Grade: {climbDetails.difficulty}</p>
             <p>Color: {climbDetails.color}</p>
             <Typography component="legend">Current Rating</Typography>
@@ -156,15 +159,17 @@ function ClimbDetail() {
                 />
             </Box>
             {checkUsername() ? (<p>You contributed this climb</p>) : (<p>Contribued by: {climbDetails.username}</p>)}
-            <button onClick={ rateClimb }>Save Rating</button>
-            <button onClick={ logRoute }>Log Your Send</button>
-            {/* <button onClick={ confirmDelete } >Delete Climb</button> */}
-            <button onClick={ toEditPage } >Edit Climb Info</button>
-            <button onClick={ toEditPhoto }>Edit Photo</button>
-            {checkUsername() && (<button  onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
+            <Box >
+            <Button variant="outlined" onClick={ rateClimb }>Save Rating</Button>
+            <Button variant="outlined" onClick={ logRoute }>Log Your Send</Button>
+            {/* <Button onClick={ confirmDelete } >Delete Climb</Button> */}
+            <Button variant="outlined" onClick={ toEditPage } >Edit Climb Info</Button>
+            <Button variant="outlined" onClick={ toEditPhoto }>Edit Photo</Button>
+            {checkUsername() && (<Button variant="outlined" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
               Delete
-            </button>)}
-        </div>
+            </Button>)}
+            </Box>
+        </Box>
     )
 
 }

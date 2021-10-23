@@ -50,12 +50,21 @@ function ClimbTag({gymId, styleId, climb}) {
                     variant="elevation"
                     sx={{ display: 'flex' }}>
                     <Box sx={{ display: 'flex', flexDirection: 'row' }} >
-                        <Paper elevation={3} xs={12} sx={{backgroundColor: '#e6e6e6'}}>
+                        <Paper elevation={3} xs={12} sx={{backgroundColor: '#e6e6e6' }}>
                             <CardActionArea onClick={viewClimbDetails} sx={{ flex: '1 0 auto' }}>
                                 {/* <Grid item xs={3}> */}
                                 <CardContent >
-                                    <Box sx={{display: 'flex', color: '#0872af', backgroundColor: '#e6e6e6' }} direction="row" justifyContent="space-around"><Typography variant="h3" element='h3' >{climb.color}</Typography>
-                                    <Typography variant="h3" element='h3' >{climb.difficulty}</Typography></Box>
+                                    <Box sx={{display: 'flex', }} 
+                                         direction="row" 
+                                         justifyContent="space-around">
+                                        <Typography variant="h3" element='h3' sx={{ color: '#70d0d9', 'text-shadow': 'black', backgroundColor: `${climb.color}` }}>
+                                            {climb.color}
+                                        </Typography>
+                                        <Typography variant="h3" 
+                                                    element='h3' >
+                                            {climb.difficulty}
+                                        </Typography>
+                                    </Box>
                                 
                                     
                                 </CardContent>

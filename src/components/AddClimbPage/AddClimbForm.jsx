@@ -4,6 +4,9 @@ import { useHistory } from 'react-router-dom';
 // import UploadPhoto from '../S3Upload/S3Upload';
 import { readAndCompressImage } from 'browser-image-resizer';
 
+import { Button, TextField, Select, MenuItem, InputLabel, Box } from '@mui/material';
+import { flexbox } from '@mui/system';
+
 function AddClimbForm({gymId, styleId}) {
 
     const dispatch = useDispatch();
@@ -78,46 +81,52 @@ function AddClimbForm({gymId, styleId}) {
     // }
 
     return(
-        <>
+        <Box sx={{display: 'flex', flexDirection: 'column' }}>
         {/* {JSON.stringify(grades)} */}
         <form onSubmit={ saveNewClimb }>
-            <label htmlFor="grade">Grade</label> 
-            <select name="grade" 
+            <InputLabel htmlFor="grade" id="grade-label">Grade</InputLabel> 
+            <Select name="grade" 
+                    labelId="grade-label"
+                    label="Grade"
                     required 
                     id="grade" 
+                    autoWidth
                     type="text" 
                     value={newClimb.grade_id} 
                     onChange={ (event) => setNewClimb({...newClimb, grade_id: event.target.value})}>
                         {/* get grades from redux and map to selector */}
-                        <option>Select the grade</option>
+                        <MenuItem>-select the grade-</MenuItem>
                         {grades.map((grade) => {
                             return(
-                                <option key={grade.id} value={grade.id}>{grade.difficulty}</option>
+                                <MenuItem key={grade.id} value={grade.id}>{grade.difficulty}</MenuItem>
                             )
 
                         })}
-            </select>
-            <label htmlFor="color">Color</label>
-            <select required
+            </Select>
+            <InputLabel htmlFor="color" id="color-label">Color</InputLabel>
+            <Select required
+                    labelId="color-label"
+                    label="Color"
                     name="color" 
                     id="color"
+                    autoWidth
                     value={newClimb.color}
                     onChange={ (event) => setNewClimb({...newClimb, color: event.target.value})}>
-                <option>select a color</option>
-                <option value="Red">Red</option>
-                <option value="Orange">Orange</option>
-                <option value="Yellow">Yellow</option>
-                <option value="Green">Green</option>
-                <option value="Blue">Blue</option>
-                <option value="Pink">Pink</option>
-                <option value="Purple">Purple</option>
-                <option value="Teal">Teal</option>
-                <option value="Black">Black</option>
-                <option value="White">White</option>
-                <option value="Grey">Grey</option>
-                <option value="Tan">Tan</option>
-                <option value="Other">Other</option>
-            </select>
+                <MenuItem>-select a color-</MenuItem>
+                <MenuItem value="Red">Red</MenuItem>
+                <MenuItem value="Orange">Orange</MenuItem>
+                <MenuItem value="Yellow">Yellow</MenuItem>
+                <MenuItem value="Green">Green</MenuItem>
+                <MenuItem value="Blue">Blue</MenuItem>
+                <MenuItem value="Pink">Pink</MenuItem>
+                <MenuItem value="Purple">Purple</MenuItem>
+                <MenuItem value="Teal">Teal</MenuItem>
+                <MenuItem value="Black">Black</MenuItem>
+                <MenuItem value="White">White</MenuItem>
+                <MenuItem value="Grey">Grey</MenuItem>
+                <MenuItem value="Tan">Tan</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+            </Select>
             
             {/* { preview && (
                 <img
@@ -129,13 +138,16 @@ function AddClimbForm({gymId, styleId}) {
             <input id="photoInput" type="file" accept="image/*" encType="multipart/form-data" onChange={onFileChange} /> */}
             {/* <button onClick={() => sendFormDataToServer()}>Save Photo</button> */}
 
-            <label htmlFor="movement">Movement Style</label>
-            <input id="movement" 
+            {/* <label htmlFor="movement">Movement Style</label> */}
+            <TextField id="movement" 
                    type="text" 
+                   label="Movement Style"
+                   sx={{marginBottom: '1em', marginLeft: '1em'}}
                    value={newClimb.movement_style}
                    onChange={ (event) => setNewClimb({...newClimb, movement_style: event.target.value})}
             />
-            <input type="submit" value="Add Photo" />
+            <br/>
+            <Button type="submit" variant="contained" sx={{marginBottom: '1em'}} >Add A Photo</Button>
         </form>
         {/* <label htmlFor="photo">Photo</label> */}
             {/* <input required
@@ -145,7 +157,7 @@ function AddClimbForm({gymId, styleId}) {
                    onChange={ (event) => setNewClimb({...newClimb, photo: event.target.value})} 
             /> */}
             {/* <UploadDisplay id="photo" setNewClimb={setNewClimb} newClimb={newClimb} /> */}
-        </>
+        </Box>
     )
 }
 
