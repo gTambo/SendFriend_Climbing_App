@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import EditClimbForm from './EditClimbForm';
 
+import { Button, Box } from '@mui/material';
+
 function EditClimb() {
     // get params to navigate back to climblist on success
     const allParams = useParams();
@@ -18,11 +20,11 @@ function EditClimb() {
 
 
     return(
-        <div>
+        <Box sx={{margin: '1em'}}>
             <h1>Update This Tag!</h1>
             <EditClimbForm  gymId={gymId} styleId={styleId} climbId={climbId} climb={climbDetails}/>
-            <button onClick={ () => history.goBack() }>Cancel Edits</button>
-        </div>
+            <Button variant="outlined" onClick={ () => history.goBack() }>Cancel Edits</Button>
+        </Box>
     )
 }
 

@@ -83,7 +83,7 @@ function LoginForm() {
           
           <Grid item xs={12} >
               {/* <div> */}
-              <input className="btn" type="submit" name="submit" />
+              {/* <input className="btn" type="submit" name="submit" /> */}
             <center><Button variant="contained" type="submit" name="submit" value="Log In">Log In</Button></center>
               {/* </div> */}
           </Grid>

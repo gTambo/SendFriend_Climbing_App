@@ -7,13 +7,14 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background-color: #d6d6d6;
+  background-color: #ffffff;
   color: rgb(1, 11, 20);
 }
 
 img {
   display: inline-block;
   max-width: 100%;
+  border: 1px solid black;
 }
 
 /* --------------------------------------------------------------------------------

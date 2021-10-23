@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import UploadDisplay from '../S3Upload/S3Upload';
 
-import { Button } from '@mui/material';
+import { Button, TextField, Select, MenuItem, InputLabel, Box } from '@mui/material';
 
 function EditClimbForm({ gymId, styleId, climbId, climb }) {
     const dispatch = useDispatch();
@@ -36,45 +36,49 @@ function EditClimbForm({ gymId, styleId, climbId, climb }) {
     }
 
     return(
+        <Box sx={{display: 'flex', flexDirection: 'column' }}>
         <form onSubmit={ updateClimb }>
-            <label htmlFor="grade">Grade</label> 
-            <select 
+            <InputLabel htmlFor="grade" id="edit-grade-label">Grade</InputLabel> 
+            <Select autoWidth
                     name="grade" 
+                    labelId="edit-grade-label"
+                    label="Grade"
                     id="grade" 
                     type="text" 
                     value={editedClimb.grade_id} 
                     onChange={ (event) => setEditedClimb({...editedClimb, grade_id: event.target.value})}>
                         {/* get grades from redux and map to selector */}
-                        <option>Select the grade</option>
+                        <MenuItem>-select the grade-</MenuItem>
                         {grades.map((grade) => {
                             return(
-                                <option key={grade.id} value={grade.id}>{grade.difficulty}</option>
+                                <MenuItem key={grade.id} value={grade.id}>{grade.difficulty}</MenuItem>
                             )
 
                         })}
-            </select>
-            <label htmlFor="color">Color</label>
-            <select
+            </Select>
+            <InputLabel htmlFor="color" id="edit-color-label">Color</InputLabel>
+            <Select autoWidth
+                    labelId="edit-color-label"
+                    label="Color"
                     name="color" 
                     id="color"
                     value={editedClimb.color}
                     onChange={ (event) => setEditedClimb({...editedClimb, color: event.target.value})}>
-                <option>select a color</option>
-                <option value="Red">Red</option>
-                <option value="Orange">Orange</option>
-                <option value="Yellow">Yellow</option>
-                <option value="Green">Green</option>
-                <option value="Blue">Blue</option>
-                <option value="Pink">Pink</option>
-                <option value="Purple">Purple</option>
-                <option value="Teal">Teal</option>
-                <option value="Black">Black</option>
-                <option value="White">White</option>
-                <option value="Grey">Grey</option>
-                <option value="Tan">Tan</option>
-                <option value="Other">Other</option>
-            </select>
-            <label htmlFor="photo">Photo</label>
+                <MenuItem>-select a color-</MenuItem>
+                <MenuItem value="Red">Red</MenuItem>
+                <MenuItem value="Orange">Orange</MenuItem>
+                <MenuItem value="Yellow">Yellow</MenuItem>
+                <MenuItem value="Green">Green</MenuItem>
+                <MenuItem value="Blue">Blue</MenuItem>
+                <MenuItem value="Pink">Pink</MenuItem>
+                <MenuItem value="Purple">Purple</MenuItem>
+                <MenuItem value="Teal">Teal</MenuItem>
+                <MenuItem value="Black">Black</MenuItem>
+                <MenuItem value="White">White</MenuItem>
+                <MenuItem value="Grey">Grey</MenuItem>
+                <MenuItem value="Tan">Tan</MenuItem>
+                <MenuItem value="Other">Other</MenuItem>
+            </Select>
             {/* <input 
                    id="photo" 
                    type="text"
@@ -82,15 +86,17 @@ function EditClimbForm({ gymId, styleId, climbId, climb }) {
                    onChange={ (event) => setEditedClimb({...editedClimb, photo: event.target.value})} 
             /> */}
             {/* <UploadDisplay id="photo" setClimbToAdd={setEditedClimb} climbToAdd={editedClimb} /> */}
-            <label htmlFor="movement">Movement Style</label>
-            <input 
+            {/* <InputLabel htmlFor="movement">Movement Style</InputLabel> */}
+            <TextField label="MovementStyle" 
                    id="movement" 
                    type="text" 
+                   sx={{marginBottom: '1em', marginLeft: '1em'}}
                    value={editedClimb.movement_style}
                    onChange={ (event) => setEditedClimb({...editedClimb, movement_style: event.target.value})}
             />
-            <input type="submit" value="Save Changes" />
+            <Button label="MovementStyle" type="submit" value="Save Changes">Save Changes</Button>
         </form>
+        </Box>
     )
 }
 

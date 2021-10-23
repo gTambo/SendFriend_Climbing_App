@@ -16,8 +16,11 @@ import {
     Paper,
     Typography,
     LinearProgress,
-    Button
+    Button,
+    
 } from '@mui/material';
+
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 function ClimbList() {
     const history = useHistory();
@@ -51,7 +54,7 @@ function ClimbList() {
             {!showHeader && <LinearProgress />}
             {showHeader && (
                 <Box fullWidth sx={{ margin: '1em', width: '100%' }}>
-                    <Button variant="outlined" color="secondary" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
+                    
                     <Grid container direction="row" justifyContent="space-between" >
                         <Grid item xs={6} >
                             <Paper elevation={3} sx={{marginBottom: '1em'}}>
@@ -68,7 +71,11 @@ function ClimbList() {
                             </Paper>
                         </Grid>
                     </Grid>
-                    <Box sx={{display: 'flex'}}><Typography variant="h6" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click for details</Typography></Box>
+
+                    <Button variant="outlined" color="secondary" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
+                    
+                    <Box sx={{display: 'flex'}}><Typography variant="h6" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click Tag for details<ArrowDownwardIcon/></Typography></Box>
+                    
                 </Box>
                 
             )}
