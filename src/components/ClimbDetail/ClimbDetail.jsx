@@ -59,7 +59,8 @@ function ClimbDetail() {
     const logRoute = () => {
         // STRETCH TO DO: Navigate to log route page
         console.log('clicked log route!');
-        alert("Okay, log the route!");
+        dispatch({ type: 'UNSET_GRADES' });
+        history.push(`/climbs/${gymId}/${styleId}/logsend/${climbId}`);
     }
 
     const deleteClimb = () => {
@@ -118,7 +119,7 @@ function ClimbDetail() {
                 {comments.map((aComment, i) => {
                     return(
                         <li key={aComment.id}>
-                            "{aComment.comment}" - {aComment.username}, {moment(aComment.created_at).format("MMMM do YYYY")}
+                            "{aComment.comment}" - {aComment.username}, {moment(aComment.created_at).format("dddd, MMMM do YYYY")}
                         </li>
                     )
                 })}

@@ -8,10 +8,10 @@ const router = express.Router();
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
   // GET route code here
-  console.log('req.user: ', req.user);
+  console.log('In gym router: ');
   const query = `SELECT * FROM "gym";`;
   pool.query(query).then( (result) => {
-      console.log("send back: ", result.rows);
+      console.log("send back from  Gym router: ", result.rows);
       res.send(result.rows);
   }).catch( error => {
       console.log('Error getting gyms', error);

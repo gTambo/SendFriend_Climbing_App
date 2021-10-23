@@ -19,7 +19,7 @@ function EditClimb() {
 
     return(
         <div>
-            <h1>Update This Climb!</h1>
+            <h1>Update This Tag!</h1>
             <EditClimbForm  gymId={gymId} styleId={styleId} climbId={climbId} climb={climbDetails}/>
             <button onClick={ () => history.goBack() }>Cancel Edits</button>
         </div>

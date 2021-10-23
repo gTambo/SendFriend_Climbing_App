@@ -15,7 +15,8 @@ import {
     CardActions,
     Button,
     Fab,
-
+    Paper,
+    CircularProgress,
  } from '@mui/material';
 
 function ClimbTag({gymId, styleId, climb}) {
@@ -33,9 +34,14 @@ function ClimbTag({gymId, styleId, climb}) {
         history.push(`/climbs/${gymId}/${styleId}/climbdetail/${climb.id}`)
     }
 
+    // variables to wait for data arriveal, to be used for contditional render on page load
+    const showItem = climb ? true : false;
+
     return(
         <Grid item sx={12} >
-            <Card>
+            {!showItem && <CircularProgress />}
+            {showItem && (<Card>
+                <Paper elevation={3}>
                 <CardActionArea onClick={ viewClimbDetails }>
                     
                     <CardContent>
@@ -45,13 +51,14 @@ function ClimbTag({gymId, styleId, climb}) {
                     <CardContent>
                         <CardMedia  component="img"
                         height="200"
-                        maxWidth="200"
+                        width="200"
                         image={climb.photo}
                         alt="a photo" />
                     {/* <Button variant="outlined" onClick={ viewClimbDetails }>View Details</Button> */}
                     </CardContent>
                 </CardActionArea>
-            </Card>
+                </Paper>
+            </Card>)}
         </Grid>
     )
 }

@@ -108,6 +108,12 @@ Styling TO DO's:
 - [ ] update README
     - [ ] add some photos
 
+    Wednesday ToDo
+- [ ] make a log book page
+- [ ] make a log send page
+- [ ] put a climb into the db @logbook table
+- [ ] see that climb in the logbook, in a table element
+
 General To-Do's:
 - [x] fix register functionality (it was wrong date type)
 - [x] fix rating update
@@ -122,6 +128,10 @@ General To-Do's:
 - [ ] review recursion
 - [ ] add unit testing
 - [ ] add api documentation
+<<<<<<< HEAD
+- [ ] PUT IN LOTS OF COMMENTS
+=======
 
+>>>>>>> master
 
 

@@ -30,30 +30,30 @@ function AddClimbForm({gymId, styleId}) {
     
 
     // code for aws-sdk /s3Bucket
-    const imageConfig = {
-        quality: 1.0,
-        maxHeight: 300,
-        autoRotate: false,
-    };
-    const [preview, setPreview] = useState('');
-    const [selectedFile, setSelectedFile] = useState('');
-    const [resizedFile, setResizedFile] = useState({});
-    const onFileChange = async (event) => {
-        const selectedFile = event.target.files[0];
-        const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
-        if (acceptedImageTypes.includes(selectedFile.type)) {
-            const copyFile = new Blob([selectedFile], { type: selectedFile.type });
-            const saveFile = await readAndCompressImage(copyFile, imageConfig);
-            setSelectedFile(selectedFile);
-            setResizedFile(saveFile);
-            setPreview(URL.createObjectURL(saveFile));
-            console.log('preview: ', preview);
-            console.log('save file: ', saveFile);
-            console.log('selected file: ', selectedFile);
-        } else {
-            alert('Invalid image file type. Must be gif, jpeg or png.');
-        }
-    }
+    // const imageConfig = {
+    //     quality: 1.0,
+    //     maxHeight: 300,
+    //     autoRotate: false,
+    // };
+    // const [preview, setPreview] = useState('');
+    // const [selectedFile, setSelectedFile] = useState('');
+    // const [resizedFile, setResizedFile] = useState({});
+    // const onFileChange = async (event) => {
+    //     const selectedFile = event.target.files[0];
+    //     const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    //     if (acceptedImageTypes.includes(selectedFile.type)) {
+    //         const copyFile = new Blob([selectedFile], { type: selectedFile.type });
+    //         const saveFile = await readAndCompressImage(copyFile, imageConfig);
+    //         setSelectedFile(selectedFile);
+    //         setResizedFile(saveFile);
+    //         setPreview(URL.createObjectURL(saveFile));
+    //         console.log('preview: ', preview);
+    //         console.log('save file: ', saveFile);
+    //         console.log('selected file: ', selectedFile);
+    //     } else {
+    //         alert('Invalid image file type. Must be gif, jpeg or png.');
+    //     }
+    // }
 
     const saveNewClimb = (event) => {
         event.preventDefault();
