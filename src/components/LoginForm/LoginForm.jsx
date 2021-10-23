@@ -68,7 +68,7 @@ function LoginForm() {
             <Grid item alignItems="center" justifyContent="center">
               {/* <div> */}
               {/* <input className="btn" type="submit" name="submit" /> */}
-              <center><Button variant="contained" type="submit" name="submit" value="Log In">Doo-doo</Button></center>
+              <center><Button variant="contained" type="submit" name="submit" value="Log In">Log In</Button></center>
               {/* </div> */}
             </Grid>
           </Box>

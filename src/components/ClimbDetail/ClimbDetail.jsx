@@ -119,7 +119,7 @@ function ClimbDetail() {
                 {comments.map((aComment, i) => {
                     return(
                         <li key={aComment.id}>
-                            "{aComment.comment}" - {aComment.username}, {moment(aComment.created_at).format("MMMM do YYYY")}
+                            "{aComment.comment}" - {aComment.username}, {moment(aComment.created_at).format("dddd, MMMM do YYYY")}
                         </li>
                     )
                 })}
