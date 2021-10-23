@@ -10,6 +10,10 @@ import {
     MenuItem,
     Box,
     FormControl, 
+    FormControlLabel,
+    LinearProgress,
+    Container,
+    OutlinedInput,
 } from '@mui/material';
 
 function GymForm () {
@@ -38,17 +42,33 @@ function GymForm () {
         history.push(`/climbs/${chosenGym}/${chosenStyle}`);
     }
 
+    const showGyms = gyms ? true : false;
+
     return(
-        <Box>
+        <>
+        {!showGyms && <LinearProgress/>}
+        {showGyms && (<Box>
             {/* <p>{JSON.stringify(gyms)}</p>
             <p>{JSON.stringify(climbStyles)}</p> */}
-        <FormControl className="entry-form" onSubmit={ handleSubmit }>
-            <h3>Gym Name:</h3>
-            
-            <Select defaultValue="select a gym" 
+        <form onSubmit={ handleSubmit } 
+              className="gym-form" 
+              >
+            <FormControl margin="normal" 
+                         
+                         color="primary"  
+                         fullWidth >
+            {/* <h3>Gym Name:</h3> */}
+            <InputLabel htmlFor="gym-select" id="gym-select-label">Gym</InputLabel>
+            <Select variant="standard"
+                    labelId="gym-select-label"
+                    id="gym-select"
+                    label="Gym" 
+                    input={<OutlinedInput label="Gym"/>}
+                    // style={{marginBottom: '1em'}}
+                    value={chosenGym}
                     onChange={ (event) => setChosenGym(event.target.value) }
             >
-                <MenuItem>select a gym</MenuItem>
+                <MenuItem>-select a gym-</MenuItem>
                 {gyms.gymList.map(gym => {
                     return(
                         <MenuItem key={gym.id}
@@ -59,11 +79,24 @@ function GymForm () {
                     )
                 })}
             </Select>
-            <h3>What type of climbing?</h3>
-            <Select defaultValue="type of climbing"
+            </FormControl>
+            <FormControl margin="normal" 
+                         color="secondary"  
+                         fullWidth>
+            {/* <h3>What type of climbing?</h3> */}
+            <br/>
+            <InputLabel htmlFor="style-select" id="style-select-label">Climbing Style</InputLabel>
+            <Select variant="standard"
+                    labelId="style-select-label"
+                    id="style-select"
+                    label="Climbing Style"
+                    // style={{marginBottom: '1em'}}
+                    input={<OutlinedInput label="Climbing Style"/>}
+                    alignContent="center"
+                    // value={chosenStyle}
                     onChange={ (event) => setChosenStyle(event.target.value) }
             >
-                <MenuItem>type of climbing</MenuItem>
+                <MenuItem>-select a style-</MenuItem>
                 {climbStyles.map(style => {
                     return(
                         <MenuItem key={style.id}
@@ -74,15 +107,18 @@ function GymForm () {
                     )
                 })}
             </Select>
+            </FormControl>
             <br/>
             {/* <input type="submit" value="Submit" /> */}
-            <Button type="submit" variant="outlined">Submit</Button>
-        </FormControl>
+            <Button type="submit" variant="outlined" >Submit</Button>
+        
+        </form>
         {/* <ul>
             <li>Chosen Gym: {chosenGym}</li>
             <li>Chosen Style: {chosenStyle}</li>
         </ul> */}
-        </Box>
+        </Box>)}
+        </>
     )
 }
 
