@@ -4,6 +4,10 @@ import { useHistory, useParams, Link, NavLink } from 'react-router-dom';
 
 import ClimbTag from './ClimbTag';
 import './ClimbList.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 // Mui styles
 import { 
@@ -11,7 +15,8 @@ import {
     Box,
     Paper,
     Typography,
-    LinearProgress
+    LinearProgress,
+    Button
 } from '@mui/material';
 
 function ClimbList() {
@@ -45,25 +50,27 @@ function ClimbList() {
         <div>
             {!showHeader && <LinearProgress />}
             {showHeader && (
-                <Box sx={{ width: '100%' }}>
-                    <button onClick={addNewClimb}>ADD A NEW CLIMB!</button>
+                <Box fullWidth sx={{ width: '100%' }}>
+                    <Button variant="outlined" color="secondary" onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
                     <Grid container direction="row" justifyContent="space-between">
-                        <Grid item sx={6} >
+                        <Grid item xs={6} >
                             <Paper elevation={3}>
                                 <Typography variant="h5" style={{ "backgroundColor": '#0872af', "color": '#ffca58' }}>
                                     {styleName}s at {gymName}
                                 </Typography>
                             </Paper>
                         </Grid>
-                        <Grid item sx={6} style={{ "fontStyle": "italic" }}>
-                            <Paper elevation={3}>
-                                <Typography component="p">
+                        <Grid item xs={3} >
+                            <Paper elevation={2}>
+                                <Typography component="p" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>
                                     viewing: {climbList.length} climbs
                                 </Typography>
                             </Paper>
                         </Grid>
                     </Grid>
+                    <Box sx={{display: 'flex'}}><Typography variant="h6" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click for details</Typography></Box>
                 </Box>
+                
             )}
             {/* {JSON.stringify(climbList)} */}
             {!showList && <LinearProgress />}

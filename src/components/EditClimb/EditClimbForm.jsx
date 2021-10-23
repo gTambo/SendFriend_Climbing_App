@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import UploadDisplay from '../S3Upload/S3Upload';
 
+import { Button } from '@mui/material';
 
 function EditClimbForm({ gymId, styleId, climbId, climb }) {
     const dispatch = useDispatch();
