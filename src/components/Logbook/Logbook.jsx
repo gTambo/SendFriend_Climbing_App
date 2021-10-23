@@ -47,7 +47,7 @@ function Logbook() {
     return(
         <div>
             <h2>Welcome, {user.username}. This is your Logbook.</h2>
-            {JSON.stringify(logbook)}
+            {/* {JSON.stringify(logbook)} */}
             <br/>
             <br/>
             <h4>Climbs you Climbed</h4>
