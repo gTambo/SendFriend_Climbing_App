@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 // To Do: import MUI Select components for dropdown
-import { Button } from '@mui/material';
+import { 
+    Button,
+    TextField,
+    Select,
+    InputLabel,
+    MenuItem,
+    Box,
+    FormControl, 
+} from '@mui/material';
 
 function GymForm () {
     // local state variables
@@ -31,50 +39,50 @@ function GymForm () {
     }
 
     return(
-        <div>
+        <Box>
             {/* <p>{JSON.stringify(gyms)}</p>
             <p>{JSON.stringify(climbStyles)}</p> */}
-        <form className="entry-form" onSubmit={ handleSubmit }>
+        <FormControl className="entry-form" onSubmit={ handleSubmit }>
             <h3>Gym Name:</h3>
             
-            <select defaultValue="select a gym" 
+            <Select defaultValue="select a gym" 
                     onChange={ (event) => setChosenGym(event.target.value) }
             >
-                <option>select a gym</option>
+                <MenuItem>select a gym</MenuItem>
                 {gyms.gymList.map(gym => {
                     return(
-                        <option key={gym.id}
+                        <MenuItem key={gym.id}
                                 value={gym.id}
                         >
                             {gym.name}
-                        </option>
+                        </MenuItem>
                     )
                 })}
-            </select>
+            </Select>
             <h3>What type of climbing?</h3>
-            <select defaultValue="type of climbing"
+            <Select defaultValue="type of climbing"
                     onChange={ (event) => setChosenStyle(event.target.value) }
             >
-                <option>type of climbing</option>
+                <MenuItem>type of climbing</MenuItem>
                 {climbStyles.map(style => {
                     return(
-                        <option key={style.id}
+                        <MenuItem key={style.id}
                                 value={style.id}
                         >
                             {style.style}
-                        </option>
+                        </MenuItem>
                     )
                 })}
-            </select>
+            </Select>
             <br/>
             {/* <input type="submit" value="Submit" /> */}
             <Button type="submit" variant="outlined">Submit</Button>
-        </form>
+        </FormControl>
         {/* <ul>
             <li>Chosen Gym: {chosenGym}</li>
             <li>Chosen Style: {chosenStyle}</li>
         </ul> */}
-        </div>
+        </Box>
     )
 }
 
