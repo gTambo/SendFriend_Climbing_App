@@ -7,7 +7,16 @@ import './S3Upload.css';
 // TO DO: REPLACE WITH MORE CURRENT VERSION OF S3BUCKET
 import { readAndCompressImage } from 'browser-image-resizer';
 
-import { Button, TextField, Select, MenuItem, InputLabel, Box } from '@mui/material';
+import { 
+    Button, 
+    Snackbar, 
+    TextField, 
+    Select, 
+    MenuItem, 
+    InputLabel, 
+    Box, 
+    Fade,
+} from '@mui/material';
 
 
 function UploadPhoto () {
@@ -18,6 +27,25 @@ function UploadPhoto () {
     const history = useHistory();
     // get the New Climb ID
     const newClimb = useSelector(store => store.newClimb);
+
+    // snackbar stuff
+    const [state, setState] = useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+        Transition: 'Fade',
+      });
+    
+      const { vertical, horizontal, open } = state;
+    
+      const handleClick = (Transition) => () => {
+        setState({ open: true, Transition });
+      };
+    
+      const handleClose = () => {
+        setState({ ...state, open: false });
+      };
+
     // code for aws-sdk /s3Bucket
     const imageConfig = {
         quality: 1,
@@ -47,6 +75,11 @@ function UploadPhoto () {
     }
 
     const sendFormDataToServer = () => {
+        handleClick({
+            vertical: 'bottom',
+            horizontal: 'center',
+        });
+
         let photoInfo = { climbId: newClimbId, selectedFile: selectedFile, resizedFile: resizedFile, gymId, styleId};
         console.log('sending to saga: ', photoInfo);
         dispatch({ type: 'UPLOAD_PHOTO', payload: photoInfo});
@@ -68,7 +101,21 @@ function UploadPhoto () {
                 {!preview ? (
                     <input id="photo-input" type="file" accept="image/*" onChange={onFileChange} />
                 ) : (
-                    <Button variant="outlined" type="submit" value="Save Photo">SavePhoto</Button>
+                    <Button type="submit" variant="contained" value="Save Photo" sx={{marginBottom: '1em'}}
+                    // onClick={handleClick({
+                    //     vertical: 'bottom',
+                    //     horizontal: 'center',
+                    // })}
+                >
+                    <Snackbar
+                        anchorOrigin={{ vertical, horizontal }}
+                        open={open}
+                        onClose={handleClose}
+                        message="Photo Added"
+                        key={vertical + horizontal}
+                        />
+                Save Photo
+            </Button>
                 )
                 }
             </form>
