@@ -2,6 +2,8 @@
 import { useHistory, useParams } from 'react-router-dom';
 import AddClimbForm from './AddClimbForm';
 
+import { Button, Box } from '@mui/material';
+
 function AddNewClimb() {
     const history = useHistory();
     // const reduxStore = useSelector(store => store);
@@ -11,14 +13,14 @@ function AddNewClimb() {
 
 
     return(
-        <div>
+        <Box sx={{margin: '1em'}}>
 
             {/* Climblist:{JSON.stringify(climbList)}
             Params: {JSON.stringify(allParams)} */}
             <h2>Add a new climb!</h2>
             <AddClimbForm gymId={gymId} styleId={styleId} />
-            <button onClick={ () => history.goBack() }>Cancel</button>
-        </div>
+            <Button variant="outlined" onClick={ () => history.goBack() }>Cancel</Button>
+        </Box>
     )
 }
 

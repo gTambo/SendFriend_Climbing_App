@@ -7,13 +7,14 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  background-color: #faf7ed;
+  background-color: #ffffff;
   color: rgb(1, 11, 20);
 }
 
 img {
   display: inline-block;
   max-width: 100%;
+  border: 1px solid #014041;
 }
 
 /* --------------------------------------------------------------------------------
@@ -97,16 +98,22 @@ Alert
 Form Treatment
 -------------------------------------------------------------------------------- */
 
-.formPanel {
+
+.login-form {
+  /* width: 65%; */
+  margin: auto;
+}
+
+/* .formPanel {
   box-sizing: border-box;
   width: 400px;
   max-width: 100%;
-  padding: 25px;
+  padding: 100px;
   margin: 0 auto 20px;
   background-color: #efefef;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
-}
+} */
 
 input {
   margin: 5px;

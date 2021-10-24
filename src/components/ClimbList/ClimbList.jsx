@@ -4,6 +4,10 @@ import { useHistory, useParams, Link, NavLink } from 'react-router-dom';
 
 import ClimbTag from './ClimbTag';
 import './ClimbList.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 // Mui styles
 import { 
@@ -11,8 +15,12 @@ import {
     Box,
     Paper,
     Typography,
-    LinearProgress
+    LinearProgress,
+    Button,
+    
 } from '@mui/material';
+
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 function ClimbList() {
     const history = useHistory();
@@ -45,33 +53,41 @@ function ClimbList() {
         <div>
             {!showHeader && <LinearProgress />}
             {showHeader && (
-                <Box sx={{ width: '100%' }}>
-                    <button onClick={addNewClimb}>ADD A NEW CLIMB!</button>
-                    <Grid container direction="row" justifyContent="space-between">
-                        <Grid item sx={6} >
-                            <Paper elevation={3}>
-                                <Typography variant="h5" style={{ "backgroundColor": '#0872af', "color": '#ffca58' }}>
+                <Box fullWidth sx={{ margin: '1em', width: '100%' }}>
+                    
+                    <Grid container direction="row" justifyContent="space-between" >
+                        <Grid item xs={6} >
+                            <Paper elevation={3} sx={{marginBottom: '1em'}}>
+                                <Typography variant="h5" style={{ padding: '0.5em', "backgroundColor": '#0872af', "color": '#ffca58' }}>
                                     {styleName}s at {gymName}
                                 </Typography>
                             </Paper>
                         </Grid>
-                        <Grid item sx={6} style={{ "fontStyle": "italic" }}>
-                            <Paper elevation={3}>
-                                <Typography component="p">
+                        <Grid item xs={3} >
+                            <Paper elevation={2} marginRight='1.5em' sx={{}}>
+                                <Typography component="p" sx={{ "fontStyle": "italic", color: '#7a7a7a', textAlign: 'center'}}>
                                     viewing: {climbList.length} climbs
                                 </Typography>
                             </Paper>
                         </Grid>
                     </Grid>
+
+                    <Button variant="outlined" color="secondary" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
+                    
+                    <Box sx={{display: 'flex'}}><Typography variant="h6" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click Tag for details<ArrowDownwardIcon/></Typography></Box>
+                    
                 </Box>
+                
             )}
             {/* {JSON.stringify(climbList)} */}
             {!showList && <LinearProgress />}
-            {showList && (<Grid container 
-                direction="column"
-                justifyContent="center"
-                alignItems="flex-start"
-                spacing={2}
+            {showList && (
+                <Grid container 
+                      sx={{marginLeft: '1em'}}
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="flex-start"
+                      spacing={2}
                 >
                 {climbList.map(climb => {
                     return(

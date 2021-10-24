@@ -4,6 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 const moment = require('moment');
 
+import { 
+    Typography, 
+    Table, 
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Button, 
+} from '@mui/material';
 
 function Logbook() {
     const reduxStore = useSelector((store) => store);
@@ -46,36 +57,38 @@ function Logbook() {
 
     return(
         <div>
-            <h2>Welcome, {user.username}. This is your Logbook.</h2>
+            <Typography variant="h3" component="h3">Welcome, {user.username}. This is your Logbook.</Typography>
             {/* {JSON.stringify(logbook)} */}
             <br/>
             <br/>
             <h4>Climbs you Climbed</h4>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Edit</th>
-                        <th>Grade</th>
-                        <th>Color</th>
-                        <th>Attempts</th>
-                        <th>Style</th>
-                        <th>Date Sent</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {logbook.map((log, index) => (<tr key={log.id}>
-                        <td><button onClick={() => editRow(index, log.climb_id) }>Edit Row</button></td>
-                        <td>{log.difficulty}</td>
-                        <td>{log.color}</td>
-                        <td>{log.attempts}</td>
-                        <td>{log.style}</td>
-                        <td>{moment(log.send_date).format('dddd, MMMM do YYYY')}</td>
-                        <td><button onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteRow(log.id) }}>Delete Row</button></td>
-                    </tr>))}
-                </tbody>
-            </table>
-            <button onClick={() => { handleBackToGym() } }>Back to Climb List</button>
+            <TableContainer  sx={{backgroundColor: '#ffca58', border: '2px solid #0872af', marginBottom: '1em'}}>
+            <Table>
+                <TableHead >
+                    <TableRow  >
+                        <TableCell>Edit</TableCell>
+                        <TableCell>Grade</TableCell>
+                        <TableCell>Color</TableCell>
+                        <TableCell>Attempts</TableCell>
+                        <TableCell>Style</TableCell>
+                        <TableCell>Date Sent</TableCell>
+                        <TableCell>Delete</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {logbook.map((log, index) => (<TableRow key={log.id}>
+                        <TableCell><Button onClick={() => editRow(index, log.climb_id) }>Edit Row</Button></TableCell>
+                        <TableCell>{log.difficulty}</TableCell>
+                        <TableCell>{log.color}</TableCell>
+                        <TableCell>{log.attempts}</TableCell>
+                        <TableCell>{log.style}</TableCell>
+                        <TableCell>{moment(log.send_date).format('dddd, MMMM do YYYY')}</TableCell>
+                        <TableCell><Button onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteRow(log.id) }}>Delete Row</Button></TableCell>
+                    </TableRow>))}
+                </TableBody>
+            </Table>
+            </TableContainer>
+            <Button variant="contained" onClick={() => { handleBackToGym() } }>Back to Climb List</Button>
         </div>
     )
 }

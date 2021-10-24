@@ -2,6 +2,10 @@
 // import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './ClimbList.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 // MUI styles
 import {
@@ -38,28 +42,50 @@ function ClimbTag({gymId, styleId, climb}) {
     const showItem = climb ? true : false;
 
     return(
-        <Grid item sx={12} >
+        <Grid item container direction="row" xs={12} >
             {!showItem && <CircularProgress />}
-            {showItem && (<Card>
-                <Paper elevation={3}>
-                <CardActionArea onClick={ viewClimbDetails }>
-                    
-                    <CardContent>
-                        <Typography> {climb.color} &nbsp; {climb.difficulty}</Typography>
-                        <Typography></Typography></CardContent>
-                    {/* <img className="small-photo" src={photoUrl} /> */}
-                    <CardContent>
-                        <CardMedia  component="img"
-                        height="200"
-                        width="200"
-                        image={climb.photo}
-                        alt="a photo" />
-                    {/* <Button variant="outlined" onClick={ viewClimbDetails }>View Details</Button> */}
-                    </CardContent>
-                </CardActionArea>
-                </Paper>
-            </Card>)}
-        </Grid>
+            {showItem && (
+                <Card fullWidth
+                    elevation={3}
+                    variant="elevation"
+                    sx={{ display: 'flex' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row' }} >
+                        <Paper elevation={3} xs={12} sx={{backgroundColor: '#ffffff' }}>
+                            <CardActionArea onClick={viewClimbDetails} sx={{ flex: '1 0 auto' }}>
+                                {/* <Grid item xs={3}> */}
+                                <CardContent >
+                                    <Box sx={{display: 'flex', }} 
+                                         direction="row" 
+                                         justifyContent="space-around">
+                                        <Typography variant="h3" element='h3' sx={{ 'borderRadius': '4px', backgroundColor: '#a9a9a9', 'text-shadow': 'black', color: `${climb.color}` }}>
+                                            {climb.color}
+                                        </Typography>
+                                        <Typography variant="h3" 
+                                                    element='h3' >
+                                            {climb.difficulty}
+                                        </Typography>
+                                    </Box>
+                                
+                                    
+                                </CardContent>
+                                {/* </Grid> */}
+                                {/* <Grid item xs={6}> */}
+                                <CardContent>
+                                    <CardMedia component="img"
+                                        sx={{ width: '17em' }}
+                                        // height="200"
+                                        // width="200em"
+                                        image={climb.photo}
+                                        alt="a photo of a climb" />
+                                    {/* <Button variant="outlined" onClick={ viewClimbDetails }>View Details</Button> */}
+                                </CardContent>
+                                {/* </Grid> */}
+                            </CardActionArea>
+                        </Paper>
+                    </Box>
+            </Card>)
+        }
+        </Grid >
     )
 }
 

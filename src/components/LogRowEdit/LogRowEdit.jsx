@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
-// import { 
-//     Button,
-//     Select,
-//     InputLabel,
-//     MenuItem,
-//     Box,
-//     FormControl, 
-// } from '@mui/material';
+import { 
+    Button,
+    TextField,
+    Select,
+    InputLabel,
+    MenuItem,
+    Box,
+    FormControl, 
+    Typography,
+} from '@mui/material';
 
 function EditASend() {
     // get climbId from params
@@ -54,40 +56,47 @@ function EditASend() {
             <p>Climb details: {JSON.stringify(climbDetails)}</p>
             <p>{climbDetails.color}, &nbsp; {climbDetails.difficulty}</p>
             <p>at {climbDetails.name}</p>
+            {/* <FormControl fullWidth> */}
             <form onSubmit={logASend}>
-                <label htmlFor="attempts">How many atempts this session?</label>
-                <select id="attempts" 
+                <Typography variant="h6">How many atempts this session?</Typography>
+                <TextField select
+                        id="attempts" 
                         type="text" 
+                        label="Attempts"
+                        autoWidth
                         value={climbToLog.attempts} 
                         onChange={ (event) => setClimbToLog({...climbToLog, attempts: event.target.value}) }>
-                    <option value="">Number of attempts</option>
-                    <option value="flash">flash</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="over 4">Over 4</option>
-                </select>
+                    <MenuItem value="">Number of attempts</MenuItem>
+                    <MenuItem value="flash">flash</MenuItem>
+                    <MenuItem value="2">2</MenuItem>
+                    <MenuItem value="3">3</MenuItem>
+                    <MenuItem value="4">4</MenuItem>
+                    <MenuItem value="over 4">Over 4</MenuItem>
+                </TextField>
+
                 <br/>
-                <label htmlFor=""></label>
-                <label htmlFor="grade">What grade would you give it?</label> 
-                <select name="grade" 
+                <Typography variant="h6">What grade would you give it?</Typography> 
+                <TextField select 
                         required 
+                        label="Grade"
                         id="grade" 
-                        type="text" 
+                        type="text"
+                        autoWidth
                         value={climbToLog.grade_id} 
                         onChange={ (event) => setClimbToLog({...climbToLog, grade_id: event.target.value})}>
                             {/* get grades from redux and map to selector */}
-                            <option>Select Your grade</option>
+                            <MenuItem>Select Your grade</MenuItem>
                             {limitGrades.map((grade) => {
                                 return(
-                                    <option key={grade.id} value={grade.id}>{grade.difficulty}</option>
+                                    <MenuItem key={grade.id} value={grade.id}>{grade.difficulty}</MenuItem>
                                 )
 
                             })}
-                </select>
-                <input type="submit" value="Save Edit!" />
+                </TextField>
+                <Button type="submit">Save Edit!</Button>
             </form>
-            <button onClick={() => history.goBack()}>Cancel</button>
+            {/* </FormControl> */}
+            <Button onClick={() => history.goBack()}>Cancel</Button>
             <p>Grades: {JSON.stringify(limitGrades)}</p>
         </div>
     )
