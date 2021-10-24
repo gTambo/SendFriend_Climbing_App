@@ -64,8 +64,8 @@ function ClimbList() {
                             </Paper>
                         </Grid>
                         <Grid item xs={3} >
-                            <Paper elevation={2}>
-                                <Typography component="p" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>
+                            <Paper elevation={2} marginRight='1.5em' sx={{}}>
+                                <Typography component="p" sx={{ "fontStyle": "italic", color: '#7a7a7a', textAlign: 'center'}}>
                                     viewing: {climbList.length} climbs
                                 </Typography>
                             </Paper>
