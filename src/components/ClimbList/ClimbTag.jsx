@@ -57,7 +57,7 @@ function ClimbTag({gymId, styleId, climb}) {
                                     <Box sx={{display: 'flex', }} 
                                          direction="row" 
                                          justifyContent="space-around">
-                                        <Typography variant="h3" element='h3' sx={{ color: '#70d0d9', 'text-shadow': 'black', backgroundColor: `${climb.color}` }}>
+                                        <Typography variant="h3" element='h3' sx={{ 'borderRadius': '4px', backgroundColor: '#a9a9a9', 'text-shadow': 'black', color: `${climb.color}` }}>
                                             {climb.color}
                                         </Typography>
                                         <Typography variant="h3" 
