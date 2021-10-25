@@ -131,12 +131,7 @@ function LogASend() {
             </form>
             // </FormControl>
             )}
-
-            
-
-            
-
-            <Button variant="outlined" onClick={() => history.goBack()}>Cancel</Button>
+            <Button onClick={() => history.goBack()}>Cancel</Button>
             {/* <p>Grades: {JSON.stringify(limitGrades)}</p> */}
             
         </Box>

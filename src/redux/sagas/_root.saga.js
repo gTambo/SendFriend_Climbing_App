@@ -11,7 +11,7 @@ import ratingSaga from './rating.saga';
 import commentSaga from './comment.saga';
 import photoSaga from './s3bucket.saga';
 import logbookSaga from './logbook.saga';
-
+import archiveSaga from './archive.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -34,5 +34,6 @@ export default function* rootSaga() {
     commentSaga(),
     photoSaga(),
     logbookSaga(),
+    archiveSaga(),
   ]);
 }

@@ -57,12 +57,12 @@ function Logbook() {
 
     return(
         <div>
-            <Typography variant="h3" component="h3">Welcome, {user.username}. This is your Logbook.</Typography>
+            <Typography variant="h4">Welcome, {user.username}. This is your Logbook.</Typography>
             {/* {JSON.stringify(logbook)} */}
             <br/>
             <br/>
             <h4>Climbs you Climbed</h4>
-            <TableContainer  sx={{backgroundColor: '#ffca58', border: '2px solid #0872af', marginBottom: '1em'}}>
+            <TableContainer  sx={{ display: 'flex', backgroundColor: '#ffca58', border: '2px solid #0872af', marginBottom: '1em'}}>
             <Table>
                 <TableHead >
                     <TableRow  >

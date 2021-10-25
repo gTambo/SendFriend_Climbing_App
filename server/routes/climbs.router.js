@@ -21,7 +21,7 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
                 JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
                 JOIN "gym" ON "climbs"."gym_id" = "gym"."id"
                 JOIN "climb_style" ON "climbs"."climb_style_id" = "climb_style"."id"
-                WHERE "gym_id" = $1 AND "climb_style_id" = $2
+                WHERE "gym_id" = $1 AND "climb_style_id" = $2 AND "is_archived"  = 'FALSE'
                 GROUP BY "climbs"."id", "grade"."difficulty", "color", "photo", "gym"."name", "climb_style"."style", "grade_id"
                 ORDER BY "grade_id" ASC;
     `;
