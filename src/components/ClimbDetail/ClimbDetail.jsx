@@ -171,7 +171,8 @@ function ClimbDetail() {
             {/* <Button onClick={ confirmDelete } >Delete Climb</Button> */}
             <Button variant="outlined" onClick={ toEditPage } >Edit Climb Info</Button>
             <Button variant="outlined" onClick={ toEditPhoto }>Edit Photo</Button>
-            {checkUsername() && (<><Button variant="outlined" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
+            {checkUsername() && (<>
+            <Button variant="outlined" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
               Delete
             </Button>
             <Button variant="contained" onClick={ archiveClimb}>Archive</Button>
