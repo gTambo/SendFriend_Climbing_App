@@ -13,13 +13,26 @@ The Send-Friend app is intended to give indoor climbers a way to view and keep t
 
 The current state of the climb list view (for mobile):
 
-![List_Page](public/images/ClimbListView_a.png)
+![List_Page](public/images/Card_list.png)
 
 And a peek at the Climb Details page:
 
-![Climb_Details_1](public/images/Details_View_1.png)
+![Climb_Details_1](public/images/Climb_detail.png)
 
-![Climb_Details_1](public/images/Details_View_2.png)
+![Climb_Details_1](public/images/Climb_detail2.png)
+
+If you want to add a new climb:
+
+![Add_climb](public/images/Add_climb.png)
+
+Adding a photo for a new climb:
+
+![add_photo](public/images/Add_photo.png)
+
+You can log a clim to your own logbook:
+
+![Log_climb](public/images/Log_climb.png)
+
 
 ### Prerequisites
 
