@@ -82,7 +82,7 @@ function Logbook() {
                         <TableCell>{log.color}</TableCell>
                         <TableCell>{log.attempts}</TableCell>
                         <TableCell>{log.style}</TableCell>
-                        <TableCell>{moment(log.send_date).format('dddd, MMMM do YYYY')}</TableCell>
+                        <TableCell>{moment(log.send_date).format('dd, MMMM DD, YYYY')}</TableCell>
                         <TableCell><Button onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteRow(log.id) }}>Delete Row</Button></TableCell>
                     </TableRow>))}
                 </TableBody>
