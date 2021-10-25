@@ -78,7 +78,7 @@ function LogASend() {
     const showForm = limitGrades ? true : false;
 
     return(
-        <Box sx={{margin: 'center auto'}}>
+        <Box sx={{marginLeft: '2em'}}>
             <h2>You are logging this climb:</h2>
             {/* <p>Climb details: {JSON.stringify(climbDetails)}</p> */}
             <Typography variant="h5" >{climbDetails.color}, &nbsp; {climbDetails.difficulty}</Typography>
@@ -127,7 +127,7 @@ function LogASend() {
                 <AddRating ratingToAdd={ratingToAdd} setRating={setRating}/>
                 <AddComment newComment={newComment} setNewComment={setNewComment} />
 
-                <Button variant="contained" type="submit" marginBottom='1em'>Log It!</Button>
+                <Button variant="contained" type="submit" sx={{marginBottom: '0.6em'}}>Log It!</Button>
             </form>
             // </FormControl>
             )}
