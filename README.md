@@ -1,17 +1,12 @@
 
-# Tag Tender
+# Send Friend
 
 ## Description
 
 _Duration: 2 Week Sprint_
-<<<<<<< HEAD
-
-This is an app intended for public use that will keep track of climbable routes within a rock climbing gym. Major features of the app will include a user’s ability to view route details and leave three types of feedback on a given route: perceived grade accuracy, rank overall quality, and optional additional comments. After submission, users will also be able to review their feedback and edit or remove it.
-
-=======
 
 Rock climbing routes come in a wide variety of difficulty, quality, and style, both outdoors and in climbing gyms. Climbers outdoors have well-known resources available to them to gain information about these route specifics. Indoor climbers have fewer well-known options
-The Tag-Tender app is intended to give indoor climbers a way to view and keep track of inddor climbing routes and their relative information. Major features of the app will include a user’s ability to view route details and leave three types of feedback on a given route: perceived grade accuracy, rank overall quality, and optional additional comments. After submission, users will also be able to review their feedback and edit or remove it. Future features will include a climber's personal logbook.
+The Send-Friend app is intended to give indoor climbers a way to view and keep track of inddor climbing routes and their relative information. Major features of the app will include a user’s ability to view route details and leave three types of feedback on a given route: perceived grade accuracy, rank overall quality, and optional additional comments. After submission, users will also be able to review their feedback and edit or remove it. Future features will include a climber's personal logbook.
 
 
 ## Screen Shot
@@ -19,7 +14,6 @@ The Tag-Tender app is intended to give indoor climbers a way to view and keep tr
 The current state of the climb list view (for mobile):
 
 ![List_Page](public/images/ClimbListView_a.png)
->>>>>>> master
 
 And a peek at the Climb Details page:
 

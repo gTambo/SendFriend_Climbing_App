@@ -5,11 +5,13 @@ import './Nav.css';
 import { useSelector } from 'react-redux';
 
 import {
+  IconButton,
   Button, 
   Menu, 
   MenuItem,
   Box,
 } from '@mui/material';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -31,17 +33,17 @@ function Nav() {
       </Link>
       <Box sx={{color: 'white'}}>
       
-      <Button
+      <IconButton aria-label="menu"
         variant="contained"
-        color="info"
+        color="primary"
         id="demo-positioned-button"
         aria-controls="demo-positioned-menu"
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Dashboard
-      </Button>
+        <MenuRoundedIcon sx={{color: '#ffca58'}}/>
+      </IconButton>
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"

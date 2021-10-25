@@ -101,6 +101,12 @@ function ClimbDetail() {
         dispatch({ type: 'UNSET_DETAILS' });
     } 
 
+    const archiveClimb = () => {
+        console.log('archiving, client');
+        dispatch({ type: 'SET_ARCHIVED', payload: {id: climbId, gymId: gymId, styleId: styleId}});
+        history.push(`/climbs/${gymId}/${styleId}`);
+    }
+
     return(
         <Box sx={{margin: '1em'}}>
             <Button onClick={ handleGoBack }>Back to Climbs</Button>
@@ -165,9 +171,12 @@ function ClimbDetail() {
             {/* <Button onClick={ confirmDelete } >Delete Climb</Button> */}
             <Button variant="outlined" onClick={ toEditPage } >Edit Climb Info</Button>
             <Button variant="outlined" onClick={ toEditPhoto }>Edit Photo</Button>
-            {checkUsername() && (<Button variant="outlined" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
+            {checkUsername() && (<>
+            <Button variant="outlined" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteClimb() } }>
               Delete
-            </Button>)}
+            </Button>
+            <Button variant="contained" onClick={ archiveClimb}>Archive</Button>
+            </>)}
             </Box>
         </Box>
     )

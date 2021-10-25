@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-// import UploadPhoto from '../S3Upload/S3Upload';
 import { readAndCompressImage } from 'browser-image-resizer';
 
-import { Button, TextField, Select, MenuItem, InputLabel, Box } from '@mui/material';
+import { 
+    Button, 
+    TextField, 
+    Select, 
+    MenuItem, 
+    InputLabel, 
+    Box, 
+    Snackbar, 
+} from '@mui/material';
 
 function AddClimbForm({gymId, styleId}) {
 
@@ -23,6 +30,27 @@ function AddClimbForm({gymId, styleId}) {
     };
 
     const [newClimb, setNewClimb] = useState(defaultClimb);
+    const [snackState, setSnackState] = useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+      });
+    
+      const { vertical, horizontal, open } = snackState;
+    
+      const handleClick = (newState) => () => {
+        setSnackState({ open: true, ...newState });
+      };
+    
+      const handleClose = () => {
+        setSnackState({ ...snackState, open: false });
+      };
+    
+    //   const buttons = (
+    //     <React.Fragment>
+          
+    //     </React.Fragment>
+    //   );
     
     // To Do: get Grades 
     useEffect( () => {
@@ -30,58 +58,22 @@ function AddClimbForm({gymId, styleId}) {
     }, [dispatch]);
 
     
-
-    // code for aws-sdk /s3Bucket
-    // const imageConfig = {
-    //     quality: 1.0,
-    //     maxHeight: 300,
-    //     autoRotate: false,
-    // };
-    // const [preview, setPreview] = useState('');
-    // const [selectedFile, setSelectedFile] = useState('');
-    // const [resizedFile, setResizedFile] = useState({});
-    // const onFileChange = async (event) => {
-    //     const selectedFile = event.target.files[0];
-    //     const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
-    //     if (acceptedImageTypes.includes(selectedFile.type)) {
-    //         const copyFile = new Blob([selectedFile], { type: selectedFile.type });
-    //         const saveFile = await readAndCompressImage(copyFile, imageConfig);
-    //         setSelectedFile(selectedFile);
-    //         setResizedFile(saveFile);
-    //         setPreview(URL.createObjectURL(saveFile));
-    //         console.log('preview: ', preview);
-    //         console.log('save file: ', saveFile);
-    //         console.log('selected file: ', selectedFile);
-    //     } else {
-    //         alert('Invalid image file type. Must be gif, jpeg or png.');
-    //     }
-    // }
-
     const saveNewClimb = (event) => {
         event.preventDefault();
         console.log('climb to add: ', newClimb);
         // including gymId and styleId for dispatch to FETCH_ALL_CLIMBS
-        // If including files for adding photos to s3Bucket
-        // use: selectedFile: selectedFile, resizedFile: resizedFile,
+
         dispatch({ type: 'ADD_CLIMB', payload: {newClimb: newClimb,  gymId: gymId, styleId: styleId} });
-        // sendFormDataToServer();
-        // setNewClimb(defaultClimb);
-        // alert("Climb added!");
-        // setPreview('');
-        // setSelectedFile('');
-        // setResizedFile('');
         history.push(`/climbs/${gymId}/${styleId}/addPhoto`);
     }
 
-    // const sendFormDataToServer = () => {
-    //     // console.log('sending to saga: ', formData.has('image'));
-    //     dispatch({ type: 'UPLOAD_PHOTO', payload: {selectedFile, resizedFile}});
-    //     setPreview('');
-    // }
-
+  
     return(
         <Box sx={{display: 'flex', flexDirection: 'column' }}>
         {/* {JSON.stringify(grades)} */}
+            <div>
+                
+            </div>
         <form onSubmit={ saveNewClimb }>
             <InputLabel htmlFor="grade" id="grade-label">Grade</InputLabel> 
             <Select name="grade" 
@@ -127,16 +119,6 @@ function AddClimbForm({gymId, styleId}) {
                 <MenuItem value="Other">Other</MenuItem>
             </Select>
             
-            {/* { preview && (
-                <img
-                    className="placeholder-photo-preview"
-                    src={preview}
-                    alt="Photo preview"
-                />)
-            }
-            <input id="photoInput" type="file" accept="image/*" encType="multipart/form-data" onChange={onFileChange} /> */}
-            {/* <button onClick={() => sendFormDataToServer()}>Save Photo</button> */}
-
             {/* <label htmlFor="movement">Movement Style</label> */}
             <TextField id="movement" 
                    type="text" 
@@ -146,7 +128,25 @@ function AddClimbForm({gymId, styleId}) {
                    onChange={ (event) => setNewClimb({...newClimb, movement_style: event.target.value})}
             />
             <br/>
-            <Button type="submit" variant="contained" sx={{marginBottom: '1em'}} >Add A Photo</Button>
+            <Button  >
+            {/* {buttons} */}
+            <Button type="submit" variant="contained" sx={{marginBottom: '1em'}}
+                    onClick={handleClick({
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    })}
+                >
+                    <Snackbar
+                        anchorOrigin={{ vertical, horizontal }}
+                        open={open}
+                        onClose={handleClose}
+                        message="Climb Saved"
+                        key={vertical + horizontal}
+                        />
+                Add A Photo
+            </Button>
+                
+            </Button>
         </form>
         {/* <label htmlFor="photo">Photo</label> */}
             {/* <input required

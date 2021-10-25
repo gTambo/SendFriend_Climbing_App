@@ -112,8 +112,16 @@ router.post('/rating', rejectUnauthenticated, (req, res) => {
   /**
  * PUT route template
  */
-router.put('/', (req, res) => {
-  // POST route code here
+   router.put('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in Put for archiving', req.params.id);
+    const query = `UPDATE "climbs" SET "is_archived" = NOT "is_archived" WHERE "id" =$1 RETURNING *`
+    pool.query(query, [req.params.id])
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('Error archiving climb', error);
+        res.sendStatus(500);
+    });
 });
 
 module.exports = router;
