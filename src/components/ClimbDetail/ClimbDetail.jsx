@@ -36,6 +36,7 @@ function ClimbDetail() {
     useEffect( () => {
         dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
         dispatch({ type: 'FETCH_COMMENTS', payload: climbId });
+        
         // setComments(climbDetails.comment);
         // commentsRefresh
     }, [climbId])

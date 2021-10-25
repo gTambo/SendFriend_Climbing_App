@@ -22,7 +22,7 @@ import {
 
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
-function ClimbList() {
+function ClimbList(props) {
     const history = useHistory();
     const dispatch = useDispatch();
     // useSelector to get climbs for render
@@ -58,15 +58,15 @@ function ClimbList() {
                     <Grid container direction="row" justifyContent="space-between" >
                         <Grid item xs={6} >
                             <Paper elevation={3} sx={{marginBottom: '1em'}}>
-                                <Typography variant="h5" style={{ padding: '0.5em', "backgroundColor": '#0872af', "color": '#ffca58' }}>
-                                    {styleName}s at {gymName}
+                                <Typography variant="body1" style={{ padding: '0.5em', "backgroundColor": '#0872af', "color": '#ffca58' }}>
+                                    Viewing {styleName}s at {gymName}
                                 </Typography>
                             </Paper>
                         </Grid>
                         <Grid item xs={3} >
                             <Paper elevation={2} marginright='1.5em' >
-                                <Typography component="p" sx={{ "fontStyle": "italic", color: '#7a7a7a', textAlign: 'center'}}>
-                                    viewing: {climbList.length} climbs
+                                <Typography component="body2" sx={{ "fontStyle": "italic", color: '#7a7a7a', textAlign: 'center'}}>
+                                    Total: {climbList.length} climbs
                                 </Typography>
                             </Paper>
                         </Grid>
@@ -74,7 +74,7 @@ function ClimbList() {
 
                     <Button variant="outlined" color="secondary" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
                     
-                    <Box sx={{display: 'flex'}}><Typography variant="h6" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click Tag for details<ArrowDownwardIcon/></Typography></Box>
+                    <Box sx={{display: 'flex'}}><Typography variant="body1" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click Tag for details<ArrowDownwardIcon/></Typography></Box>
                     
                 </Box>
                 

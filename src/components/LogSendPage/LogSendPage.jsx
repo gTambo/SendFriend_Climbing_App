@@ -71,6 +71,7 @@ function LogASend() {
         addNewComment();
         rateClimb();
         dispatch({ type: 'ADD_TO_LOGBOOK', payload: climbToLog });
+        dispatch({ type: 'SET_GYM_CHOICE', payload: {gymId: allParams.gymId, styleId: allParams.styleId}})
         history.push('/logbook');
     }
 
@@ -122,9 +123,11 @@ function LogASend() {
 
                             })}
                 </TextField>
-                <Button type="submit">Log It!</Button>
+                
                 <AddRating ratingToAdd={ratingToAdd} setRating={setRating}/>
                 <AddComment newComment={newComment} setNewComment={setNewComment} />
+
+                <Button variant="contained" type="submit" marginBottom='1em'>Log It!</Button>
             </form>
             // </FormControl>
             )}
