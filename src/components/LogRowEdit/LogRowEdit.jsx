@@ -53,7 +53,7 @@ function EditASend() {
     return(
         <div>
             <h2>You are editing this logged climb:</h2>
-            <p>Climb details: {JSON.stringify(climbDetails)}</p>
+            {/* <p>Climb details: {JSON.stringify(climbDetails)}</p> */}
             <p>{climbDetails.color}, &nbsp; {climbDetails.difficulty}</p>
             <p>at {climbDetails.name}</p>
             {/* <FormControl fullWidth> */}
@@ -97,7 +97,7 @@ function EditASend() {
             </form>
             {/* </FormControl> */}
             <Button onClick={() => history.goBack()}>Cancel</Button>
-            <p>Grades: {JSON.stringify(limitGrades)}</p>
+            {/* <p>Grades: {JSON.stringify(limitGrades)}</p> */}
         </div>
     )
 }
