@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
+import AddRating from '../AddRating/AddRating';
+import AddComment from '../AddComments/AddComments';
 
 import { 
     Button,
@@ -35,8 +37,28 @@ function LogASend() {
         attempts: '',
         grade_id: '',
     };
-    const [climbToLog, setClimbToLog] = useState(defaultClimb)
+    const [climbToLog, setClimbToLog] = useState(defaultClimb);
+    const [newComment, setNewComment] = useState('');
+    const [rating, setRating] = useState(0);
+    let ratingToAdd = parseInt(rating);
     
+    const addNewComment = () => {
+        // event.preventDefault();
+        console.log('new comment: ', newComment);
+        dispatch({ type: 'ADD_COMMENT', payload: {climb_id: climbId, comment: newComment }});
+        setNewComment('');
+        dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
+    }
+
+    const rateClimb = () => {
+        // event.preventDefault();
+        console.log('rating to add: ', rating);
+        dispatch({ type: 'ADD_RATING', payload: {climb_id: climbId, rating: rating }});
+        setRating(0);
+        dispatch({ type: "FETCH_CLIMB_DETAILS", payload: {id: climbId}});
+    }
+
+
     // get grades on page load
     useEffect(() => {
         console.log('grade_id, expecting an integer: ', gradeId);
@@ -46,18 +68,21 @@ function LogASend() {
     // handle form submission
     const logASend = (event) => {
         event.preventDefault();
+        addNewComment();
+        rateClimb();
         dispatch({ type: 'ADD_TO_LOGBOOK', payload: climbToLog });
+        dispatch({ type: 'SET_GYM_CHOICE', payload: {gymId: allParams.gymId, styleId: allParams.styleId}})
         history.push('/logbook');
     }
 
     const showForm = limitGrades ? true : false;
 
     return(
-        <div>
+        <Box sx={{marginLeft: '2em'}}>
             <h2>You are logging this climb:</h2>
             {/* <p>Climb details: {JSON.stringify(climbDetails)}</p> */}
-            <p>{climbDetails.color}, &nbsp; {climbDetails.difficulty}</p>
-            <p>at {climbDetails.name}</p>
+            <Typography variant="h5" >{climbDetails.color}, &nbsp; {climbDetails.difficulty}</Typography>
+            <Typography variant="body1" >At {climbDetails.name}</Typography>
             {!showForm && <LinearProgress />}
             {showForm && (
             // <FormControl fullWidth>
@@ -65,9 +90,10 @@ function LogASend() {
                 <Typography variant="h6" >How many atempts this session?</Typography>
                 <TextField select
                         autoWidth
-                        label="attempts"
+                        label="Attempts"
                         id="attempts" 
                         type="text" 
+                        style={{width: '8em'}}
                         value={climbToLog.attempts} 
                         onChange={ (event) => setClimbToLog({...climbToLog, attempts: event.target.value}) }>
                     <MenuItem value="">''</MenuItem>
@@ -85,7 +111,7 @@ function LogASend() {
                         required 
                         id="grade" 
                         type="text" 
-                        autoWidth
+                        style={{width: '8em'}}
                         value={climbToLog.grade_id} 
                         onChange={ (event) => setClimbToLog({...climbToLog, grade_id: event.target.value})}>
                             {/* get grades from redux and map to selector */}
@@ -97,14 +123,18 @@ function LogASend() {
 
                             })}
                 </TextField>
-                <Button type="submit">Log It!</Button>
+                
+                <AddRating ratingToAdd={ratingToAdd} setRating={setRating}/>
+                <AddComment newComment={newComment} setNewComment={setNewComment} />
+
+                <Button variant="contained" type="submit" sx={{marginBottom: '0.6em'}}>Log It!</Button>
             </form>
             // </FormControl>
             )}
             <Button onClick={() => history.goBack()}>Cancel</Button>
             {/* <p>Grades: {JSON.stringify(limitGrades)}</p> */}
             
-        </div>
+        </Box>
     )
 }
 

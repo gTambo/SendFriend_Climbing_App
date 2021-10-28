@@ -98,9 +98,9 @@ function UploadPhoto () {
                         alt="Photo preview"
                     />)
                 }
-                {!preview ? (
+                {/* {!preview ? ( */}
                     <input id="photo-input" type="file" accept="image/*" onChange={onFileChange} />
-                ) : (
+                {/* ) : ( */}
                     <Button type="submit" variant="contained" value="Save Photo" sx={{marginBottom: '1em'}}
                     // onClick={handleClick({
                     //     vertical: 'bottom',
@@ -116,8 +116,8 @@ function UploadPhoto () {
                         />
                 Save Photo
             </Button>
-                )
-                }
+                {/* )
+            } */}
             </form>
             <Button onClick={() => history.push(`/climbs/${gymId}/${styleId}`)}>Skip Photo</Button>
         </>
