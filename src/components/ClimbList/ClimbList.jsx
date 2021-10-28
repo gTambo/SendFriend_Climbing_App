@@ -58,10 +58,11 @@ function ClimbList() {
 
     return(
         <>
-        {noClimbs ? (
+        {noClimbs && (
         <div style={{display: 'flex', alignItmes: 'center', justifyContent: 'center'}}>
             <h4>{climbList[0].message}</h4>
-        </div>) : (<div>
+        </div>) }
+        <div>
             {!showHeader && <LinearProgress />}
             {showHeader && (
                 <Box fullWidth sx={{ margin: '1em', width: '100%' }}>
@@ -106,7 +107,7 @@ function ClimbList() {
                     )
                 })}
             </Grid>)}
-        </div>)}
+        </div>
     </>)
 }
 
