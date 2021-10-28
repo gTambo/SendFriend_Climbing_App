@@ -65,7 +65,7 @@ function ClimbList(props) {
                         </Grid>
                         <Grid item xs={3} >
                             <Paper elevation={2} marginright='1.5em' >
-                                <Typography component="body2" sx={{ "fontStyle": "italic", color: '#7a7a7a', textAlign: 'center'}}>
+                                <Typography variant="body2" sx={{ "fontStyle": "italic", color: '#7a7a7a', textAlign: 'center'}}>
                                     Total: {climbList.length} climbs
                                 </Typography>
                             </Paper>

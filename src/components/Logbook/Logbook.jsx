@@ -71,6 +71,7 @@ function Logbook() {
                         <TableCell>Color</TableCell>
                         <TableCell>Attempts</TableCell>
                         <TableCell>Style</TableCell>
+                        <TableCell>Image</TableCell>
                         <TableCell>Date Sent</TableCell>
                         <TableCell>Delete</TableCell>
                     </TableRow>
@@ -81,7 +82,8 @@ function Logbook() {
                         <TableCell>{log.difficulty}</TableCell>
                         <TableCell>{log.color}</TableCell>
                         <TableCell>{log.attempts}</TableCell>
-                        <TableCell>{log.style}</TableCell>
+                        <TableCell>{log.movement_style}</TableCell>
+                        <TableCell><img src={log.thumb_url} /></TableCell>
                         <TableCell>{moment(log.send_date).format('dd, MMMM DD, YYYY')}</TableCell>
                         <TableCell><Button onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) deleteRow(log.id) }}>Delete Row</Button></TableCell>
                     </TableRow>))}
