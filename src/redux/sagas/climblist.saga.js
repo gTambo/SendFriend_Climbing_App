@@ -15,7 +15,7 @@ function* fetchClimbs(action) {
         const response = yield axios.get(`/api/climbs/${gymId}/${styleId}`, config);
         console.log("Got some climbs from the server", response.data);
 
-        if(response.data) {
+        if(response.data.length > 0) {
             // send dispatch and payload to reducer
         yield put({ type: 'SET_CLIMBS_LIST', payload: response.data})
         } else {

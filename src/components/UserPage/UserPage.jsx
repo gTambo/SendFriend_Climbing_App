@@ -12,7 +12,7 @@ function UserPage() {
       <p>Your ID is: {user.id}</p>
       <p>Your Hometown: {user.hometown}</p>
       <p>climbing since: {moment(user.climbing_start_date).format("MMMM, YYYY")}</p>
-      <LogOutButton className="btn" />
+      <LogOutButton />
     </div>
   );
 }

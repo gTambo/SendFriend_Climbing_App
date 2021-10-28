@@ -48,9 +48,20 @@ function ClimbList() {
     // variables to wait for data arriveal, to be used for contditional render on page load
     const showHeader = (gymName === '') ? false : true;
     const showList = climbList ? true : false;
+    const noClimbs = () => { 
+        if(climbList[0].name === 0){
+            return true;
+         } else {
+          return false;
+        }
+    }
 
     return(
-        <div>
+        <>
+        {noClimbs ? (
+        <div style={{display: 'flex', alignItmes: 'center', justifyContent: 'center'}}>
+            <h4>{climbList[0].message}</h4>
+        </div>) : (<div>
             {!showHeader && <LinearProgress />}
             {showHeader && (
                 <Box fullWidth sx={{ margin: '1em', width: '100%' }}>
@@ -95,8 +106,8 @@ function ClimbList() {
                     )
                 })}
             </Grid>)}
-        </div>
-    )
+        </div>)}
+    </>)
 }
 
 export default ClimbList;

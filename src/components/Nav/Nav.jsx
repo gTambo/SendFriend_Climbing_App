@@ -10,6 +10,7 @@ import {
   Menu, 
   MenuItem,
   Box,
+  Typography,
 } from '@mui/material';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 
@@ -32,7 +33,6 @@ function Nav() {
         <h2 className="nav-title">SendFriend</h2>
       </Link>
       <Box sx={{color: 'white'}}>
-      
       <IconButton aria-label="menu"
         variant="contained"
         color="primary"
@@ -41,8 +41,9 @@ function Nav() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        sx={{color: '#ffca58', fontSize: '0.9em'}}
       >
-        <MenuRoundedIcon sx={{color: '#ffca58'}}/>
+        Menu<MenuRoundedIcon />
       </IconButton>
       <Menu
         id="demo-positioned-menu"
