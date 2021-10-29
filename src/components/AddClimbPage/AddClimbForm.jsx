@@ -36,21 +36,6 @@ function AddClimbForm({gymId, styleId}) {
         horizontal: 'center',
       });
     
-      const { vertical, horizontal, open } = snackState;
-    
-      const handleClick = (newState) => () => {
-        setSnackState({ open: true, ...newState });
-      };
-    
-      const handleClose = () => {
-        setSnackState({ ...snackState, open: false });
-      };
-    
-    //   const buttons = (
-    //     <React.Fragment>
-          
-    //     </React.Fragment>
-    //   );
     
     // To Do: get Grades 
     useEffect( () => {
@@ -130,19 +115,7 @@ function AddClimbForm({gymId, styleId}) {
             <br/>
             <Button  >
             {/* {buttons} */}
-            <Button type="submit" variant="contained" sx={{marginBottom: '1em'}}
-                    onClick={handleClick({
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                    })}
-                >
-                    <Snackbar
-                        anchorOrigin={{ vertical, horizontal }}
-                        open={open}
-                        onClose={handleClose}
-                        message="Climb Saved"
-                        key={vertical + horizontal}
-                        />
+            <Button type="submit" variant="contained" sx={{marginBottom: '1em'}}>
                 Add A Photo
             </Button>
                 
