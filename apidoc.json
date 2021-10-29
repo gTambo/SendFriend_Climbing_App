@@ -1,0 +1,17 @@
+{
+    "title": "Send Friend API Docs",
+    "name": "Prime SendFriend Documentation",
+    "version": "0.1.0",
+    "description": "API documentation for Prime solo project",
+    "url": "https://github.com/gTambo/Climb-Tag-Tender",
+    "apidoc": {
+      "header": {
+        "title": "Send Friend APIs",
+        "filename": "header.md"
+      },
+      "footer": {
+        "title": "SendFriend, with your foot",
+        "filename": "footer.md"
+      }
+    }  
+}

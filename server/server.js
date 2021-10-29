@@ -23,6 +23,7 @@ app.use(fileUpload());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/apidoc', express.static('apidoc'));
 
 
 // Passport Session Configuration //

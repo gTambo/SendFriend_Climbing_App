@@ -24,6 +24,20 @@ const sharp = require('sharp');
  * @apiSuccess {String} climb.movement_style 
  * @apiSuccess {String} climb.name
  * @apiSuccess {String} climb.style
+ * @apisuccessExample {json} Success-Example
+ * [
+ *   {
+ *     color: "Blue"
+ *     difficulty: "V7"
+ *     grade_id: 9
+ *     id: 73
+ *     movement_style: "Dirt-burglar"
+ *     name: "VE - Twin Cities Bouldering"
+ *     photo: "https://climbtags1.s3.amazonaws.com/photos/medium/1/IMG_3587.JPG"
+ *     style: "Boulder"
+ *     thumb_url: "https://climbtags1.s3.amazonaws.com/photos/thumb/1/IMG_3587.JPG"
+ *   }
+ * ]
  */
 router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
