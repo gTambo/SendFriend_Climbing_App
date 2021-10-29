@@ -45,6 +45,23 @@
   "devDependencies": {
     "nodemon": "^2.0.4"
   },
+  "apidoc": {
+    "name": "Send Friend Documentation",
+    "version": "0.0.1",
+    "description": "API documentation for Prime solo project",
+    "title": "Prime Solo Project API Docs",
+    "url": "https://github.com/gTambo/Climb-Tag-Tender",
+    "apidoc": {
+      "header": {
+        "title": "Send Friend APIs",
+        "filename": "header.md"
+      },
+      "footer": {
+        "title": "SendFriend, with your foot",
+        "filename": "footer.md"
+      }
+    }  
+},
   "browserslist": [
     ">0.2%",
     "not dead",
