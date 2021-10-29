@@ -36,7 +36,7 @@
   
   "scripts": {
     "start": "node server/server.js",
-    "apidoc": "apidoc -i server/routes/ -o apidoc",
+    "apidoc": "apidoc -i server/routes/ -o apidoc/",
     "client": "react-scripts start",
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
