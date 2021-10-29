@@ -49,7 +49,7 @@ function UploadPhoto () {
     // code for aws-sdk /s3Bucket
     const imageConfig = {
         quality: 1,
-        maxHeight: 300,
+        maxHeight: 400,
         autoRotate: false,
     };
     const newClimbId = newClimb.id;
