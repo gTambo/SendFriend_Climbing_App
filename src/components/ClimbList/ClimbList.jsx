@@ -65,12 +65,12 @@ function ClimbList(props) {
         <div>
             {!showHeader && <LinearProgress />}
             {showHeader && (
-                <Box fullWidth sx={{ margin: '1em', width: '100%' }}>
+                <Box sx={{ margin: '1em', }}>
                     
-                    <Grid container direction="row" justifyContent="space-between" >
+                    <Grid container direction="row" justifyContent="space-between"  >
                         <Grid item xs={6} >
                             <Paper elevation={3} sx={{marginBottom: '1em'}}>
-                                <Typography variant="body1" style={{ padding: '0.5em', "backgroundColor": '#0872af', "color": '#ffca58' }}>
+                                <Typography variant="body1" style={{ padding: '0.5em', "backgroundColor": '#0872af', "color": '#ffca58', fontSize: '1.4em' }}>
                                     Viewing {styleName}s at {gymName}
                                 </Typography>
                             </Paper>
@@ -84,7 +84,7 @@ function ClimbList(props) {
                         </Grid>
                     </Grid>
 
-                    <Button variant="outlined" color="secondary" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
+                    <Button variant="contained" color="warning" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
                     
                     <Box sx={{display: 'flex'}}><Typography variant="body1" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click Tag for details<ArrowDownwardIcon/></Typography></Box>
                     
@@ -95,11 +95,12 @@ function ClimbList(props) {
             {!showList && <LinearProgress />}
             {showList && (
                 <Grid container 
-                      sx={{marginLeft: '1em'}}
+                      sx={{margin: 'auto', display: 'flex' }}
                       direction="column"
                       justifyContent="center"
-                      alignItems="flex-start"
+                      alignItems="center"
                       spacing={2}
+                      xs={12}
                 >
                 {climbList.map(climb => {
                     return(

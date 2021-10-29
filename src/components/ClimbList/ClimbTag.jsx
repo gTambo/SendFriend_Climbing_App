@@ -42,10 +42,10 @@ function ClimbTag({gymId, styleId, climb}) {
     const showItem = climb ? true : false;
 
     return(
-        <Grid item container direction="row" xs={12} >
+        <Grid item container direction="row" xs={12} sx={{margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             {!showItem && <CircularProgress />}
             {showItem && (
-                <Card fullWidth
+                <Card 
                     elevation={3}
                     variant="elevation"
                     sx={{ display: 'flex' }}>

@@ -7,7 +7,23 @@ const aws = require('aws-sdk');
 const sharp = require('sharp');
 
 /**
- * GET climbs from specified gym with specified style
+ * @api {get} /climbs/:gymId/:styleId Request list of climbs for specified gym and climbing style
+ * @apiName GetClimbs
+ * @apiGroup Climbs
+ *
+ * @apiParam {Number} gymId Climbing gym's unique Id.
+ * @apiParam {Number} styleId A climbing style's unique Id
+ * 
+ * @apiSuccess {Object[]} climbs An array of climbs.
+ * @apiSuccess {Number} climb.id  The unique id for the climb.
+ * @apiSuccess {String} climb.difficulty The grade of the climb.
+ * @apiSuccess {Number} climb.grade_id The id of the grade of the climb.
+ * @apiSuccess {String} climb.color Color of the climb.
+ * @apiSuccess {String} climb.photo Meduim sized photo fo the climb.
+ * @apiSuccess {String} climb.thumb_url Thumbain photo of the climb.
+ * @apiSuccess {String} climb.movement_style 
+ * @apiSuccess {String} climb.name
+ * @apiSuccess {String} climb.style
  */
 router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
   // GET route code here
@@ -44,8 +60,15 @@ aws.config.update({
    accessKeyId: AWS_ACCESS_KEY_ID,
    secretAccessKey: AWS_SECRET_ACCESS_KEY
 });
+
+
 /**
- * POST new climb
+ * @api {post} /climbs Add a climb
+ * @apiName AddClimb
+ * @apiGroup Climbs
+ *
+ * @apiSuccessExample {json} Success-Response:
+  *      HTTP/1.1 201 OK
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
@@ -84,7 +107,7 @@ pool.query((query), [
 
 
  /**
-  * @api {post} /s3 Upload Photo
+  * @api {put} /s3 Upload Photo
   * @apiPermission user
   * @apiName PostPhoto
   * @apiGroup Photo
@@ -96,7 +119,7 @@ pool.query((query), [
   * @apiParam {File}   image             Mandatory image
   *
   * @apiSuccessExample {json} Success-Response:
-  *      HTTP/1.1 201 OK
+  *      HTTP/1.1 200 OK
   */
  router.put('/s3', rejectUnauthenticated, async (req, res) => {
      console.log("in s3 router");
@@ -154,8 +177,14 @@ pool.query((query), [
  
 
 /**
- * PUT route template
+ * @api {put} /climbs/edit/:id Edit a climb of a specified ID.
+ * @apiName EditClimb
+ * @apiGroup Climbs
+ *
+ * @apiParam {Number} id Unique ID of the climb to update.
  * 
+ * @apiSuccessExample {json} Success-Response:
+  *      HTTP/1.1 200 OK
  */
 router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
     // PUT route code here
@@ -188,7 +217,14 @@ router.put('/edit/:id', rejectUnauthenticated, (req, res) => {
 });
 
 /**
- * DELETE route template
+ * @api {delete} /climbs/:id Delete a climb of a specified ID.
+ * @apiName DeleteClimb
+ * @apiGroup Climbs
+ *
+ * @apiParam {Number} id Unique ID of the climb to delete.
+ * 
+ * @apiSuccessExample {json} Success-Response:
+  *      HTTP/1.1 204 OK
  */
  router.delete('/:id', rejectUnauthenticated, async (req, res) => {
     //  DELETE route code here

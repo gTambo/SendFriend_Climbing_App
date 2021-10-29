@@ -12,7 +12,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
     console.log('Params: ', req.params);
     const climbId = req.params.climbId;
     const query = `
-    SELECT "climbs"."id", "grade"."difficulty", "climbs"."grade_id", "color", "photo", "gym"."name", "movement_style", "date_added", "user"."username", 
+    SELECT "climbs"."id", "grade"."difficulty", "climbs"."grade_id", "description", "color", "photo", "tag_photo", "gym"."name", "movement_style", "date_added", "user"."username", 
     COALESCE((AVG("rating"."rating")::NUMERIC(10)),0) 
     FROM "climbs" 
     JOIN "grade" ON "climbs"."grade_id" = "grade"."id"
