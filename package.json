@@ -33,9 +33,10 @@
     "redux-saga": "^1.1.3",
     "sharp": "^0.29.1"
   },
+  
   "scripts": {
     "start": "node server/server.js",
-    "apidoc": "apidoc -i server/routes -o apidoc",
+    "apidoc": "apidoc -i server/routes/ -o apidoc",
     "client": "react-scripts start",
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
@@ -45,23 +46,6 @@
   "devDependencies": {
     "nodemon": "^2.0.4"
   },
-  "apidoc": {
-    "name": "Send Friend Documentation",
-    "version": "0.0.1",
-    "description": "API documentation for Prime solo project",
-    "title": "Prime Solo Project API Docs",
-    "url": "https://github.com/gTambo/Climb-Tag-Tender",
-    "apidoc": {
-      "header": {
-        "title": "Send Friend APIs",
-        "filename": "header.md"
-      },
-      "footer": {
-        "title": "SendFriend, with your foot",
-        "filename": "footer.md"
-      }
-    }  
-},
   "browserslist": [
     ">0.2%",
     "not dead",
