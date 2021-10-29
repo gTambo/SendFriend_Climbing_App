@@ -99,7 +99,7 @@ function GymForm () {
                     value={chosenStyle}
                     onChange={ (event) => setChosenStyle(event.target.value) }
             >
-                <MenuItem>-select a style-</MenuItem>
+                <MenuItem key={'rtmiky0'} >-select a style-</MenuItem>
                 {climbStyles.map(style => {
                     return(
                         <MenuItem key={style.id}
@@ -117,10 +117,7 @@ function GymForm () {
             <Button type="submit" variant="outlined" >Submit</Button>
         
         </form>
-        {/* <ul>
-            <li>Chosen Gym: {chosenGym}</li>
-            <li>Chosen Style: {chosenStyle}</li>
-        </ul> */}
+        
         </Box>)}
         </>
     )

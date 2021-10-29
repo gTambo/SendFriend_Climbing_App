@@ -79,14 +79,7 @@ function EditClimbForm({ gymId, styleId, climbId, climb }) {
                 <MenuItem value="Tan">Tan</MenuItem>
                 <MenuItem value="Other">Other</MenuItem>
             </Select>
-            {/* <input 
-                   id="photo" 
-                   type="text"
-                   value={editedClimb.photo}
-                   onChange={ (event) => setEditedClimb({...editedClimb, photo: event.target.value})} 
-            /> */}
-            {/* <UploadDisplay id="photo" setClimbToAdd={setEditedClimb} climbToAdd={editedClimb} /> */}
-            {/* <InputLabel htmlFor="movement">Movement Style</InputLabel> */}
+            
             <TextField label="MovementStyle" 
                    id="movement" 
                    type="text" 

@@ -42,22 +42,22 @@ function ClimbTag({gymId, styleId, climb}) {
     const showItem = climb ? true : false;
 
     return(
-        <Grid item container direction="row" xs={12} sx={{margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <Grid item container direction="row" key={climb.id, 'a'} sx={{margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             {!showItem && <CircularProgress />}
             {showItem && (
-                <Card 
+                <Card key={climb.id, 'b'}
                     elevation={3}
                     variant="elevation"
                     sx={{ display: 'flex' }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'row' }} >
-                        <Paper elevation={3} xs={12} sx={{backgroundColor: '#ffffff' }}>
+                    <Box key={climb.id, 'c'} sx={{ display: 'flex', flexDirection: 'row' }} >
+                        {/* <Paper elevation={3} xs={12} sx={{backgroundColor: '#ffffff' }}> */}
                             <CardActionArea onClick={viewClimbDetails} sx={{ flex: '1 0 auto' }}>
                                 {/* <Grid item xs={3}> */}
                                 <CardContent >
-                                    <Box sx={{display: 'flex', }} 
+                                    <Box key={climb.id, 'd'} sx={{display: 'flex', }} 
                                          direction="row" 
                                          justifyContent="space-around">
-                                        <Typography variant="h3" element='h3' sx={{ 'borderRadius': '4px', backgroundColor: '#a9a9a9', 'text-shadow': 'black', color: `${climb.color}` }}>
+                                        <Typography variant="h3" element='h3' sx={{ 'borderRadius': '4px', backgroundColor: '#a9a9a9', 'textShadow': '3px -2px #202022', color: `${climb.color}` }}>
                                             {climb.color}
                                         </Typography>
                                         <Typography variant="h3" 
@@ -81,7 +81,7 @@ function ClimbTag({gymId, styleId, climb}) {
                                 </CardContent>
                                 {/* </Grid> */}
                             </CardActionArea>
-                        </Paper>
+                        {/* </Paper> */}
                     </Box>
             </Card>)
         }

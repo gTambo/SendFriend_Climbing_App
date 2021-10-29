@@ -30,11 +30,11 @@ function AddClimbForm({gymId, styleId}) {
     };
 
     const [newClimb, setNewClimb] = useState(defaultClimb);
-    const [snackState, setSnackState] = useState({
-        open: false,
-        vertical: 'top',
-        horizontal: 'center',
-      });
+    // const [snackState, setSnackState] = useState({
+    //     open: false,
+    //     vertical: 'top',
+    //     horizontal: 'center',
+    //   });
     
     
     // To Do: get Grades 
@@ -54,81 +54,70 @@ function AddClimbForm({gymId, styleId}) {
 
   
     return(
-        <Box sx={{display: 'flex', flexDirection: 'column' }}>
+        <Box sx={{display: 'flex', flexDirection: 'column', }}>
         {/* {JSON.stringify(grades)} */}
-            <div>
-                
-            </div>
+            
         <form onSubmit={ saveNewClimb }>
-            <InputLabel htmlFor="grade" id="grade-label">Grade</InputLabel> 
-            <Select name="grade" 
+            {/* <InputLabel htmlFor="grade" id="grade-label">Grade</InputLabel>  */}
+            <TextField select name="grade" 
                     labelId="grade-label"
                     label="Grade"
                     required 
                     id="grade" 
                     autoWidth
-                    type="text" 
+                    sx={{marginRight: '1em'}}
                     value={newClimb.grade_id} 
                     onChange={ (event) => setNewClimb({...newClimb, grade_id: event.target.value})}>
                         {/* get grades from redux and map to selector */}
-                        <MenuItem>-select the grade-</MenuItem>
-                        {grades.map((grade) => {
+                        <MenuItem key={'7fhnr8d9'}>-select the grade-</MenuItem>
+                        {grades.map((grade, i) => {
                             return(
-                                <MenuItem key={grade.id} value={grade.id}>{grade.difficulty}</MenuItem>
+                                <MenuItem key={i, grade.id} value={grade.id}>{grade.difficulty}</MenuItem>
                             )
 
                         })}
-            </Select>
-            <InputLabel htmlFor="color" id="color-label">Color</InputLabel>
-            <Select required
+            </TextField>
+            {/* <InputLabel htmlFor="color" id="color-label">Color</InputLabel> */}
+            <TextField select required
                     labelId="color-label"
                     label="Color"
                     name="color" 
                     id="color"
                     autoWidth
+                    sx={{marginRight: '1em'}}
                     value={newClimb.color}
                     onChange={ (event) => setNewClimb({...newClimb, color: event.target.value})}>
-                <MenuItem>-select a color-</MenuItem>
-                <MenuItem value="Red">Red</MenuItem>
-                <MenuItem value="Orange">Orange</MenuItem>
-                <MenuItem value="Yellow">Yellow</MenuItem>
-                <MenuItem value="Green">Green</MenuItem>
-                <MenuItem value="Blue">Blue</MenuItem>
-                <MenuItem value="Pink">Pink</MenuItem>
-                <MenuItem value="Purple">Purple</MenuItem>
-                <MenuItem value="Teal">Teal</MenuItem>
-                <MenuItem value="Black">Black</MenuItem>
-                <MenuItem value="White">White</MenuItem>
-                <MenuItem value="Grey">Grey</MenuItem>
-                <MenuItem value="Tan">Tan</MenuItem>
-                <MenuItem value="Other">Other</MenuItem>
-            </Select>
+                <MenuItem key={'cl0'} >-select a color-</MenuItem>
+                <MenuItem key={'cl1'} value="Red">Red</MenuItem>
+                <MenuItem key={'cl2'} value="Orange">Orange</MenuItem>
+                <MenuItem key={'cl3'} value="Yellow">Yellow</MenuItem>
+                <MenuItem key={'cl4'} value="Green">Green</MenuItem>
+                <MenuItem key={'cl5'} value="Blue">Blue</MenuItem>
+                <MenuItem key={'cl6'} value="Pink">Pink</MenuItem>
+                <MenuItem key={'cl7'} value="Purple">Purple</MenuItem>
+                <MenuItem key={'cl8'} value="Teal">Teal</MenuItem>
+                <MenuItem key={'cl9'} value="Black">Black</MenuItem>
+                <MenuItem key={'cla'} value="White">White</MenuItem>
+                <MenuItem key={'clb'} value="Grey">Grey</MenuItem>
+                <MenuItem key={'cld'} value="Tan">Tan</MenuItem>
+                <MenuItem key={'cle'} value="Other">Other</MenuItem>
+            </TextField>
             
-            {/* <label htmlFor="movement">Movement Style</label> */}
             <TextField id="movement" 
                    type="text" 
                    label="Movement Style"
-                   sx={{marginBottom: '1em', marginLeft: '1em'}}
+                   sx={{marginBottom: '1em'}}
                    value={newClimb.movement_style}
                    onChange={ (event) => setNewClimb({...newClimb, movement_style: event.target.value})}
             />
             <br/>
-            <Button  >
-            {/* {buttons} */}
+            
             <Button type="submit" variant="contained" sx={{marginBottom: '1em'}}>
                 Add A Photo
             </Button>
-                
-            </Button>
+   
         </form>
-        {/* <label htmlFor="photo">Photo</label> */}
-            {/* <input required
-                   id="photo" 
-                   type="text"
-                   value={newClimb.photo}
-                   onChange={ (event) => setNewClimb({...newClimb, photo: event.target.value})} 
-            /> */}
-            {/* <UploadDisplay id="photo" setNewClimb={setNewClimb} newClimb={newClimb} /> */}
+       
         </Box>
     )
 }

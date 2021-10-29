@@ -39,7 +39,7 @@ function ClimbList(props) {
 
     const gymName = climbList[0].name;
     const styleName = climbList[0].style;
-    console.log('gym: ', gymName, ', style: ', styleName);
+    // console.log('gym: ', gymName, ', style: ', styleName);
 
     const addNewClimb = () => {
         history.push(`/climbs/${gymId}/${styleId}/addclimb`)
@@ -99,12 +99,11 @@ function ClimbList(props) {
                       direction="column"
                       justifyContent="center"
                       alignItems="center"
-                      spacing={2}
-                      xs={12}
+                      rowSpacing={1}
                 >
-                {climbList.map(climb => {
+                {climbList.map((climb, i) => {
                     return(
-                        <ClimbTag key={climb.id} gymId={gymId} styleId={styleId} climb={climb}/>
+                        <ClimbTag key={i, climb.id} gymId={gymId} styleId={styleId} climb={climb}/>
                     )
                 })}
             </Grid>)}
