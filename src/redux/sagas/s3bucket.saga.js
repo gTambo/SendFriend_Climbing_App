@@ -21,7 +21,7 @@ function* uploadPhoto(action) {
             console.log(`${name} = ${value}`);
         }
         const resp = yield axios.put(`/api/climbs/s3?name=${fileName}&type=${fileType}&size=${fileSize}`, formData );
-        console.log(resp);
+        console.log('s3 response data', resp);
         yield put({ type: 'FETCH_ALL_CLIMBS', payload: {gymId: gymId, styleId: styleId}});
     } catch (error) {
         alert('Something went wrong when uploading a photo');

@@ -23,7 +23,7 @@ import {
     CircularProgress,
  } from '@mui/material';
 
-function ClimbTag({gymId, styleId, climb}) {
+function ClimbTag({gymId, styleId, climb }) {
     //  use history to view details page
     const history = useHistory();
 
@@ -43,7 +43,7 @@ function ClimbTag({gymId, styleId, climb}) {
 
     return(
         <Grid item container direction="row" key={climb.id, 'a'} sx={{margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            {!showItem && <CircularProgress />}
+            {!showItem && <CircularProgress key={'zero'}/>}
             {showItem && (
                 <Card key={climb.id, 'b'}
                     elevation={3}
@@ -51,17 +51,18 @@ function ClimbTag({gymId, styleId, climb}) {
                     sx={{ display: 'flex' }}>
                     <Box key={climb.id, 'c'} sx={{ display: 'flex', flexDirection: 'row' }} >
                         {/* <Paper elevation={3} xs={12} sx={{backgroundColor: '#ffffff' }}> */}
-                            <CardActionArea onClick={viewClimbDetails} sx={{ flex: '1 0 auto' }}>
+                            <CardActionArea key={climb.id, 'ca'} onClick={viewClimbDetails} sx={{ flex: '1 0 auto' }}>
                                 {/* <Grid item xs={3}> */}
-                                <CardContent >
+                                <CardContent key={climb.id, 'cc'} >
                                     <Box key={climb.id, 'd'} sx={{display: 'flex', }} 
                                          direction="row" 
                                          justifyContent="space-around">
-                                        <Typography variant="h3" element='h3' sx={{ 'borderRadius': '4px', backgroundColor: '#a9a9a9', 'textShadow': '3px -2px #202022', color: `${climb.color}` }}>
+                                        <Typography variant="h3" element='h3' key={climb.id, 'e'} sx={{ 'borderRadius': '4px', backgroundColor: '#a9a9a9', 'textShadow': '3px -2px #202022', color: `${climb.color}` }}>
                                             {climb.color}
                                         </Typography>
                                         <Typography variant="h3" 
-                                                    element='h3' >
+                                                    element='h3' 
+                                                    key={climb.id, 'f'}>
                                             {climb.difficulty}
                                         </Typography>
                                     </Box>
@@ -70,9 +71,10 @@ function ClimbTag({gymId, styleId, climb}) {
                                 </CardContent>
                                 {/* </Grid> */}
                                 {/* <Grid item xs={6}> */}
-                                <CardContent>
+                                <CardContent key={climb.id, 'gg'}>
                                     <CardMedia component="img"
                                         sx={{ width: '17em' }}
+                                        key={climb.id, 'hh'}
                                         // height="200"
                                         // width="200em"
                                         image={climb.photo}

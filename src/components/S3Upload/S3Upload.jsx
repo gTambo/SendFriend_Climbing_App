@@ -9,6 +9,7 @@ import { readAndCompressImage } from 'browser-image-resizer';
 
 import { 
     Button, 
+    LinearProgress,
     Snackbar, 
     TextField, 
     Select, 
@@ -26,25 +27,8 @@ function UploadPhoto () {
     const dispatch = useDispatch();
     const history = useHistory();
     // get the New Climb ID
-    const newClimb = useSelector(store => store.newClimb);
-
-    // snackbar stuff
-    // const [state, setState] = useState({
-    //     open: false,
-    //     vertical: 'top',
-    //     horizontal: 'center',
-    //     Transition: 'Fade',
-    //   });
-    
-    //   const { vertical, horizontal, open } = state;
-    
-    //   const handleClick = (Transition) => () => {
-    //     setState({ open: true, Transition });
-    //   };
-    
-    //   const handleClose = () => {
-    //     setState({ ...state, open: false });
-    //   };
+    const reduxStore = useSelector(store => store);
+    const { newClimb } = reduxStore;
 
     // code for aws-sdk /s3Bucket
     const imageConfig = {
@@ -54,6 +38,7 @@ function UploadPhoto () {
     };
     const newClimbId = newClimb.id;
     console.log('Id for new climb: ', newClimbId);
+    const [addingPhoto, setAddingPhoto] = useState(false);
     const [preview, setPreview] = useState('');
     const [selectedFile, setSelectedFile] = useState('');
     const [resizedFile, setResizedFile] = useState({});
@@ -74,54 +59,60 @@ function UploadPhoto () {
         }
     }
 
+    const pushAfter2Seconds = () => {
+        console.log("Adding photo...")
+        return new Promise(resolve => {
+          setTimeout(function() {
+            resolve("photo add");
+            history.push(`/climbs/${gymId}/${styleId}`);
+            console.log("Add photo is done");
+          }, 2000);
+        });
+      }
+    
+      const alertFor2Seconds = () => {
+        console.log("Alerting...")
+        return new Promise(resolve => {
+          setTimeout(function() {
+            resolve("photo alert");
+            alert("Adding photo")
+            console.log("Add photo is done");
+          }, 2000);
+        });
+      }
+
     let photoInfo = { climbId: newClimbId, selectedFile: selectedFile, resizedFile: resizedFile, gymId, styleId};
 
-    const sendFormDataToServer = () => {
-        // handleClick({
-        //     vertical: 'bottom',
-        //     horizontal: 'center',
-        // });
-
+    const sendFormDataToServer = async (event) => {
+        event.preventDefault();
+        setAddingPhoto(true);
         console.log('sending to saga: ', photoInfo);
-        dispatch({ type: 'UPLOAD_PHOTO', payload: photoInfo});
-        setPreview('');
-        history.push(`/climbs/${gymId}/${styleId}`);
+        await dispatch({ type: 'UPLOAD_PHOTO', payload: photoInfo});
+        await setPreview('');
+        await pushAfter2Seconds();
     }
 
+    const showPending = (addingPhoto) ? true : false
     return(
         <>
-
-            <form style={{'marginLeft': '2em'}} onSubmit={sendFormDataToServer}>
+        {showPending && (<div><p>Adding photo... </p><LinearProgress /></div>)}
+            {!showPending && (<div><form style={{'marginLeft': '2em'}} onSubmit={sendFormDataToServer}>
                 {preview && (
                     <img
                         className="placeholder-photo-preview"
                         src={preview}
                         alt="Photo preview"
-                    />)
-                }
-                {/* {!preview ? ( */}
+                    />)}
+               
                     <input id="photo-input" type="file" accept="image/*" onChange={onFileChange} />
-                {/* ) : ( */}
-                    <Button type="submit" variant="contained" value="Save Photo" sx={{marginBottom: '1em'}}
-                    // onClick={handleClick({
-                    //     vertical: 'bottom',
-                    //     horizontal: 'center',
-                    // })}
-                >
-                    {/* <Snackbar
-                        anchorOrigin={{ vertical, horizontal }}
-                        open={open}
-                        onClose={handleClose}
-                        message="Photo Added"
-                        key={vertical + horizontal}
-                        /> */}
-                Save Photo
-            </Button>
-                {/* )
-            } */}
-            </form>
+                
+                    <Button type="submit" variant="contained" sx={{marginBottom: '1em'}}>
+                        Save Photo
+                    </Button>
 
-            <Button onClick={() => history.push(`/climbs/${gymId}/${styleId}`)}>Skip Photo</Button>
+            </form>
+            
+            <Button onClick={() => history.push(`/climbs/${gymId}/${styleId}`)}>Skip Photo</Button></div>)}
         </>
     )
 }

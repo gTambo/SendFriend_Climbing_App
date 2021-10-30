@@ -60,11 +60,10 @@ function AddClimbForm({gymId, styleId}) {
         <form onSubmit={ saveNewClimb }>
             {/* <InputLabel htmlFor="grade" id="grade-label">Grade</InputLabel>  */}
             <TextField select name="grade" 
-                    labelId="grade-label"
                     label="Grade"
                     required 
                     id="grade" 
-                    autoWidth
+                    width="auto"
                     sx={{marginRight: '1em'}}
                     value={newClimb.grade_id} 
                     onChange={ (event) => setNewClimb({...newClimb, grade_id: event.target.value})}>
@@ -79,11 +78,10 @@ function AddClimbForm({gymId, styleId}) {
             </TextField>
             {/* <InputLabel htmlFor="color" id="color-label">Color</InputLabel> */}
             <TextField select required
-                    labelId="color-label"
                     label="Color"
                     name="color" 
                     id="color"
-                    autoWidth
+                    width="auto"
                     sx={{marginRight: '1em'}}
                     value={newClimb.color}
                     onChange={ (event) => setNewClimb({...newClimb, color: event.target.value})}>

@@ -46,8 +46,8 @@ function GymForm () {
 
     return(
         <>
-        {!showGyms && <LinearProgress/>}
-        {showGyms && (<Box>
+        {!showGyms && <LinearProgress key={'zed'} />}
+        {showGyms && (<Box key={'nada'}>
             {/* <p>{JSON.stringify(gyms)}</p>
             <p>{JSON.stringify(climbStyles)}</p> */}
         <form onSubmit={ handleSubmit } 
@@ -69,10 +69,10 @@ function GymForm () {
                     value={chosenGym}
                     onChange={ (event) => setChosenGym(event.target.value) }
             >
-                <MenuItem>-select a gym-</MenuItem>
-                {gyms.gymList.map(gym => {
+                <MenuItem key={'gmslctopt0'} >-select a gym-</MenuItem>
+                {gyms.gymList.map((gym, i) => {
                     return(
-                        <MenuItem key={gym.id}
+                        <MenuItem key={i, gym.id}
                                 value={gym.id}
                         >
                             {gym.name}
@@ -93,16 +93,14 @@ function GymForm () {
                     // labelId="style-select-label"
                     id="style-select"
                     label="Climbing Style"
-                    // style={{marginBottom: '1em'}}
                     input={<OutlinedInput label="Climbing Style"/>}
-                    alignContent="center"
                     value={chosenStyle}
                     onChange={ (event) => setChosenStyle(event.target.value) }
             >
                 <MenuItem key={'rtmiky0'} >-select a style-</MenuItem>
-                {climbStyles.map(style => {
+                {climbStyles.map((style, i) => {
                     return(
-                        <MenuItem key={style.id}
+                        <MenuItem key={i, style.id}
                                 value={style.id}
                         >
                             {style.style}

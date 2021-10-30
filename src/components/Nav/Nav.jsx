@@ -50,6 +50,7 @@ function Nav() {
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
         open={open}
+        onClick={handleClose}
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'top',
