@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams, Link, NavLink } from 'react-router-dom';
 
@@ -8,9 +8,10 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { makeStyles } from '@mui/styles'; 
 
 // Mui styles
-import { 
+import {
     Grid, 
     Box,
     Paper,
@@ -22,7 +23,17 @@ import {
 
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
+const useStyles = makeStyles({
+    gridItem: {
+        display: 'flex',
+        marginTop: 10,
+        marginBottom: 10,
+        display: 'block',
+    }
+})
+
 function ClimbList(props) {
+    const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
     // useSelector to get climbs for render
