@@ -57,12 +57,19 @@ function ClimbTag({gymId, styleId, climb }) {
                                     <Box key={climb.id, 'd'} sx={{display: 'flex', }} 
                                          direction="row" 
                                          justifyContent="space-around">
-                                        <Typography variant="h3" element='h3' key={climb.id, 'e'} sx={{ 'borderRadius': '4px', backgroundColor: '#a9a9a9', 'textShadow': '3px -2px #202022', color: `${climb.color}` }}>
+                                        <Typography variant="h3" 
+                                                    element='h3' 
+                                                    key={climb.id, 'e'} 
+                                                    sx={{ 
+                                                        'borderRadius': '4px', 
+                                                        'textShadow': '3px 3px 6px #202022', 
+                                                        color: `${climb.color}` }}>
                                             {climb.color}
                                         </Typography>
                                         <Typography variant="h3" 
                                                     element='h3' 
-                                                    key={climb.id, 'f'}>
+                                                    key={climb.id, 'f'}
+                                                    fontWeight='bold'>
                                             {climb.difficulty}
                                         </Typography>
                                     </Box>

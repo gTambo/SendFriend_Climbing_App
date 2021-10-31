@@ -65,28 +65,28 @@ function ClimbList(props) {
         <div>
             {!showHeader && <LinearProgress />}
             {showHeader && (
-                <Box sx={{ margin: '1em', }}>
+                <Box key={'yougetakey!'} sx={{ margin: '1em', }}>
                     
-                    <Grid container direction="row" justifyContent="space-between"  >
-                        <Grid item xs={6} >
-                            <Paper elevation={3} sx={{marginBottom: '1em'}}>
-                                <Typography variant="body1" style={{ padding: '0.5em', "backgroundColor": '#0872af', "color": '#ffca58', fontSize: '1.4em' }}>
+                    <Grid key={'andYOUgetakey!'} container direction="row" justifyContent="space-between"  >
+                        <Grid item xs={6} key={'asdfohjg'}>
+                            <Paper key={'fasldjnla;'} elevation={3} sx={{marginBottom: '1em'}}>
+                                <Typography key={'bhctsgtj'} variant="body1" style={{ padding: '0.5em', "backgroundColor": '#0872af', "color": '#ffca58', fontSize: '1.4em' }}>
                                     Viewing {styleName}s at {gymName}
                                 </Typography>
                             </Paper>
                         </Grid>
-                        <Grid item xs={3} >
-                            <Paper elevation={2} marginright='1.5em' >
-                                <Typography variant="body2" sx={{ "fontStyle": "italic", color: '#7a7a7a', textAlign: 'center'}}>
+                        <Grid key={'byebyewarning'} item xs={3} >
+                            <Paper key={'everychild'} elevation={2} marginright='1.5em' >
+                                <Typography key={'nochildleftbehind'} variant="body2" sx={{ "fontStyle": "italic", color: '#7a7a7a', textAlign: 'center'}}>
                                     Total: {climbList.length} climbs
                                 </Typography>
                             </Paper>
                         </Grid>
                     </Grid>
 
-                    <Button variant="contained" color="warning" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
+                    <Button key={'keysallaround'} variant="contained" color="warning" sx={{marginBottom: '1em'}} onClick={addNewClimb}>ADD A NEW CLIMB!</Button>
                     
-                    <Box sx={{display: 'flex'}}><Typography variant="body1" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click Tag for details<ArrowDownwardIcon/></Typography></Box>
+                    <Box key={'thismightalsobeachild'} sx={{display: 'flex'}}><Typography variant="body1" sx={{ "fontStyle": "italic", color: '#7a7a7a'}}>Click Tag for details<ArrowDownwardIcon/></Typography></Box>
                     
                 </Box>
                 
