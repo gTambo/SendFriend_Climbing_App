@@ -6,6 +6,14 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const aws = require('aws-sdk');
 const sharp = require('sharp');
 
+const { S3_BUCKET, AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
+aws.config.region = AWS_REGION;
+aws.config.update({
+   accessKeyId: AWS_ACCESS_KEY_ID,
+   secretAccessKey: AWS_SECRET_ACCESS_KEY
+});
+
+
 /**
  * @api {get} /climbs/:gymId/:styleId Request list of climbs for specified gym and climbing style
  * @apiName GetClimbs
@@ -68,14 +76,6 @@ router.get('/:gymId/:styleId', rejectUnauthenticated, (req, res) => {
 
 
 
-const { S3_BUCKET, AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
-aws.config.region = AWS_REGION;
-aws.config.update({
-   accessKeyId: AWS_ACCESS_KEY_ID,
-   secretAccessKey: AWS_SECRET_ACCESS_KEY
-});
-
-
 /**
  * @api {post} /climbs Add a climb
  * @apiName AddClimb
@@ -86,16 +86,12 @@ aws.config.update({
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
-  if (!S3_BUCKET || !AWS_REGION || !AWS_ACCESS_KEY_ID || !AWS_SECRET_ACCESS_KEY) {
-        res.status(500).send('Missing environment variables for AWS bucket.');
-        return;
-    }
     console.log('Posting new climb: ', req.body);
     console.log('User: ', req.user);
     const query = `INSERT INTO "climbs" 
-	("grade_id", "color", "gym_id", "climb_style_id", "photo", "movement_style", "user_id")
+	("grade_id", "color", "gym_id", "climb_style_id", "movement_style", "user_id")
     VALUES
-	($1, $2, $3, $4, $5, $6, $7) 
+	($1, $2, $3, $4, $5, $6) 
     RETURNING "id";
 `;
 pool.query((query), [
@@ -103,16 +99,15 @@ pool.query((query), [
         req.body.color, // $2
         req.body.gym_id, // $3
         req.body.climb_style_id, // $4
-        req.body.photo, // $5
-        req.body.movement_style, // $6
-        req.user.id // $7
+        req.body.movement_style, // $5
+        req.user.id // $6
     ]).then((result) => {
         console.log("result: ", result);
         res.send(result.rows[0]);
     }).catch((err) => {
         console.log('Error in post: ', err);
         res.sendStatus(500);
-    })
+    });
 });
 
 /**

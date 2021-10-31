@@ -37,7 +37,7 @@ function UploadPhoto () {
         autoRotate: false,
     };
     const newClimbId = newClimb.id;
-    console.log('Id for new climb: ', newClimbId);
+    // console.log('Id for new climb: ', newClimbId);
     const [addingPhoto, setAddingPhoto] = useState(false);
     const [preview, setPreview] = useState('');
     const [selectedFile, setSelectedFile] = useState('');
